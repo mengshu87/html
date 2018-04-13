@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{margin:0;}
+        p{margin:0;}
+        #box{width:700px;height:500px;background-color:#ccc;margin:0;position:relative;}
+        .set{font-size:24px;font-weight:bold;line-height:35px;padding:10px;}
+        .set span{width:80px;height:35px;line-height:35px;display:inline-block;font-size:14px;background-color:red;color:white;text-align:center;margin-left:10px;cursor:pointer;}
+        .pox{width:100px;height:100px;border:5px solid black;margin:20px;background-color:white;}
+        .drag{width:500px;height:300px;}
+        .bg{background-color:rgba(255,255,255,0.6);width:100%;height:100%;position:absolute;top:0;left:0;display:none;}
+        .drag{width:300px;height:200px;position:absolute;right:50px;bottom:50px;border:10px solid #9c949c;padding:20px;background-color:white;display:none;}
+        .drag div{width:100%;line-height:40px;}
+        .drag .selectColor span{display:inline-block;width:35px;height:35px;line-height:35px;color:white;text-align:center;margin-right:10px;cursor:pointer;}
+        .drag .selectColor span:nth-of-type(1){background-color:#9cce00;}
+        .drag .selectColor span:nth-of-type(2){background-color:#efbd00;}
+        .drag .selectColor span:nth-of-type(3){background-color:#5a94ef;}
+        .drag .selectWidth span,.drag .selectHeight span{display:inline-block;width:35px;height:30px;line-height:30px;text-align:center;margin-right:10px;cursor:pointer;background-color:#ccc;border:1px solid #999;transition:5s;}
+        .drag .selectButton{text-align:center;}
+        .drag .selectButton span{display:inline-block;width:60px;height:30px;line-height:30px;background-color:#002952;color:#fff;cursor:pointer;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <p class="set">请为下面的div设置样式:<span class="setButton">点击设置</span></p>
+        <div class="pox" id="pox"></div>
+        <div class="bg"></div>
+        <div class="drag">
+            <div class="selectColor">
+                请选择背景色：
+                <span class="red">红</span>
+                <span class="yellow">黄</span>
+                <span class="blue">蓝</span>
+            </div>
+            <div class="selectWidth">
+                请选择宽(px)：
+                <span class="w200">200</span>
+                <span class="w300">300</span>
+                <span class="w400">400</span>
+            </div>
+            <div class="selectHeight">
+                请选择高(px)：
+                <span class="h200">200</span>
+                <span class="h300">300</span>
+                <span class="h400">400</span>
+            </div>
+            <div class="selectButton">
+                <span class="init">恢复</span>
+                <span class="sure">确认</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var setBtn=document.querySelector('.setButton');
+    var bg=document.querySelector('.bg');
+    var drag=document.querySelector('.drag');
+    var pox=document.getElementById('pox');
+    setBtn.onclick=function(){
+        bg.style.display='block';
+        drag.style.display='block';
+    };
+    var red=document.querySelector('.red');
+    var yellow=document.querySelector('.yellow');
+    var blue=document.querySelector('.blue');
+    var w200=document.querySelector('.w200');
+    var w300=document.querySelector('.w300');
+    var w400=document.querySelector('.w400');
+    var h200=document.querySelector('.h200');
+    var h300=document.querySelector('.h300');
+    var h400=document.querySelector('.h400');
+    var init=document.querySelector('.init');
+    var sure=document.querySelector('.sure');
+    red.onclick=function(){
+        red.style.backgroundColor='red';
+        pox.style.backgroundColor='red';
+    };
+    yellow.onclick=function(){
+        yellow.style.backgroundColor='yellow';
+        pox.style.backgroundColor='yellow';
+    };
+    blue.onclick=function(){
+        blue.style.backgroundColor='blue';
+        pox.style.backgroundColor='blue';
+    };
+    w200.onclick=function(){
+        pox.style.width='200px';
+    };
+    w300.onclick=function(){
+        pox.style.width='300px';
+    };
+    w400.onclick=function(){
+        pox.style.width='400px';
+    };
+    h200.onclick=function(){
+        pox.style.height='200px';
+    };
+    h300.onclick=function(){
+        pox.style.height='300px';
+    };
+    h400.onclick=function(){
+        pox.style.height='400px';
+    };
+    init.onclick=function(){
+        pox.style.width='100px';
+        pox.style.height='100px';
+        pox.style.backgroundColor='white';
+
+    };
+    sure.onclick=function(){
+        bg.style.display='none';
+        drag.style.display='none';
+    }
+</script>
+</html>

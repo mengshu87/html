@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width:300px;
+            height:300px;
+            background-color:rgb(180, 208, 88);
+
+        }
+        #pox{
+            width:100px;
+            height:100px;
+            background-color:red;
+            position:absolute;
+            left:100px;
+            top:100px;
+            transition:1s;
+        }
+    </style>
+</head>
+<body>
+    <!--<div class="box" id="box"></div>-->
+
+    <div class="pox" id="pox">转</div>
+<script>
+    //console.log('Hello World!');            //字符串要用引号;   //这是单行注释
+    //console.log(123);                       //这是数字     在console里颜色为蓝色
+
+    //var box=document.getElementById('box');       //通过id获取元素对象
+    //console.log(box);
+    //var box=document.querySelector('div');     //querySelector  获取的是第一个元素对象
+    //console.log(box);
+
+    //var box=document.getElementById('box');
+    /*box.onclick=function(){
+        box.style.backgroundColor='pink';
+    }
+
+    //.
+    box.onclick=function(){
+        box.style['background-color']='pink';
+    }
+     */
+
+    var pox=document.getElementById('pox');
+    pox.onmouseover=function(){
+        pox.style.width='200px';
+        pox.style.height='200px';
+        pox.style.backgroundColor='blue';
+        pox.style.transform='rotate(360deg)';
+    }
+    pox.onmouseout=function(){
+        pox.style.width='100px';
+        pox.style.height='100px';
+        pox.style.backgroundColor='red';
+        pox.style.transform='rotate(0deg)';
+    }
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
