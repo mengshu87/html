@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<input type="text" class="text"/>
+<input type="button" value="提交" class="btn"/>
+    <script>
+        var text=document.querySelector('.text');
+        text.focus();		//获取焦点
+        var btn=document.querySelector('.btn');
+        btn.onclick=function(){
+            console.log(text.value);
+            text.value='';				//清空value
+            text.focus();				//再次获得焦点
+        }
+    </script>
+</body>
+</html>

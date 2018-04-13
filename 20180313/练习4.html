@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串</title>
+</head>
+<body>
+<div class="box"></div>
+</body>
+<script>
+    /*var str1='a';
+    var str2="a";
+    var str3=`a`;
+    var str='<input type="text"/>'
+    console.log(str);
+
+
+    var str1='hello';
+    var str2='world';
+    var str3=str1+' '+str2+'!';			//+ 在字符串中，+是拼接的作用
+    console.log(str3);
+
+
+
+    //var str=1+1;
+    var str='2'+1;
+    console.log(str);*/
+    var href='http://www.baidu.com';
+    var link='百度';
+    //var str='<div><span><a href="'+href+'">'+link+'</a></span></div>';				//字符串使用引号    使用引号，不能换行。
+    var box=document.querySelector('.box');
+    var str=`
+		<div>
+			<span>
+				<a href="${href}">${link}</a>
+			</span>
+		</div>
+	`;
+    box.innerHTML=str;
+    //console.log(str);
+</script>
+</html>

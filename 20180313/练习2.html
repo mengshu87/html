@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .text1,.text2{width:200px;height:35px;line-height:35px;border:1px solid #999;margin-right:10px;}
+        .box{width:200px;height:200px;border:1px solid black;margin-top:20px;}
+    </style>
+</head>
+<body>
+<input type="text" value="" class="text1"/>
+<input type="text" value="" class="text2"/>
+<input type="button" value="设置" class="btn"/>
+<div class="box"></div>
+</body>
+<script>
+    var text1=document.querySelector('.text1');
+    var text2=document.querySelector('.text2');
+    var btn=document.querySelector('.btn');
+    var box=document.querySelector('.box');
+
+    btn.onclick=function(){
+        var key=text1.value;
+        var val=text2.value;
+        box.style[key]=val;
+    }
+</script>
+</html>

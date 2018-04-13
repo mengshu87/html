@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{width:100px;height:100px;margin-top:10px;}
+        .red{background-color:red;}
+        .blue{background-color:blue;}
+    </style>
+</head>
+<body>
+<button class="btn">按钮</button>
+<div class="red"></div>
+
+</body>
+<script>
+    var btn=document.querySelector('.btn');
+    var red=document.querySelector('.red');
+    btn.onclick=function(){
+        red.className='blue';
+    }
+</script>
+</html>

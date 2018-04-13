@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .btn{
+            width:200px;
+            height:60px;
+        }
+        .box{
+            width:200px;height:200px;background-color:pink;border:1px solid black;margin:20px 0;
+
+        }
+    </style>
+</head>
+<body>
+<button class="btn">显示/隐藏</button>
+<div class="box"></div>
+</body>
+<script>
+    var btn=document.querySelector('.btn');
+    var box=document.querySelector('.box');
+    var invoke=true;
+    btn.onclick=function(){
+        /*if(invoke){
+            box.style.display='none';
+            invoke=false;
+        }else{
+            box.style.display='block';
+            invoke=true;
+        }*/
+
+        //也可以写成这面这种：
+        if(invoke){
+            box.style.display='none';
+        }else{
+            box.style.display='block';
+        }
+        invoke=!invoke;
+    }
+</script>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div class="bg">
+    <div class="pad">
+        <div class="receiver"></div>
+        <div class="main">
+            <ul class="tabs">
+                <li class="li1 select">循环播放</li>
+                <li class="li2">顺序播放</li>
+            </ul>
+            <div class="loop">图片可以从最后一张跳转到第一张循环切换</div>
+            <div class="noLoop">图片只能到最后一张或只能到第一张切换</div>
+            <div class="img">
+                <div class="pageNum">1/4</div>
+                <div class="prevBtn"></div>
+                <div class="nextBtn"></div>
+                <img src="img/img01.jpg" class="pic"/>
+                <div class="explain">文字描述一</div>
+            </div>
+        </div>
+        <div class="cover"></div>
+        <div class="box dnone">
+            <span class="close"></span>
+            <p>JavaScript提醒</p>
+            <p class="jsRemind">已经到第一张啦~</p>
+            <button class="sure">确定</button>
+        </div>
+        <div class="homeBtn"></div>
+    </div>
+</div>
+</body>
+<script>
+    var li1=document.querySelector('.li1');
+    var li2=document.querySelector('.li2');
+    var loop=document.querySelector('.loop');
+    var noLoop=document.querySelector('.noLoop');
+    var prevBtn=document.querySelector('.prevBtn');
+    var nextBtn=document.querySelector('.nextBtn');
+    var pageNum=document.querySelector('.pageNum');
+    var pic=document.querySelector('.pic');
+    var explain=document.querySelector('.explain');
+    var box=document.querySelector('.box');
+    var jsRemind=document.querySelector('.jsRemind');
+    var close=document.querySelector('.close');
+    var sure=document.querySelector('.sure');
+    var cover=document.querySelector('.cover');
+    var num=1;
+    nextBtn.onclick=function(){
+        num++;
+        pageNum.innerHTML= num +'/4';
+        console.log(num);
+        if(num >= 4){
+            num=0;
+        }
+        if(num==1){
+            pic.src='img/img01.jpg';
+            explain.innerHTML='文字描述一';
+        }else if(num==2){
+            pic.src='img/img02.jpg';
+            explain.innerHTML='文字描述二';
+        }else if(num==3){
+            pic.src='img/img03.jpg';
+            explain.innerHTML='文字描述三';
+        }else{
+            pic.src='img/img04.jpg';
+            explain.innerHTML='文字描述四';
+        }
+
+    };
+    prevBtn.onclick=function(){
+        if(num <= 1){
+            num=5;
+        }
+        num--;
+        pageNum.innerHTML= num +'/4';
+        console.log(num);
+        if(num==1){
+            pic.src='img/img01.jpg';
+            explain.innerHTML='文字描述一';
+        }else if(num==2){
+            pic.src='img/img02.jpg';
+            explain.innerHTML='文字描述二';
+        }else if(num==3){
+            pic.src='img/img03.jpg';
+            explain.innerHTML='文字描述三';
+        }else{
+            pic.src='img/img04.jpg';
+            explain.innerHTML='文字描述四';
+        }
+
+    };
+    li1.onclick=function(){
+        loop.style.display='block';
+        noLoop.style.display='none';
+        li1.classList.add('select');
+        li2.classList.remove('select');
+        nextBtn.onclick=function(){
+            num++;
+            pageNum.innerHTML= num +'/4';
+            console.log(num);
+            if(num >= 4){
+                num=0;
+            }
+            if(num==1){
+                pic.src='img/img01.jpg';
+                explain.innerHTML='文字描述一';
+            }else if(num==2){
+                pic.src='img/img02.jpg';
+                explain.innerHTML='文字描述二';
+            }else if(num==3){
+                pic.src='img/img03.jpg';
+                explain.innerHTML='文字描述三';
+            }else{
+                pic.src='img/img04.jpg';
+                explain.innerHTML='文字描述四';
+            }
+
+        };
+        prevBtn.onclick=function(){
+            if(num <= 1){
+                num=5;
+            }
+            num--;
+            pageNum.innerHTML= num +'/4';
+            console.log(num);
+            if(num==1){
+                pic.src='img/img01.jpg';
+                explain.innerHTML='文字描述一';
+            }else if(num==2){
+                pic.src='img/img02.jpg';
+                explain.innerHTML='文字描述二';
+            }else if(num==3){
+                pic.src='img/img03.jpg';
+                explain.innerHTML='文字描述三';
+            }else{
+                pic.src='img/img04.jpg';
+                explain.innerHTML='文字描述四';
+            }
+
+        }
+    };
+    li2.onclick=function(){
+        noLoop.style.display='block';
+        loop.style.display='none';
+        li2.classList.add('select');
+        li1.classList.remove('select');
+        nextBtn.onclick=function(){
+            if(num >= 4){
+                num=4;
+                box.classList.remove('dnone');
+                jsRemind.innerHTML='已经到最后一张啦~';
+                cover.style.display='block';
+            }else{
+                num++;
+                pageNum.innerHTML= num +'/4';
+            }
+            console.log(num);
+            if(num==1){
+                pic.src='img/img01.jpg';
+                explain.innerHTML='文字描述一';
+            }else if(num==2){
+                pic.src='img/img02.jpg';
+                explain.innerHTML='文字描述二';
+            }else if(num==3){
+                pic.src='img/img03.jpg';
+                explain.innerHTML='文字描述三';
+            }else{
+                pic.src='img/img04.jpg';
+                explain.innerHTML='文字描述四';
+            }
+        };
+        prevBtn.onclick=function(){
+            if(num <= 1){
+                num=1;
+                box.classList.remove('dnone');
+                jsRemind.innerHTML='已经到第一张啦~';
+                cover.style.display='block';
+
+            }else{
+                num--;
+                pageNum.innerHTML= num +'/4';
+            }
+            console.log(num);
+            if(num==1){
+                pic.src='img/img01.jpg';
+                explain.innerHTML='文字描述一';
+            }else if(num==2){
+                pic.src='img/img02.jpg';
+                explain.innerHTML='文字描述二';
+            }else if(num==3){
+                pic.src='img/img03.jpg';
+                explain.innerHTML='文字描述三';
+            }else{
+                pic.src='img/img04.jpg';
+                explain.innerHTML='文字描述四';
+            }
+        }
+    };
+    close.onclick=function(){
+        box.classList.add('dnone');
+        cover.style.display='none';
+    };
+    sure.onclick=function(){
+        box.classList.add('dnone');
+        cover.style.display='none';
+    };
+</script>
+</html>

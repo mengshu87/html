@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul {
+            width: 300px;
+            height: 400px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<ul class="content"></ul>
+<input type="text" value="" class="text"/>
+<input type="button" value="发送" class="btn"/>
+</body>
+<script>
+    var content=document.querySelector('.content');
+    var text=document.querySelector('.text');
+    var btn=document.querySelector('.btn');
+    text.focus();
+    btn.onclick=function(){
+        var val=`<li>${text.value}</li>`;           //这句话不能放到外面去定义，因为要重复执行。
+        //content.innerHTML=content.innerHTML+val;
+        //content.innerHTML+=val;                 //这句话和上面一句是同一个意思
+        content.innerHTML=val+content.innerHTML;            //这句话没有简单写法。
+        text.value='';
+        text.focus();
+    }
+</script>
+</html>

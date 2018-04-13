@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button class="sub">-</button>
+<input type="text" value="0" class="text">
+<button class="add">+</button>
+</body>
+<script>
+    var sub=document.querySelector('.sub');
+    var text=document.querySelector('.text');
+    var add=document.querySelector('.add');
+    var num=0;
+    add.onclick=function(){
+        num++;
+        if(num > 4){
+            num=0;
+        }
+        text.value=num;
+        console.log(num);
+
+    };
+    sub.onclick=function(){
+        num--;
+        if(num<0){
+            num=4;
+        }
+        text.value=num;
+        console.log(num);
+    }
+</script>
+</html>

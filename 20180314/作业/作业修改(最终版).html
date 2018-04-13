@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html{
+            height:100%;        }
+        body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        .bg{
+            margin:0 auto;
+            width:100%;
+            height:100%;
+            background:url('img/bg.jpg');
+            background-size:cover;
+        }
+        .pad{
+            width:700px;
+            height:510px;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin-left:-350px;
+            margin-top:-255px;
+            background:#f8f7fd;
+            box-shadow:6px 6px 6px #827faf;
+            border-radius:10px;
+        }
+        .receiver{
+            float:left;
+            width:6px;
+            height:60px;
+            background-color:#fff;
+            border-radius:3px;
+            margin:225px 20px;
+            border:1px solid #d6d5db;
+        }
+        .main{
+            float:left;
+            width:560px;
+            height:420px;
+            border:1px solid #adadb0;
+            margin:50px 0;
+            background-color:black;
+            position:relative;
+        }
+        .homeBtn{
+            float:left;
+            width:46px;
+            height:57px;
+            background:url('img/miaov.png') no-repeat;
+            margin:225px 20px;
+        }
+        .tabs{
+            list-style-type:none;
+            width:244px;
+            padding:0;
+            margin:15px auto;
+            overflow:hidden;
+        }
+        .tabs li{
+            float:left;
+            width:120px;
+            height:35px;
+            line-height:35px;
+            border:1px solid #d1d0d4;
+            color:#fff;
+            text-align:center;
+            cursor:pointer;
+        }
+        .tabs li.select{
+            background-color:#fff;
+            color:#000;
+        }
+        .img{
+            margin:23px 5px 5px 5px;
+            position:relative;
+        }
+        .loop,.noLoop{
+            color:#919491;
+            text-align:center;
+            width:100%;
+            font-size:13px;
+            line-height:15px;
+        }
+        .noLoop{
+            display:none;
+        }
+        .img .pageNum{
+            text-align:center;
+            color:#fff;
+            line-height:35px;
+            position:absolute;
+            top:0;
+            left:280px;}
+        .img .prevBtn{
+            width:35px;
+            height:50px;
+            position:absolute;
+            left:0;
+            top:110px;
+            background:url('img/prev.png') no-repeat center center;
+        }
+        .img .prevBtn:hover{
+            background:#151719 url('img/prev.png') no-repeat center center;
+            cursor:pointer;
+        }
+        .img .nextBtn{
+            width:35px;
+            height:50px;
+            position:absolute;
+            right:0;
+            top:110px;
+            background:url('img/next.png') no-repeat center center;
+        }
+        .img .nextBtn:hover{
+            background:#151719 url('img/next.png') no-repeat center center;
+            cursor:pointer;
+        }
+        .img .explain{
+            position:absolute;
+            bottom:0;
+            left:0;
+            width:100%;
+            height:43px;
+            line-height:43px;
+            background:url('img/spanbg.png') no-repeat;
+            text-align:center;
+            color:#fff;
+        }
+        .box{
+            position:absolute;
+            width:300px;
+            height:150px;
+            border:1px solid #797976;
+            background-color:rgba(42,38,35,0.5);
+            top:215px;
+            left:180px;
+            color:#fff;
+        }
+        .box span{
+            display:inline-block;
+            width:11px;
+            height:11px;
+            position:absolute;
+            top:18px;
+            right:13px;
+            background:url('img/close.png') no-repeat;
+            cursor:pointer;
+        }
+        .box p:nth-of-type(1){
+            text-align:center;
+            line-height:25px;
+            margin-top:25px;
+            font-size:17px;
+        }
+        .box p.jsRemind{
+            text-align:center;
+            line-height:25px;
+            font-size:12px;
+            color:#919491;
+        }
+        .box button{
+            width:80px;
+            height:25px;
+            border:1px solid #efedea;
+            color:#efedea;
+            background:none;
+            margin:10px 110px;
+            cursor:pointer;}
+        .dnone{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div class="bg">
+    <div class="pad">
+        <div class="receiver"></div>
+        <div class="main">
+            <ul class="tabs">
+                <li class="li1 select">循环播放</li>
+                <li class="li2">顺序播放</li>
+            </ul>
+            <div class="loop">图片可以从最后一张跳转到第一张循环切换</div>
+            <div class="noLoop">图片只能到最后一张或只能到第一张切换</div>
+            <div class="img">
+                <div class="pageNum">1/4</div>
+                <div class="prevBtn"></div>
+                <div class="nextBtn"></div>
+                <img src=" " class="pic"/>
+                <div class="explain">文字描述一</div>
+            </div>
+        </div>
+        <div class="box dnone">
+            <span class="close"></span>
+            <p>JavaScript提醒</p>
+            <p class="jsRemind">已经到第一张啦~</p>
+            <button class="sure">确定</button>
+        </div>
+        <div class="homeBtn"></div>
+    </div>
+</div>
+</body>
+<script>
+    var li1=document.querySelector('.li1');
+    var li2=document.querySelector('.li2');
+    var loop=document.querySelector('.loop');
+    var noLoop=document.querySelector('.noLoop');
+    var prevBtn=document.querySelector('.prevBtn');
+    var nextBtn=document.querySelector('.nextBtn');
+    var pageNum=document.querySelector('.pageNum');
+    var pic=document.querySelector('.pic');
+    var explain=document.querySelector('.explain');
+    var jsRemind=document.querySelector('.jsRemind');
+    var close=document.querySelector('.close');
+    var sure=document.querySelector('.sure');
+    var box=document.querySelector('.box');
+    var invoke=true;
+    var imgDate=['./img/img01.jpg','./img/img02.jpg','./img/img03.jpg','./img/img04.jpg'];
+    var explainDate=['文字描述一','文字描述二','文字描述三','文字描述四'];
+    var current=0;
+    var isAlert=false;          //弹框默认是没有隐藏的。
+    tabImg();
+
+    function tabImg(){
+        if(!isAlert){
+            pageNum.innerHTML=(current+1)+'/'+imgDate.length;
+            pic.src=imgDate[current];
+            explain.innerHTML=explainDate[current];
+        }
+    }
+    //tab切换
+    li1.onclick=function(){
+        if(!isAlert){
+            loop.style.display='block';
+            noLoop.style.display='none';
+            li1.classList.add('select');
+            li2.classList.remove('select');
+            invoke=true;
+        }
+    };
+    li2.onclick=function(){
+        if(!isAlert){
+            noLoop.style.display='block';
+            loop.style.display='none';
+            li2.classList.add('select');
+            li1.classList.remove('select');
+            invoke=false;
+        }
+    };
+    //点击右侧
+    nextBtn.onclick=function() {
+        if(!isAlert){
+            current++;
+            if (invoke) {
+                if (current > imgDate.length - 1) {
+                    current = 0;
+                }
+            } else {
+                if (current > imgDate.length - 1) {
+                    current = imgDate.length - 1;
+                    jsRemind.innerHTML = '已经到最后一张啦~~';
+                    box.classList.remove('dnone');
+                    isAlert=true;
+                }
+
+            }
+            tabImg();
+        }
+    };
+    //点击左侧
+    prevBtn.onclick=function(){
+        if(!isAlert){
+            current--;
+            if(invoke){
+                if(current<0){
+                    current=imgDate.length-1;
+                }
+            }else{
+                if(current<0){
+                    current=0;
+                    box.classList.remove('dnone');
+                    console.log(1);
+                    jsRemind.innerHTML='已经到第一张啦~~';
+                    isAlert=true;
+
+                }
+            }
+            tabImg();
+        }
+    };
+
+    //关闭弹框
+    close.onclick=function(){
+        box.classList.add('dnone');
+        isAlert=false;
+    };
+    sure.onclick=function(){
+        box.classList.add('dnone');
+        isAlert=false;
+    };
+
+
+</script>
+</html>

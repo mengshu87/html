@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+<div class="bg">
+    <div class="phone">
+        <div class="receiver"></div>
+        <div class="main">
+            <div class="message">
+                <div class="lico">
+                    <img src="img/lico.png" />
+                    <span>你好啊~<em></em></span>
+                </div>
+                <div class="rico">
+                    <img src="img/rico.png" />
+                    <span>你好!<em></em></span>
+                </div>
+            </div>
+            <div class="sentMsg">
+                <img src="img/lico.png" alt="" class="img"/>
+                <input type="text" value="" class="text" placeholder="请输入"/>
+                <button class="sentBtn">发送</button>
+            </div>
+        </div>
+        <div class="homeBtn"></div>
+    </div>
+</div>
+</body>
+<script>
+    //老师讲后整理
+    var msg=document.querySelector('.message');
+    var img=document.querySelector('.img');
+    var text=document.querySelector('.text');
+    var btn=document.querySelector('.sentBtn');
+    var invoke=true;
+    text.focus();
+    img.onclick=function(){
+        img.src=invoke?'img/rico.png':'img/lico.png';
+        invoke=!invoke;
+        text.focus();
+    };
+    btn.onclick=function(){
+        var val=text.value;
+        if(val ==''){
+            alert('亲，请写点什么吧！');
+        }else{
+            if(invoke){
+                msg.innerHTML=`<div class="lico">
+                                    <img src="img/lico.png" />
+                                    <span>${val}<em></em></span>
+                                </div>` + msg.innerHTML;
+            }else{
+                msg.innerHTML=`<div class="rico">
+                                    <img src="img/rico.png" />
+                                    <span>${val}<em></em></span>
+                                </div>`+ msg.innerHTML;
+            }
+        };
+        text.value='';
+        text.focus();
+
+    };
+
+</script>
+</html>

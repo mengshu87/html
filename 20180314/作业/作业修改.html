@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div class="bg">
+    <div class="pad">
+        <div class="receiver"></div>
+        <div class="main">
+            <ul class="tabs">
+                <li class="li1 select">循环播放</li>
+                <li class="li2">顺序播放</li>
+            </ul>
+            <div class="loop">图片可以从最后一张跳转到第一张循环切换</div>
+            <div class="noLoop">图片只能到最后一张或只能到第一张切换</div>
+            <div class="img">
+                <div class="pageNum">1/4</div>
+                <div class="prevBtn"></div>
+                <div class="nextBtn"></div>
+                <img src=" " class="pic"/>
+                <div class="explain">文字描述一</div>
+            </div>
+        </div>
+        <div class="cover dnone">
+            <div class="box">
+                <span class="close"></span>
+                <p>JavaScript提醒</p>
+                <p class="jsRemind">已经到第一张啦~</p>
+                <button class="sure">确定</button>
+            </div>
+        </div>
+        <div class="homeBtn"></div>
+    </div>
+</div>
+</body>
+<script>
+    var li1=document.querySelector('.li1');
+    var li2=document.querySelector('.li2');
+    var loop=document.querySelector('.loop');
+    var noLoop=document.querySelector('.noLoop');
+    var prevBtn=document.querySelector('.prevBtn');
+    var nextBtn=document.querySelector('.nextBtn');
+    var pageNum=document.querySelector('.pageNum');
+    var pic=document.querySelector('.pic');
+    var explain=document.querySelector('.explain');
+    var jsRemind=document.querySelector('.jsRemind');
+    var close=document.querySelector('.close');
+    var sure=document.querySelector('.sure');
+    var cover=document.querySelector('.cover');
+    var invoke=true;
+    var imgDate=['./img/img01.jpg','./img/img02.jpg','./img/img03.jpg','./img/img04.jpg'];
+    var explainDate=['文字描述一','文字描述二','文字描述三','文字描述四'];
+    var current=0;
+    tabImg();
+
+    function tabImg(){
+        pageNum.innerHTML=(current+1)+'/'+imgDate.length;
+        pic.src=imgDate[current];
+        explain.innerHTML=explainDate[current];
+
+    }
+    //tab切换
+    li1.onclick=function(){
+        loop.style.display='block';
+        noLoop.style.display='none';
+        li1.classList.add('select');
+        li2.classList.remove('select');
+        invoke=true;
+
+    };
+    li2.onclick=function(){
+        noLoop.style.display='block';
+        loop.style.display='none';
+        li2.classList.add('select');
+        li1.classList.remove('select');
+        invoke=false;
+    };
+    //点击右侧
+    nextBtn.onclick=function() {
+        if (invoke) {
+            current++;
+            if (current > imgDate.length - 1) {
+                current = 0;
+            }
+        } else {
+            current++;
+            if (current > imgDate.length - 1) {
+                current = imgDate.length - 1;
+                jsRemind.innerHTML = '已经到最后一张啦~~';
+                console.log(1);
+                cover.classList.remove('dnone');
+            }
+
+        }
+        tabImg();
+    };
+    //点击左侧
+    prevBtn.onclick=function(){
+        if(invoke){
+            current--;
+            if(current<0){
+                current=imgDate.length-1;
+            }
+        }else{
+            current--;
+            if(current<0){
+                current=0;
+                cover.classList.remove('dnone');
+                console.log(1);
+                jsRemind.innerHTML='已经到第一张啦~~';
+            }
+        }
+        tabImg();
+    };
+
+    //关闭弹框
+    close.onclick=function(){
+        cover.classList.add('dnone');
+    };
+    sure.onclick=function(){
+        cover.classList.add('dnone');
+    };
+
+
+</script>
+</html>
