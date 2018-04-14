@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button class="prev">prev</button>
+<button class="next">next</button>
+<div>
+    <p class="info">1/4</p>
+</div>
+<img src="" class="img" width="400"/>
+</body>
+<!--<script>
+    var prev=document.querySelector('.prev');
+    var next=document.querySelector('.next');
+    var info=document.querySelector('.info');
+    var img=document.querySelector('.img');
+    var imgDate=['img2/asd.jpg','img2/fasd.jpg','img2/hgj.jpg','img2/timg.jpg'];
+    var current=0;
+    tabImg()
+    function tabImg(){
+        info.innerHTML=(current+1)+'/'+imgDate.length;
+        img.src=imgDate[current];
+    }
+
+
+
+    console.log(info.innerHTML);
+    next.onclick=function(){
+        current++;
+
+        if(current>imgDate.length-1){
+            current=imgDate.length-1;
+        };
+        tabImg()
+        /*info.innerHTML=(current+1)+'/'+imgDate.length;
+        img.src=imgDate[current];*/
+    }
+    prev.onclick=function(){
+        current&#45;&#45;;
+        if(current<0){
+            current=0;
+        }
+        tabImg()
+        /*info.innerHTML=(current+1)+'/'+imgDate.length;
+        img.src=imgDate[current];*/
+    }
+</script>-->
+<script>
+    var prev=document.querySelector('.prev');
+    var next=document.querySelector('.next');
+    var info=document.querySelector('.info');
+    var img=document.querySelector('.img');
+    var imgDate=['img2/asd.jpg','img2/fasd.jpg','img2/hgj.jpg','img2/timg.jpg'];
+    var current=0;
+    tabImg();
+    function tabImg(){
+        info.innerHTML=(current+1)+'/'+imgDate.length;
+        img.src=imgDate[current];
+    }
+    console.log(info.innerHTML);
+    next.onclick=function(){
+        current++;
+        if(current>imgDate.length-1){
+            current=0;
+        };
+        tabImg();
+    };
+    prev.onclick=function(){
+        current--;
+        if(current<0){
+            current=imgDate.length-1;
+        }
+        tabImg();
+    }
+</script>
+</html>

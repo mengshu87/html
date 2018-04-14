@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html{
+            height:100%;
+        }
+        body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        .bg{
+
+        }
+        .main{
+
+            position:relative;
+        }
+
+        .box{
+            width:90%;
+            height:600px;
+            position:absolute;
+            top:30px;
+            left:30px;
+
+        }
+        .box div{
+            width:50px;
+            height:50px;
+            line-height:50px;
+            position:absolute;
+            display:inline-block;
+            color:red;
+            border:1px solid black;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div class="bg">
+    <div class="main">
+        <input type="text" value="" class="text"/>
+        <button class="btn">生成</button>
+        <div class="box">
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script>
+    //获取所需要的元素
+    var text=document.querySelector('.text');
+    var btn=document.querySelector('.btn');
+    var box=document.querySelector('.box');
+    //定义变换角度的数组
+    var rotateDate=[
+            ['left','top'],
+            ['top','right'],
+            ['right','bottom'],
+            ['bottom','left']
+    ];
+    //生成div
+    var str='';
+    //生成div的个数;
+    var num=0;
+    //定义一个div的宽度
+    var size=50;
+    //定义点击的次数
+    var current=0;
+    function rotateDiv(){
+        for(var i=0;i<num;i++){
+            if(i<num/2){
+                str+=`<div style="${rotateDate[current][0]}:${i*size}px;${rotateDate[current][1]}:${i*size}px;">${i+1}</div>`;
+            }else{
+                str+=`<div style="${rotateDate[current][0]}:${i*size}px;${rotateDate[current][1]}:${(num-i-1)*size}px;">${i+1}</div>`;
+            }
+        }
+    }
+
+    //点击按钮
+    btn.onclick=function(){
+        str='';
+        num=text.value;
+        btn.innerHTML='变换';
+        if(num%2===0){
+            alert('请输入奇数');
+        }else{
+            rotateDiv();
+            current++;
+            if(current>3){
+                current=0;
+            }
+            box.innerHTML=str;
+        }
+    };
+
+</script>
+</html>

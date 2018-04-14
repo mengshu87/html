@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button class="prev">prev</button>
+<button class="next">next</button>
+<div>
+    <p class="info">1/4</p>
+</div>
+<img src="" class="img" />
+</body>
+<!--<script>
+    var img=document.querySelector('.img');
+    var prev=document.querySelector('.prev');
+    var next=document.querySelector('.next');
+    var info=document.querySelector('.info');
+    var current=1;
+    img.src='img/img01.jpg';
+    info.innerHTML=current+'/'+4;
+
+    next.onclick=function(){
+        current++;
+        if(current > 4){
+            current=1;
+        }
+        img.src='img/img0'+current+'.jpg';
+        info.innerHTML= current +'/'+4;
+    };
+    prev.onclick=function(){
+        current--;
+        if(current<1){
+            current=4;
+        }
+        img.src='img/img0'+current+'.jpg';
+        info.innerHTML= current +'/'+4;
+
+    }
+
+</script>-->
+<script>
+    //上面的js 简写
+    var img=document.querySelector('.img');
+    var prev=document.querySelector('.prev');
+    var next=document.querySelector('.next');
+    var info=document.querySelector('.info');
+    var current=1;
+    imgDate();
+    function imgDate(){
+        img.src='img/img0'+current+'.jpg';
+        info.innerHTML=current+'/'+4;
+    }
+
+
+    next.onclick=function(){
+        current++;
+        if(current > 4){
+            current=1;
+        }
+        imgDate();
+    };
+    prev.onclick=function(){
+        current--;
+        if(current<1){
+            current=4;
+        }
+        imgDate();
+
+    }
+</script>
+</html>
