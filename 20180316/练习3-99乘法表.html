@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>99乘法表</title>
+    <style>
+        .main{
+            margin:0;
+            padding:0;
+        }
+        .main span{
+            width:100px;
+            height:40px;
+            line-height:40px;
+            display:inline-block;
+            border:1px solid red;
+            color:red;
+            margin:2px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+
+</div>
+
+</body>
+<script>
+    //99乘法表正数
+    /*var main=document.querySelector('.main');
+    var str='';
+    for(var i=1;i<=9;i++){
+        for(var j=1;j<=i;j++){
+            str+=`<span>${j} × ${i}＝${j*i}</span>`;
+        }
+        str+='<br/>';
+    }
+    main.innerHTML=str;*/
+    //99乘法表倒数
+    var main=document.querySelector('.main');
+    var str='';
+    for(var i=9;i>=1;i--){
+        for(var j=1;j<=i;j++){
+            str+=`<span>${j}×${i}=${j*i}</span>`;
+        }
+        str+='<br/>';
+    }
+    main.innerHTML=str;
+</script>
+</html>

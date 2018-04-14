@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main{
+            width:800px;
+            height:auto;
+            border:2px solid red;
+        }
+        .main div{
+            width:100px;
+            height:100px;
+            line-height:100px;
+            background:blue;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+
+</div>
+
+</body>
+<script>
+//    var main=document.querySelector('.main');
+//    for(var i=0;i<1000;i++){
+//        main.innerHTML+=`<div>${i+1}</div>`;            //这样写页面加载很慢，多次渲染，有可能会造成页面的假死状态
+//    }
+//
+    var main=document.querySelector('.main');
+    var str='';
+    for(var i=0;i<1000;i++){
+        str+=`<div>${i+1}</div>`;
+    }
+    main.innerHTML=str;
+</script>
+</html>
