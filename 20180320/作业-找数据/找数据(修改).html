@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        .bg{
+            width:100%;
+            height:100%;
+            background:url(img/bg.png) no-repeat;
+            background-size:cover;
+            position:relative;
+        }
+        .bg button{
+            width:120px;
+            height:30px;
+            background:transparent;
+            border:1px solid #fff;
+            border-radius:15px;
+            color:#fff;
+            position:absolute;
+            top:70%;
+            right:30%;
+            cursor:pointer;
+        }
+        .bg .box{
+            position:absolute;
+            top:77%;
+            left:25%;
+        }
+        .bg .box div{
+            line-height:35px;
+        }
+        .bg .box div span{
+            padding:0 10px;
+        }
+        .bg .box div .number{
+            width:15px;
+            height:15px;
+            line-height:15px;
+            display:inline-block;
+
+        }
+        .bg .box .one{
+            color:#f8fa00;
+        }
+
+        .bg .box .two{
+            color:#4dd4ec;
+        }
+        .bg .box .three{
+            color:#df4c9f;
+        }
+        .bg .box .four{
+            color:#ed9a37;
+        }
+    </style>
+</head>
+<body>
+<div class="bg">
+    <button>开始查找</button>
+    <div class="box">
+        <div class="one"><span class="number">1</span>所有数字是:<span class="num"></span></div>
+        <div class="two"><span class="number">2</span>可以转成数字的是:<span class="toNum"></span></div>
+        <div class="three"><span class="number">3</span>转成数字的最大值是:<span class="maxNum"></span></div>
+        <div class="four"><span class="number">4</span>所有运算结果是NaN的位置是:<span class="nanNum"></span></div>
+    </div>
+</div>
+<script>
+    var arr = ['100px', 'abc' - 6, [], -98765, 34, -2, 0, '300', , function() {
+        alert(1);
+    }, null, document, [], true, '200px' - 30, '23.45元', 5, Number('abc'), function() {
+        alert(3);
+    }, 'xyz' - 90];
+
+    //获取元素
+    var num=document.querySelector('.num');
+    var toNum=document.querySelector('.toNum');
+    var maxNum=document.querySelector('.maxNum');
+    var nanNum=document.querySelector('.nanNum');
+    var btn=document.querySelector('button');
+    var len=arr.length;
+    var x='', y = x ,z=y;
+    var bigNum=-Infinity;
+    for(var i=0;i<len;i++){
+        var item=arr[i];
+        if(typeof item==='number' && item===item){
+            x+=item+',';
+        }
+        if(parseFloat(item)){
+            if(bigNum < parseFloat(item)){
+                bigNum = parseFloat(item);
+            }
+            if(typeof item==='string'){
+                item='"'+item+'"';
+            }
+            y+=item+','
+        }
+        if(typeof item==='number'){
+            if(item !== item){
+                z+=i+',';
+            }
+
+        }
+    }
+    btn.onclick=function(){
+        num.innerHTML=x;
+        toNum.innerHTML=y;
+        maxNum.innerHTML=bigNum;
+        nanNum.innerHTML=z;
+    };
+
+</script>
+</body>
+</html>

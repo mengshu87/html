@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>音乐全选</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        ul,li{
+            margin:0;
+            padding:0;
+        }
+        .bg{
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+            background:url('img/bg.png') no-repeat;
+            background-size:cover;
+            position:relative;
+        }
+        .music{
+            margin:0;
+            padding:0;
+            width:480px;
+            height:300px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin-left:-300px;
+            margin-top:-250px;
+            background:rgba(255,255,255,1.0);
+            border-radius:5px;
+        }
+        .logo{
+           position:absolute;
+            top:50%;
+            left:50%;
+            margin-left:-113px;
+            margin-top:-91px;
+            opacity:0.2;
+
+        }
+        .list{
+            width:100%;
+            height:300px;
+            position:absolute;
+            left:0;
+            top:30px;
+            overflow:hidden;
+        }
+        .list li{
+            list-style:none;
+            width:100%;
+            line-height:35px;
+            font-size:13px;
+            padding:0 25px;
+            float:left;
+            position:relative;
+        }
+        .list li div{
+            float:left;
+        }
+        .list li .checkebox{
+            width:12px;
+            height:12px;
+            border:2px solid #ccc;
+            margin:10px;
+        }
+        .list li.active .checkebox::after{
+            content:'✔';
+            color:green;
+            position:absolute;
+            top:0;
+            font-size:16px;
+        }
+        .list li .musicUser{
+            float:right;
+            margin-right:50px;
+        }
+        .list li.even{
+            background:rgba(247,197,206,0.4);
+        }
+        .list li.hover{
+            background:rgba(231,106,129,0.6);
+        }
+        .list li.active{
+            background:rgba(231,106,129,0.8) !important;
+            color:#fff;
+        }
+        .bottom{
+            width:100%;
+            height:45px;
+            line-height:45px;
+            background-color:#de4a63;
+            border-bottom-left-radius:5px;
+            border-bottom-right-radius:5px;
+            position:absolute;
+            bottom:0;
+            left:0;
+            color:#fff;
+        }
+        .bottom div{
+            float:left;
+            margin-left:25px;
+            margin-right:25px;
+        }
+        .bottom .allSelect div{
+            width:12px;
+            height:12px;
+            border:2px solid #ccc;
+            margin:15px 10px;
+        }
+        .bottom .allSelect.active div::after{
+            content:'✔';
+            color:green;
+            position:absolute;
+            top:0;
+            font-size:16px;
+        }
+        .bottom .collect,.bottom .add,.bottom .delete{
+            line-height:45px;
+
+        }
+        .bottom .collect span{
+            width:24px;
+            height:20px;
+            display:inline-block;
+            background-image:url('./img/1.png');
+            background-position:0 0;
+            vertical-align:middle;
+            margin-right:5px;
+        }
+        .bottom .add span{
+            width:24px;
+            height:26px;
+            display:inline-block;
+            background-image:url('./img/1.png');
+            background-position:0 -20px;
+            vertical-align:middle;
+            margin-right:5px;
+        }
+        .bottom .delete span{
+            width:24px;
+            height:25px;
+            display:inline-block;
+            background-image:url('./img/1.png');
+            background-position:0 -46px;
+            vertical-align:middle;
+            margin-right:5px;
+        }
+    </style>
+</head>
+<body>
+<div class="bg">
+    <div class="music">
+        <div class="logo"><img src="img/logo.png" /></div>
+        <ul class="list">
+            <li>
+                <div class="checkebox"></div>
+                <div class="musicName">泡沫</div>
+                <div class="musicUser">邓紫棋</div>
+            </li>
+            <li>
+                <div class="checkebox"></div>
+                <div class="musicName">说爱你</div>
+                <div class="musicUser">蔡依林</div>
+            </li>
+            <li>
+                <div class="checkebox"></div>
+                <div class="musicName">稻香</div>
+                <div class="musicUser">周杰伦</div>
+            </li>
+            <li>
+                <div class="checkebox"></div>
+                <div class="musicName">我的梦</div>
+                <div class="musicUser">张靓颖</div>
+            </li>
+            <li>
+                <div class="checkebox"></div>
+                <div class="musicName">怎么说我不爱你</div>
+                <div class="musicUser">萧敬腾</div>
+            </li>
+            <li>
+                <div class="checkebox"></div>
+                <div class="musicName">远处安放</div>
+                <div class="musicUser">白若溪</div>
+            </li>
+        </ul>
+        <div class="bottom">
+            <div class="allSelect">
+                <div></div>
+                <span>全选</span>
+            </div>
+            <div class="collect"><span></span>收藏</div>
+            <div class="add"><span></span>添加</div>
+            <div class="delete"><span></span>删除</div>
+        </div>
+    </div>
+</div>
+<script>
+    /*思路：
+    * 1.给需要的元素添加  even  hover  active  样式
+    * 2.给每一个li 添加onclick 事件
+    * 3.全选添加click 事件
+    * */
+
+    var list=document.querySelectorAll('.list li');
+    var listLen=list.length;
+    var current=0;
+    //给需要的元素添加样式
+    for(var i=0;i<listLen;i++){
+        if(!(i%2)){
+            list[i].classList.add('even');
+        }
+        list[i].onmouseover=function(){
+            this.classList.add('hover');
+        };
+        list[i].onmouseout=function(){
+            this.classList.remove('hover');
+        };
+        list[i].onclick=function(){
+            var ret=this.classList.toggle('active');
+            current=ret ? ++current : --current ;
+            allSelect.classList.toggle('active',current==listLen);
+        }
+    }
+    var allSelect=document.querySelector('.allSelect');
+
+    allSelect.onclick=function(){
+        var ret=allSelect.classList.toggle('active');
+        current=ret ? listLen : 0;
+        for(var i=0;i<listLen;i++){
+            list[i].classList.toggle('active',ret);
+        }
+    }
+
+</script>
+</body>
+</html>

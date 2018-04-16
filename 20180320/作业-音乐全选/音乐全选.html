@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>音乐全选</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        ul,li{
+            margin:0;
+            padding:0;
+        }
+        .bg{
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+            background:url('img/bg.png') no-repeat;
+            background-size:cover;
+            position:relative;
+        }
+        .music{
+            margin:0;
+            padding:0;
+            width:480px;
+            height:300px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin-left:-300px;
+            margin-top:-250px;
+            background:rgba(255,255,255,1.0);
+            border-radius:5px;
+        }
+        .logo{
+           position:absolute;
+            top:50%;
+            left:50%;
+            margin-left:-113px;
+            margin-top:-91px;
+            opacity:0.4;
+
+        }
+        .list{
+            width:100%;
+            height:300px;
+            position:absolute;
+            left:0;
+            top:30px;
+            overflow:hidden;
+        }
+        .list li{
+            list-style:none;
+            width:100%;
+            line-height:35px;
+            font-size:13px;
+            padding:0 25px;
+        }
+        .list li label {
+            width: 85%;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .list li label .musicName{
+            margin-left:25px;
+        }
+        .list li label .musicUser{
+            float:right;
+        }
+        .list li:nth-of-type(even){
+            background:rgba(247,197,206,0.6);
+        }
+        .list li.select{
+            color:#fff;
+            background:rgba(231,106,129,0.6);
+        }
+
+        .bottom{
+            width:100%;
+            height:45px;
+            line-height:45px;
+            background-color:#de4a63;
+            border-bottom-left-radius:5px;
+            border-bottom-right-radius:5px;
+            position:absolute;
+            bottom:0;
+            left:0;
+            color:#fff;
+        }
+        .bottom div{
+            float:left;
+            margin-left:25px;
+            margin-right:25px;
+        }
+        .bottom .allSelect label{
+            margin-left:17px;
+        }
+        .bottom .collect,.bottom .add,.bottom .delect{
+            line-height:45px;
+
+        }
+        .bottom .collect span{
+            width:24px;
+            height:20px;
+            display:inline-block;
+            background-image:url('./img/1.png');
+            background-position:0 0;
+            vertical-align:middle;
+            margin-right:5px;
+        }
+        .bottom .add span{
+            width:24px;
+            height:26px;
+            display:inline-block;
+            background-image:url('./img/1.png');
+            background-position:0 -20px;
+            vertical-align:middle;
+            margin-right:5px;
+        }
+        .bottom .delete span{
+            width:24px;
+            height:25px;
+            display:inline-block;
+            background-image:url('./img/1.png');
+            background-position:0 -46px;
+            vertical-align:middle;
+            margin-right:5px;
+        }
+    </style>
+</head>
+<body>
+<div class="bg">
+    <div class="music">
+        <div class="logo"><img src="img/logo.png" /></div>
+        <ul class="list">
+            <li>
+                <input type="checkbox" value="" id="music1">
+                <label for="music1">
+                    <span class="musicUser">邓紫棋</span><span class="musicName">泡沫</span>
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" value="" id="music2">
+                <label for="music2">
+                    <span class="musicUser">邓紫棋</span><span class="musicName">泡沫</span>
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" value="" id="music3">
+                <label for="music3">
+                    <span class="musicUser">邓紫棋</span><span class="musicName">泡沫</span>
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" value="" id="music4">
+                <label for="music4">
+                    <span class="musicUser">邓紫棋</span><span class="musicName">泡沫</span>
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" value="" id="music5">
+                <label for="music5">
+                    <span class="musicUser">邓紫棋</span><span class="musicName">泡沫</span>
+                </label>
+            </li>
+            <li>
+                <input type="checkbox" value="" id="music6">
+                <label for="music6">
+                    <span class="musicUser">邓紫棋</span><span class="musicName">泡沫</span>
+                </label>
+            </li>
+        </ul>
+        <div class="bottom">
+            <div class="allSelect">
+                <input type="checkbox" value="" id="allSelect"/>
+                <label for="allSelect">全选</label>
+            </div>
+            <div class="collect"><span></span>收藏</div>
+            <div class="add"><span></span>添加</div>
+            <div class="delete"><span></span>删除</div>
+        </div>
+    </div>
+</div>
+<script>
+    var music=document.querySelector('.music');
+    var lis=document.querySelectorAll('li');
+    //单选按钮
+    var inps=document.querySelectorAll('li input');
+    var len=inps.length;
+    //全选按钮
+    var allSelect=document.getElementById('allSelect');
+    //点击全选按钮
+    allSelect.onclick=function(){
+        for(var i=0;i<len;i++){
+            if(this.checked==true){
+                inps[i].checked=allSelect.checked;
+                lis[i].classList.add('select');
+            }else{
+                inps[i].checked=false;
+                lis[i].classList.remove('select');
+            }
+        }
+    };
+    //给每一个按钮添加绑定事件
+    for(var i=0;i<len;i++){
+        inps[i].index=i;
+        inps[i].onclick=function(){
+            //如果当前的按钮没有选中，那全选按钮就不选中。
+            if(this.checked==false){
+                allSelect.checked=false;
+                lis[this.index].classList.remove('select');
+            }else{
+                //查看单选按钮是否都选中。
+                var current=0;
+                if(this.checked==true){
+                    inps[this.index].checked=true;
+                    lis[this.index].classList.add('select')
+                }
+                for(var i=0;i<len;i++){
+                    if(inps[i].checked==true){
+                        current++;
+                    }
+                }
+                if(current==len){
+                    allSelect.checked=true;
+                    lis[this.index].classList.add('select');
+                }
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
