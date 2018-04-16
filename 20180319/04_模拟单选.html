@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box{
+            margin:0;
+            padding:0;
+        }
+        span{
+            width:50px;
+            height:50px;
+            line-height:50px;
+            display:inline-block;
+            border:1px solid red;
+            color:red;
+            text-align:center;
+            border-radius:50%;
+            margin:0 5px;
+        }
+        span.active{
+            background-color:green;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="box">
+    请选择：
+    <span>男</span>
+    <span>女</span>
+    <span>保密</span>
+</div>
+<script>
+    //方法一：先把之前的样式全部清空，再添加样式
+//    var listSpan=document.querySelectorAll('.box span');
+//    var len=listSpan.length;
+//
+//    for(var i=0;i<len;i++){
+//        listSpan[i].onclick=function(){
+//            for(var i=0;i<len;i++){
+//                listSpan[i].classList.remove('active');
+//            }
+//            this.classList.add('active');
+//
+//        };
+//    }
+
+
+    //-----------------------------------------------------------------------------------
+    //方法二：先定义一个变量，上一个，开始之前先把上一个的清空
+    var spans=document.querySelectorAll('.box span');
+    var len=spans.length;
+    var prev=0;
+    for(var i=0;i<len;i++){
+        //给每个元素添加一个属性，是每次循环的i的值;
+        spans[i].a=i;
+        spans[i].onclick=function(){
+            //清楚上一个的class
+            spans[prev].classList.remove('active');
+            //给点击的i添加class
+            this.classList.add('active');
+            //点击谁，谁变成上一个;
+            prev=this.a;
+        };
+
+
+    }
+    /*spans[0].onclick=function(){
+        this.style.backgroundColor='pink';
+    }
+    spans[1].onclick=function(){
+        this.style.backgroundColor='pink';
+    }
+    spans[2].onclick=function(){
+        this.style.backgroundColor='pink';
+    }*/
+
+</script>
+
+
+</body>
+</html>

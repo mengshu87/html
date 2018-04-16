@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            margin:0;
+            padding:0;
+        }
+        span{
+            width:50px;
+            height:50px;
+            line-height:50px;
+            display:inline-block;
+            border:1px solid red;
+            color:red;
+            text-align:center;
+            border-radius:50%;
+            margin:0 5px;
+        }
+        span.active{
+            background-color:green;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    请选择：
+    <span>男</span>
+    <span>女</span>
+    <span>保密</span>
+</div>
+<script>
+    /*
+    * 1.点击任意一个可以切换有没有背景颜色;
+    * 2.点击任意一个让其它的背景颜色消失;
+    * */
+    var listSpan=document.querySelectorAll('.box span');
+    var len=listSpan.length;
+    for(var i=0;i<len;i++){
+        //先为每一个按钮添加一个属性 checked 初始值为false;
+        listSpan[i].checked=false;
+        listSpan[i].onclick=function(){
+            if(this.checked){
+                this.classList.remove('active');
+            }else{
+                for(var i=0;i<len;i++){
+                    listSpan[i].classList.remove('active');
+                    listSpan[i].checked=false;
+                }
+                this.classList.add('active');
+            }
+            this.checked=!this.checked;
+        }
+    }
+
+</script>
+</body>
+</html>

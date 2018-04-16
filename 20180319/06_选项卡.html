@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style>
+        .box{
+            width:800px;
+            height:500px;
+        }
+        .btns{
+            margin: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .btns button{
+            width:200px;
+            height:50px;
+            font-size:30px;
+            font-weight:bold;
+        }
+        .btns button.active{
+            background-color:pink;
+        }
+        .content div{
+            width: 700px;
+            height: 400px;
+            margin: 0 50px;
+            border: 2px solid #000;
+            text-align: center;
+            font-size: 200px;
+            line-height: 400px;
+            display: none;
+        }
+        .content div.active{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="btns">
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+    </div>
+    <div class="content">
+        <div class="active">1111</div>
+        <div>2222</div>
+        <div>3333</div>
+    </div>
+</div>
+<script>
+    var btns=document.querySelectorAll('.btns button');
+    var divs=document.querySelectorAll('.content div');
+    var len=btns.length;
+    for(var i=0;i<len;i++){
+        btns[i].a=i;
+        btns[i].onclick=function(){
+            for(var i=0;i<len;i++){
+              btns[i].classList.remove('active');
+              divs[i].classList.remove('active');
+            }
+            /*for(var i=0;i<len;i++){
+                divs[i].classList.remove('active');
+            }*/
+            divs[this.a].classList.add('active');
+            this.classList.add('active');
+        }
+
+    }
+</script>
+</body>
+</html>

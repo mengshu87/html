@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        .bg{
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+            background:url('img/bg.png') no-repeat;
+            background-size:cover;
+            position:relative;
+        }
+        .main{
+            padding:0;
+            width:384px;
+            height:700px;
+            background:url('img/bg1.png') no-repeat;
+            position:absolute;
+            top:0;
+            left:50%;
+            margin-left:-192px;
+            color:#fff;
+        }
+        .list{
+            position:absolute;
+            top:60px;
+            left:37px;
+            width:300px;
+
+
+        }
+        .list h2{
+            margin:0;
+            padding:0;
+            line-height:45px;
+            font-size:14px;
+            background:rgba(0,0,0,0.8);
+            text-indent:15px;
+            margin-top:10px;
+        }
+        .list h2.active{
+            background:#b9565c;
+        }
+        .list h2 span{
+            width:15px;
+            height:15px;
+            display:inline-block;
+            background:url('img/01.png') no-repeat;
+        }
+        .list h2.active span{
+            width:15px;
+            height:15px;
+            display:inline-block;
+            margin-right:3px;
+            background:url('img/02.png') no-repeat 0 5px;
+        }
+        .list ul{
+            margin:0;
+            padding:0;
+            background:rgba(0,0,0,0.5);
+            display:none;
+
+        }
+        .list ul li{
+            list-style:none;
+            text-indent:30px;
+            line-height:35px;
+            cursor:pointer;
+            font-size:12px;
+        }
+        .list ul li.active{
+            background-color:#7b2c3a;
+        }
+        .list ul li:hover{
+            background-color:#5b5b5b;
+        }
+        .list ul li.active:hover{
+            background:#7b2c3a;
+        }
+    </style>
+</head>
+<body>
+<div class="bg">
+    <div class="main">
+        <div class="list">
+            <h2><span></span>我的好友</h2>
+            <ul>
+                <li>我的好友1</li>
+                <li>我的好友2</li>
+                <li>我的好友3</li>
+            </ul>
+            <h2><span></span>企业好友</h2>
+            <ul>
+                <li>企业好友1</li>
+                <li>企业好友2</li>
+                <li>企业好友3</li>
+                <li>企业好友3</li>
+            </ul>
+            <h2><span></span>黑名单</h2>
+            <ul>
+                <li>黑名单1</li>
+                <li>黑名单2</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    var h2s=document.querySelectorAll('.list h2');
+    var uls=document.querySelectorAll('.list ul');
+    var lis=document.querySelectorAll('.list li');
+    var len=h2s.length;
+    for(var i=0;i<len;i++){
+        h2s[i].index=i;
+        h2s[i].onclick=function(){
+            if(this.className=='active'){
+                this.classList.remove('active');
+                uls[this.index].style.display='';
+            }else{
+                for(var i=0;i<len;i++){
+                    h2s[i].classList.remove('active');
+                    uls[i].style.display='';
+                }
+                this.classList.add('active');
+                uls[this.index].style.display='block';
+            }
+        }
+    }
+    for(var i=0;i<lis.length;i++){
+        lis[i].onclick=function(){
+            if(this.className=='active'){
+                this.classList.remove('active');
+            }else{
+                for(var i=0;i<lis.length;i++){
+                    lis[i].classList.remove('active');
+                }
+                this.classList.add('active');
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

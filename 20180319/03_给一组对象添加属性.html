@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box">
+    <button>按钮0</button>
+    <button>按钮1</button>
+    <button>按钮2</button>
+</div>
+<script>
+    /*
+    * 点击第一个按钮 btns[0].a=0;
+    * 点击第二个按钮 btns[1].a=1;
+    * 点击第二个按钮 btns[2].a=2;
+    *
+    * */
+    var btns=document.querySelectorAll('.box button');
+    var len=btns.length;
+    for(var i=0;i<len;i++){
+        //给每一个元素添加一个 a 属性
+        btns[i].a=i;
+        btns[i].onclick=function(){
+            console.log(this.a);
+        }
+    }
+</script>
+</body>
+</html>
