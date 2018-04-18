@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>arguments</title>
+</head>
+<body>
+<script>
+    /*
+    * arguments 也只能在函数内部使用，是一个定义好的对象，它储存了所有实参的集合，它是个类数组
+    *
+    * */
+
+
+    /*function fn(a,b){
+        console.log(a+b);
+    }
+    fn(1,2,3,4);                    //3
+    */
+
+    /*function fn(){
+        console.log(arguments);
+
+    }
+    fn(1,2,3,4,5,6);
+    */
+
+    /*function add(){
+        var arg=arguments,x=0;
+        arg.length--;
+        console.log(arg);
+    }
+    add(1,2,3,4,5);
+
+    输出的结果是   如果一个类数组，但是长度已经变成了4   所以argument 和真正的数组不一样。
+    Arguments(4) [1, 2, 3, 4, 4: 5, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+     0    :     1
+     1    :     2
+     2    :     3
+     3    :     4
+     4    :     5
+     callee    :     ƒ add()
+     length    :     4
+     Symbol(Symbol.iterator)    :     ƒ values()
+     __proto__    :     Object
+
+    */
+
+    /*   利用arguments 来计算一些数据的和。
+    function add(){
+        var arg = arguments, x = 0;
+        for (var i=0; i<arg.length; i++) {
+            x += arg[i]
+        }
+        return x;
+    }
+    console.log(add(1, 4, 3, 0, 2));            //10
+
+     */
+
+
+   /* function fn(a,b){
+        var arr=[];
+        var arg=arguments;
+        for(i=2;i<arg.length;i++){
+            arr[i-2]=arg[i];
+        }
+        return arr;                     //记住一定要返回数组。
+    }
+    console.log(fn(1,2,3,4,5));        //[3,4,5]
+    */
+
+</script>
+</body>
+</html>

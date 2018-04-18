@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text">
+<button>提交</button>
+<script>
+    /*function fn(a,b){
+        console.log(a);
+        return                      //return 终止后面的代码继续执行
+        console.log(b);
+        alert('ok');
+    }
+    fn(1,2);
+*/
+/*
+* 需求：如果input 内输入内容，提交就能点击，如果没有输入内容，提交不能点击
+* */
+    /*var input=document.querySelector('input[type=text]');
+    var btn=document.querySelector('button');
+    btn.onclick=function(){
+        var val=input.value;
+        if(!val) return
+        console.log('ok');
+    }*/
+
+
+
+
+
+
+    function ti(a,b,c){
+        function fn(){
+            return a+b+c;
+        }
+        return fn;
+    }
+    var f1=ti(1,2,3);
+    console.log(f1);                    //fn(){return a+b+c;}
+    console.log(f1());                  //6
+
+
+</script>
+
+</body>
+</html>

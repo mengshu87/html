@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div></div><div></div><div></div>
+<script>
+    /*
+    *  Array.isArray(要判断的值)   判断是否是真正的数组
+    * */
+   /* var div=document.querySelector('div');
+    var obj={
+        '0':'a',
+        '1':'b',
+        '2':'c'
+    }
+    var arr=[4,5,6];
+    console.log(Array.isArray(div));            //false
+    console.log(Array.isArray(obj));            //false
+    console.log(Array.isArray(arr));            //true
+    */
+
+    /*
+    * 判断argumengs 是类数组
+    *
+    function fn(){
+        console.log(Array.isArray(arguments));
+    }
+    fn();                       //false
+
+     */
+    /*
+    var arr=[1,2,3,4,5];
+    console.log(arr.slice(2));          // [3, 4, 5]
+
+    function fn(){
+        console.log(arguments.slice(2));
+    }
+    fn(1,2,3,4,5)                   //报错
+
+     */
+
+    /*
+    * 类数组转数组的方法：    Array.from(类数组);
+    *
+
+    var div=document.querySelectorAll('div');
+    var ret=Array.from(div);
+    console.log(ret);               //[div, div, div]
+
+
+    function fn(){
+        console.log(Array.from(arguments));
+    }
+    fn(1,2,3,4,5)               //[1, 2, 3, 4, 5]
+
+
+    var div=document.querySelectorAll('div');
+    var ret=Array.from(div);
+    ret.length=2;
+    console.log(ret);           //[div, div]
+
+
+    var div=document.querySelectorAll('div');
+    div=[...div];
+    console.log(div);           //[div, div, div]
+
+    注意：   ...叫做扩展运算符，可以把数据结构进行展开
+
+
+
+    var arr1=[1,2,3];
+    var arr2=[4,5,6];
+    var arr3=[...arr1,...arr2];
+    console.log(arr3);              //[1, 2, 3, 4, 5, 6]
+
+
+    var obj1={a:1,b:2};
+    var obj2={x:'ok',...obj1};
+    console.log(obj2);      //{x: "ok", a: 1, b: 2}
+
+     */
+
+</script>
+
+</body>
+</html>

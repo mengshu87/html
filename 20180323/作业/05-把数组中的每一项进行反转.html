@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+</head>
+<body>
+  <script>
+    /**
+     * 1 封装一个函数叫做 reverse
+     * 2 该函数的参数是一个数组
+     * 3 调用这个函数，那么数组将会反转
+     * 4 返回反转后的数组
+     */
+
+    /*
+    * 思路：1.当数组为空或都长度为1的时候，数组是不需要反转的
+    *      2.这数组的两段互换位置，有两个方法
+    *                                 1> 声明一个中间项，先让中间项等于前一个元素，然后让第一个元素等于最后一个元素，然后把中间项给最后一个元素。
+    *                                 2> [a,b]=[b,a];
+    *
+    * */
+
+    function reverse(arr){
+      var len=arr.length;
+      if(len<2) return arr;     //
+      for(var i=0;i<len;i++){
+        var start=i;
+        var end=len-1-i;
+        /*if(start<end){
+          var middle=arr[start];
+          arr[start]=arr[end];        --------------------------->这种方法可以，下面这种方法更简单
+          arr[end]=middle;
+
+        }*/
+        if(start<end){
+          [arr[start],arr[end]]=[arr[end],arr[start]];
+        }
+      }
+      return arr;
+    }
+    
+    var arr = [1, 2, 3];
+    
+    console.log(reverse(arr));  // [3, 2, 1]
+    console.log(arr);  // [3, 2, 1]
+    
+    
+  </script>
+</body>
+</html>

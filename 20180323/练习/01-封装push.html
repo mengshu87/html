@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /*
+  * // 封装一个函数 叫做 push，它的第一个参数是一个数组，
+  * 其它的参数可以是任意的，参数数量不固定，
+  * 作用是，将第二个开始的参数依次放入数组的最后面，这个函数的返回值是 新数组的长度
+  *
+  * */
+
+  function push(arr,...rest){
+      for(var i=0;i<rest.length;i++){
+        arr[arr.length]=rest[i];
+
+      }
+      return arr.length;
+  }
+  var arr=[1,2,3];
+  var result=push(arr,4,5,6);
+  console.log(arr);           //[1, 2, 3, 4, 5, 6]
+  console.log(result);          //6
+  //arr ==> [1, 2, 3, 4, 5, 6]   return 6
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
