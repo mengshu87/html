@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="price.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="box">
+				<ul class="list">
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong class="strong1">12.5元 </strong> 小计：<strong class="strong2">0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong class="strong1">10.5元 </strong> 小计：<strong class="strong2">0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong  class="strong1">8.5元 </strong> 小计：<strong class="strong2">0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong class="strong1">8元 </strong> 小计：<strong class="strong2">0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong class="strong1">14.5元 </strong> 小计：<strong class="strong2">0元</strong>
+						</span>
+					</li>
+				</ul>
+				<div class="info">
+					<span>商品共合计：<em>0</em>件</span>
+					<span>共花费了：<em>0</em>元</span>
+					<br />
+					<br />
+					<span>其中最贵的商品单价是：<em>0</em>元</span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		/*
+		* 思路：1.点击 + 号，输入框里的值加1 ，点击 -号，输入框里的值减1，但最小值是0;
+		* 	   2.可以封装一个函数，因为每件商品的加减都是一样的，然后再对每件商品进行遍历;
+		* 	   3.求总共有多少件商品，可以根据输入框的值来确定。让所有输入框的值相加，就是公共有多少件商品;
+		* 	   4.求总共有多少钱，可以根据每件商品的总价格相加来计算得出;
+		* 	   5.求最大值 ，当商品添加后才会比较，如果没有添加商品，就没有最大值。所以必须确定输入框的是有值的，然后对有值的
+		* 	     数据进行单价的比较;
+		* */
+		var listUL=document.querySelector('.list');
+		var lis=document.querySelectorAll('.list li');
+		var infoEm=document.querySelectorAll('.info em');
+
+		function text(oli){
+			var reduce=oli.querySelectorAll('i')[0];
+			var num=oli.querySelector('em');
+			var add=oli.querySelectorAll('i')[1];
+			var price=oli.querySelectorAll('strong')[0].innerHTML;
+			var count=oli.querySelectorAll('strong')[1];
+			reduce.onclick=function(){
+				var value=parseInt(num.innerHTML);
+				value--;
+				if(value<0){
+					value=0
+				}
+				count.innerHTML=parseFloat(price)*value+'元';
+				num.innerHTML=value;
+				text2();
+			};
+			add.onclick=function(){
+				var value=parseInt(num.innerHTML);
+				value++;
+				count.innerHTML=parseFloat(price)*value+'元';
+				num.innerHTML=value;
+				text2();
+			}
+		}
+
+		for(let i=0;i<lis.length;i++){
+			text(lis[i]);
+		}
+
+		function text2(){
+			var numEm=listUL.querySelectorAll('em');
+			var priceStrong=listUL.querySelectorAll('.strong1');
+			var countStrong=listUL.querySelectorAll('.strong2');
+			var allNum=0;
+			var allCount=0;
+			var maxPrice=-Infinity;
+			for(var i=0;i<numEm.length;i++){
+				allNum +=parseInt(numEm[i].innerHTML);
+				allCount+=parseFloat(countStrong[i].innerHTML);
+				//取最大的单价，得确保当前价格的物品是有价格的。
+				if(parseFloat(numEm[i].innerHTML)){
+					if(maxPrice<parseFloat(priceStrong[i].innerHTML)){
+						maxPrice=parseFloat(priceStrong[i].innerHTML);
+					}
+				}
+			}
+			if(allNum==0){
+				maxPrice=0;
+			}
+			infoEm[0].innerHTML=allNum;
+			infoEm[1].innerHTML=allCount;
+			infoEm[2].innerHTML=maxPrice;
+		}
+
+
+	</script>
+</html>

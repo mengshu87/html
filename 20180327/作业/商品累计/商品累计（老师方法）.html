@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="price.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="box">
+				<ul class="list">
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+				</ul>
+				<div class="info">
+					<span>商品公合计：<em>0</em>件</span>
+					<span>共花费了：<em>0</em>元</span>
+					<br />
+					<br />
+					<span>其中最贵的商品单价是：<em>0</em>元</span>
+				</div>
+			</div>
+		</div>
+	</body>
+<script>
+	var data=[
+		{
+			id:0,
+			num:0,
+			price:12.5,
+			total:0
+		},
+		{
+			id:1,
+			num:0,
+			price:10.5,
+			total:0
+		},
+		{
+			id:2,
+			num:0,
+			price:8.5,
+			total:0
+		},
+		{
+			id:3,
+			num:0,
+			price:8,
+			total:0
+		},
+		{
+			id:4,
+			num:0,
+			price:14.5,
+			total:0
+		}
+	];
+	//生成数据结构
+	function createGoodsListHtml(){
+		var list=document.querySelector('.list');
+		var html='';
+		for(let i=0;i<data.length;i++){
+			html+=`<li>
+						<i class="minus"></i>
+						<em class="num">${data[i].num}</em>
+						<i class="add"></i>
+						<span>
+							单价：<strong class="price">${data[i].price}</strong>元  小计：<strong class="total">${data[i].total}</strong>元
+						</span>
+				   </li>`;
+		}
+		list.innerHTML=html;
+	}
+	createGoodsListHtml();
+	//获取生成的li元素节点
+	const listItems=document.querySelectorAll('.list li');
+	//计算某一行商品的信息，参数是对应的某个 li
+	function computedGoods(listItem,i){
+		var minus=listItem.querySelector('.minus');  //-
+		var add=listItem.querySelector('.add');		 //+
+		var num=listItem.querySelector('.num');		 //个数
+		var price=listItem.querySelector('.price');	 //单价
+		var total=listItem.querySelector('.total');  //小计
+		minus.onclick=function(){
+			num.innerHTML=data[i].num > 0 ? --data[i].num : 0;
+			total.innerHTML=data[i].total=data[i].num*data[i].price;
+			// 执行统计方法
+			computedAllData();
+		};
+
+		add.onclick=function(){
+			num.innerHTML=++data[i].num;
+			total.innerHTML=data[i].total=data[i].num*data[i].price;
+			// 执行统计方法
+			computedAllData();
+		}
+	}
+	/*for(let i=0;i<listItems.length;i++){
+		computedGoods(listItems[i],i);------------这种方法可以用下面的方法代替
+	}*/
+	[...listItems].forEach(computedGoods);
+	//统计
+	function computedAllData(i){
+		var infos=document.querySelectorAll('.info em');
+		let [x, y, z] = [0, 0, 0];
+		var len=data.length;
+		for(let i=0;i<len;i++){
+			x+=data[i].num;
+			y+=data[i].total;
+			if(data[i].num && z<data[i].price){
+				z=data[i].price;
+			}
+		}
+		infos[0].innerHTML=x;
+		infos[1].innerHTML=y;
+		infos[2].innerHTML=z;
+	}
+
+</script>
+
+</html>

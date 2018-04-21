@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    // 作用域：用来管理标识符可以在什么情况下被访问和修改的一套规则。
+
+    // JS引擎不会上来就开始执行每一行代码。
+    // 首先 编译器 会逐行解析代码，并且对每一行代码进行编译
+
+    // 先找到 var 和 function 这两个标识符
+    // 然后：
+
+    /**
+     * 1 问作用域，当前作用域注册过 变量 a 么？
+     * 2 作用域 告诉  编译器  没有
+     * 3 那么 就声明一个变量  a，并且把 var 声明的 变量提升到代码最前面
+     * 4 然后发现没有其它 var 或者 funciton 了
+     * 5 编译完成每行代码，JS引擎开始逐行执行
+     */
+
+   /*
+    console.log(a);             //undefined;
+    var a;
+    a=1;
+    console.log(a);             //1
+    */
+
+    /*
+    //看到函数，会把这个函数的整个提升到前面
+    function fn(){
+        console.log('ok');
+    }
+    fn();
+    */
+    /*
+    fn();               //fn is not a function   会报错
+    var fn = function () {
+       console.log('ok');
+    }
+    //原因分析： 代码执行fn,编译器会解析代码，然后问作用域，有没有变量fn ,作用域告诉编译器，没有，那么就坏蛋是怎样炼成的一个变量，
+                把声明的变量var fn 提到最面前，然后再执行fn,因为fn是声明的变量，变量没有自我执行的能力，所以会报错。
+       //所以，函数表达式的执行必须放在函数表达式的后面来执行。
+      js 会优先把var 先提升，然后是function
+    */
+
+
+    function fn(){
+       var a = 1;
+       console.log(a);          //1
+     }
+
+     fn();
+
+     console.log(a);                //报错
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

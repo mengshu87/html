@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    *  当作用域互相嵌套的时候，那么会形成作用域链。
+    * 作用域链：规定了局部作用域可以访问外部作用域的标识符，但是外部作用域不能访问局部作用域里面的标识符
+    *
+    */
+     /*
+     var a = 1;
+
+     function fn () {
+       console.log(a);          //1
+       var b = 2;
+     }
+
+     fn();
+
+     console.log(b);            //报错
+     */
+
+    /*
+    var a = 'ok';
+
+     function fn () {
+       // 只要进入了新的作用域，那么会重新的进行 预编译，然后在执行每一行代码
+       console.log(a);   // undefined
+       var a = 1
+       console.log(a);  // 1
+       a = 10
+       return                   //return 返回，后面的代码就不执行了。
+       var a = 3;
+       console.log(a);
+     }
+
+     fn ();
+     */
+
+
+     var a = 1;
+     function fn1() {
+       fn2();
+       function fn2 () {
+         console.log(a + 1);        //2
+       }
+     }
+    fn1();
+
+
+
+
+</script>
+</body>
+</html>
