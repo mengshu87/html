@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 封装一个函数叫做 toHump 参数是一个 'aa-bb-cc' ，这样格式的字符串，然后转换为  'aaBbCc'
+
+    // get-element-by-id  ===> getElementById
+    function toHump(str){
+        var hump='';
+        var strArr=str.split('-');
+        for(let i=1;i<strArr.length;i++){
+            strArr[i]=strArr[i][0].toUpperCase()+strArr[i].substr(1);
+        }
+        for(let i=0;i<strArr.length;i++){
+            hump+=strArr[i];
+        }
+
+        return hump;
+    }
+    let str='get-element-by-id';
+    const ret=toHump(str);
+    console.log(ret);           //"getElementById"
+</script>
+</body>
+</html>
