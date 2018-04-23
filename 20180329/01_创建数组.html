@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 创建数组：
+     *  字面量表示法： var arr = [];
+     *  实例化数组：var arr = new Array();
+     */
+
+   /* var arr=[1,2,3,4];
+    console.log(arr); //[1,2,3,4]  */
+
+    /*var arr=new Array(1,2,3);
+    console.log(arr);           //[1, 2, 3]
+    */
+    // 当 new Array 的参数只有一个的时候，并且这个参数是一个数字，那么代表创建一个长度是这个数字的数组
+    /*var arr=new Array(5);
+    console.log(arr);           //[empty × 5]
+    arr.fill(1);
+    console.log(arr);
+    */
+    //创建一个10*10的元素都为0 的数组。
+    /*[
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0,0]
+    ]*/
+    function creatMap(x,y){
+        var arr=new Array();
+        for(let i=0;i<x;i++){
+           arr[i]=new Array(y);
+           arr[i].fill(0);
+        }
+        return arr;
+    }
+    console.log(creatMap(10,10))
+
+
+</script>
+</body>
+</html>
