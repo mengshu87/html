@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /*
+    * 题目：
+    * n个数字（0,1,…,n-1）形成一个圆圈，从数字0开始，
+    * 每次从这个圆圈中删除第m个数字（第一个为当前数字本身，第二个为当前数字的下一个数字）。
+    * 当一个数字删除后，从被删除数字的下一个继续删除
+    *
+    *
+    * arr=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+    *            q        q        q           q           q           q           q           q           q           q
+    *
+    * arr=[1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29]
+    *
+    *
+    * */
+
+    const arr=[];
+    for(var i=1;i<=50;i++){
+        arr.push(i);
+    }
+    /*for(var i=0;i<Infinity;i++){
+        if(arr.length ===1) break;
+        if(i<2){
+            arr.push(arr.shift());
+        }else{
+            arr.shift();
+            i=-1;
+        }
+    }
+    console.log(arr);*/
+
+    while(arr.length>1){
+       for(let i=0;i<2;i++){
+            arr.push(arr.shift());  //对数组中的每个元素进行，判断，如果不满足条件，就要把他放到数组的最后面。
+        }
+        arr.shift();
+    }
+    console.log(arr);
+
+
+    /*function find(n,m){//定义一个输出 最后一个人下标的方法，两个参数，n表示总人数，m表示报的数
+        var arr=[];//定义一个空数组
+        for(var i=0;i<n;i++){
+            arr[i]=true;//建立一个可以有n元素的数组，用来模拟报数的总人数 数组中值为true 的表示剩下的人，false 表示出去的人
+        }
+        var total=n,
+            index=0,
+            count=0;    //定义三个变量 total 表示剩下的人数，index 表示数组的下标，count 表示从0-m报的数的下标
+        //循环，直到剩下一个人
+        while(total>1){
+            if(arr[index]==true){
+                count++; //如果数组中的值为true，那么 count+1
+                if(count==m){ //判断报数的人的数量是否为m，如果为m,
+                    count=0; //那么就重置count计数器
+                    arr[index]=false;   //报m的人出去，即将它的值改为false
+                    total--;//将剩下的人数-1
+                }
+            }
+            index++;//下标+1
+            if(index==arr.length){//如果到了最后一人
+                index=0;//重置下标为0
+            }
+        }//循环结束
+        //遍历整个数组
+        for(var  i=0;i<arr.length;i++){
+            if(arr[i]==true){ //值为true 的人就是剩下的最后一个人
+                return i; // 因为数组下标就是从0开始的，而报数的是从1开始的，所以剩下的那个报的数为数组下标+1
+            }
+        }
+        return -1; //如果没有返回-1
+    }
+    //调用find()方法
+    console.log(find(50,3));*/
+
+
+
+</script>
+
+</body>
+</html>
