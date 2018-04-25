@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <div class="main">妙味课堂是一支独具特色的IT培训团队，妙味反对传统IT教育枯燥乏味的教学模式，妙味提供一种全新的快乐学习方法！目前主要针对的是javascript培训，同时还提供了css教程、javascript视频、js特效等，最新推出了外地学员们喜欢的javascript网络课程服务，同时还为处于javascript入门阶段的朋友录制了大量javascript视频，其中涉及了大量javascript基础知识，希望妙味课堂推出的javascript网络培训课程能带给大家更多惊喜。</div>
+        <div class="btns">
+            <div class="openBtn">展开</div>
+            <div class="otherBtn">
+                <div class="searchBtn">查找</div>
+                <div class="replaceBtn">替换</div>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="close"></div>
+        <button class="search">查找</button>
+        <div class="searchText"><input type="text" value="" placeHolder="输入要查找的内容" /><button class="filterBtn"></button></div>
+        <button class="replace">替换</button>
+        <div class="repeatText"><input type="text" value="" placeHolder="输入要查找的内容" /><input type="text" value="" placeHolder="输入要替换的内容" /><button class="filterBtn"></button></div>
+    </div>
+
+</div>
+<script>
+    const main=document.querySelector('.main');     //所有内容
+    const openBtn=document.querySelector('.openBtn');   //展开按钮
+    const otherBtn=document.querySelector('.otherBtn');       //隐藏的两个按钮所包的层
+    const box=document.querySelector('.box');           //box 是查找和替换所包的层。
+    var invoke=true;                    //中间变量
+    openBtn.onclick=function(){     //点击展开按钮 查找和替换按钮的显示和隐藏
+        if(invoke){
+            otherBtn.style.display='block';
+            this.innerHTML=`收起`;
+            openBtn.style.backgroundImage='url(img/close.png)';
+            box.style.display='block';
+        }else{
+            otherBtn.style.display='none';
+            this.innerHTML=`展开`;
+            openBtn.style.backgroundImage='url(img/add.png)';
+            box.style.display='none';
+        }
+        invoke=!invoke;
+    }
+    //所有与查找有关的元素
+    const searchBtn=document.querySelector('.searchBtn');
+    const searchText=document.querySelector('.searchText');
+    const searchInput=searchText.querySelector('input');
+    const search=document.querySelector('.search');
+    const filterBtn1=searchText.querySelector('.filterBtn');
+    //所有与替换有关的元素
+    const replaceBtn=document.querySelector('.replaceBtn');
+    const replace=document.querySelector('.replace');
+    const repeatText=document.querySelector('.repeatText');
+    const repeatInput1=repeatText.querySelectorAll('input')[0];
+    const repeatInput2=repeatText.querySelectorAll('input')[1];
+    const filterBtn2=repeatText.querySelector('.filterBtn');
+
+    searchBtn.onclick= search.onclick=function(){
+        searchInput.focus();
+        searchText.style.display='block';
+        repeatText.style.display='none';
+    }
+    replaceBtn.onclick= replace.onclick=function(){
+        repeatInput1.focus();
+        repeatText.style.display='block';
+        searchText.style.display='none';
+    }
+    filterBtn1.onclick=function(){
+        var val=searchInput.value;
+        var str=main.innerHTML;
+        if(val){
+           var arr=str.split(val);
+           main.innerHTML=arr.join('<span class="green">'+val+'</span>');
+
+        }
+    }
+    filterBtn2.onclick=function(){
+        var val1=repeatInput1.value;
+        var val2=repeatInput2.value;
+        var str=main.innerHTML;
+        if(val1){
+            var arr=str.split(val1);
+            //main.innerHTML=arr.join(val2);
+            main.innerHTML=arr.join('<span class="green">'+val2+'</span>');
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    /*const arr=[5,4,3,2,1];
+    for(let i=0;i<arr.length;i++){
+        console.log(arr[i]);
+    }*/
+    //while循环
+    //语法如下：
+    /*let i=0;
+    while(i<5){
+        console.log(i++);
+    }
+    // 凡是能用for循环的，都能用while,
+    //当不确定要循环多少次的时候用while。
+
+    const arr=[5,4,3,2,1];
+    var i=0;
+    while(i<arr.length){
+        console.log(arr[i]);
+        i++;
+    }
+     */
+    /*
+    //递规：就是函数自己调自己
+    function fn(n){
+        if(n>=0){
+            console.log(n--);
+            fn(n);
+        }
+    }
+    fn(4);
+
+
+    //递归求阶乘
+    function factorial(n){
+        if(n===1) return n;
+        //     4*factorial(3) ==>3* factorial(2) ==> 2* factorial(1)==>1
+        //     4*3*2*1
+        return n * factorial(n-1);
+
+    }
+    console.log(factorial(4));      //24
+    //注意：循环能做的事情，递规99% 都能做; 递规能做的事，循环就不一定能做了。
+     */
+
+    /*function fn(n){
+        if(n<4) return n;
+        return n * fn(n-1);
+    }
+    console.log(fn(6));//360     6*5*4*3*/
+
+    /*function fn(n){
+        if(n==0||n==1){
+            return 1
+        }
+        return fn(n-1)+fn(n-2);
+    }
+    console.log(fn(10));*/
+
+    /*const arr = ['a', 'b', 'c']
+    for(var i=0;i<arr.length;i++){
+        console.log(arr[i])
+
+    }
+    //用递归来实现for 循环
+     */
+
+    const arr=['a','b','c'];
+    function fn(i){
+        if(i<arr.length){
+            console.log(arr[i++]);
+            fn(i);
+        }
+    }
+    fn(0);
+
+</script>
+
+</body>
+</html>

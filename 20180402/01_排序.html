@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //冒泡排序
+    /*
+    *  const arr=[5,4,3,2,1]
+    *  第一次排序
+    *  [4,5,3,2,1]
+    *  [4,3,5,2,1]
+    *  [4,3,2,5,1]
+    *  [4,3,2,1,5]
+    *
+    *  第二次排序
+    *  [3,4,2,1,5]
+    *  [3,2,4,1,5]
+    *  [3,2,1,4,5]
+    *
+    *  第三次排序
+    *  [2,3,1,4,5]
+    *  [2,1,3,4,5]
+    *
+    *  第四次排序
+    *  [1,2,3,4,5]
+    *
+    * */
+
+    const arr=[5,4,3,2,1];
+    var x=0;
+    for(let i=0;i<arr.length;i++){
+        // 每次让当前这个和后一个做比较，然后根据大小交换位置
+        for(let j=0;j<arr.length-1-i;j++){
+            let a=arr[j];
+            let b=arr[j+1];
+            /*if(a>b){                //传统方法，定位一个第三个值，
+                let c=a;
+                arr[j]=b;
+                arr[j+1]=c;
+
+            }*/
+            if(a>b){
+                [arr[j],arr[j+1]]=[b,a]
+            }
+            x++;
+        }
+
+    }
+    console.log(arr);//[1,2,3,4,5]
+    console.log(x);  //10
+
+
+</script>
+</body>
+</html>
