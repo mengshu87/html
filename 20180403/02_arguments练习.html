@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //fn1(1,2,3,'+')  //6
+    //fn1(10,1,2,3,'-')   //4
+    function fn1(){
+        //console.log(arguments.length);
+        var a=arguments[arguments.length-1];
+        var sum=0;
+        for(var i=0;i<arguments.length-1;i++){
+            if(a=='+'){
+                sum+=arguments[i]*1;
+            }
+            if(a=='-'){
+                sum=sum-arguments[i];
+            }
+
+        }
+        return sum;
+    }
+    console.log(fn1(1,2,3,'+'));
+    console.log(fn1(10,1,2,3,'-'))
+
+</script>
+</body>
+</html>

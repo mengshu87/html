@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*把一个Array中的空字符串删掉*/
+    /*var arr = ['A', '', 'B', null, undefined, 'C', '  '];
+    var ret=arr.filter(function(item){
+        return item && item.trim();
+    })
+    console.log(ret);*/
+
+    /*在一个Array中，删掉偶数，只保留奇数*/
+    /*var arr = [1, 2, 4, 5, 6, 9, 10, 15];
+    var ret=arr.filter(function(item){
+        return item%2!==0;
+    })
+    console.log(ret);*/
+
+    /*
+    * 去除Array的重复元素
+    * */
+    const arr = ['apple', 'strawberry', 'banana', 'pear', 'apple', 'orange', 'orange', 'strawberry'];
+    var ret=arr.filter(function(item,i,arr){
+        return arr.indexOf(item)===i;       //indexOf总是返回这个元素第一次出现的位置
+    })
+    console.log(ret);
+</script>
+</body>
+</html>
