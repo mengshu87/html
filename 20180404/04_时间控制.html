@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>引爆</button>
+<script>
+    const btn=document.querySelector('button');
+    let timer;
+    let time=8000;
+    let num=50;
+    btn.onclick=t();
+    function t(){
+        timer=setInterval(fn,time);
+
+    }
+    function fn(){
+        if(num<=0){
+            btn.innerHTML=num;
+        }else{
+            btn.innerHTML=num;
+            num--;
+            time=time/3;
+            t();
+        }
+
+    }
+</script>
+</body>
+</html>

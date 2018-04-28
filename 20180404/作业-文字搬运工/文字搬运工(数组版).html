@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html{
+            height:100%;
+        }
+        body{
+            margin:0;
+            padding:0;
+            height:100%;
+            background:#7367c8;
+        }
+        .box{
+            width:800px;
+            height:400px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin-top:-200px;
+            margin-left:-400px;
+            position:relative;
+        }
+        textarea{
+            position:absolute;
+            width:290px;
+            height:360px;
+            padding:5px;
+            background:#ebf8f9;
+            border:1px solid #3a69d8;
+            box-shadow:3px 3px 2px #3a69d8;
+            border-radius:3px;
+            resize:none;
+        }
+        textarea:nth-of-type(1){
+            left:0;
+        }
+        textarea:nth-of-type(2){
+            right:0;
+        }
+        button{
+            width:95px;
+            height:75px;
+            line-height:75px;
+            color:#fff;
+            background:#6de0fd;
+            border:none;
+            border-radius:3px;
+            position:absolute;
+            top:25%;
+            left:355px;
+            cursor:pointer;
+        }
+        span{
+            position:absolute;
+            width:95px;
+            height:30px;
+            display:inline-block;
+            text-align:center;
+            top:50%;
+            left:350px;
+            color:#6de0fd;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <textarea>我国在1990年代进口现代级驱逐舰，目的是通过引进这一苏联时代最为强大的反舰、防空两用驱逐舰，迅速提高我海军水面作战能力，填补我军052家族驱逐舰研制成功、全面服役前的力量空白！特别是1996年危机后，我军迫切需要增强水面作战威慑能力，应当说4艘引进的现代级驱逐舰，在我东海舰队完成了这一特殊的使命。</textarea>
+    <button>把文字右移</button>
+    <span></span>
+    <textarea></textarea>
+</div>
+<script>
+    const texts=document.querySelectorAll('textarea');
+    const btn=document.querySelector('button');
+    const span=document.querySelector('span');
+    var timer=null;
+    btn.onclick=function(){
+        clearInterval(timer);
+        let v=texts[0].value;
+        var len=texts[0].value.length;
+        texts[1].value='';
+        if(!v){
+            alert('请添加内容');
+            return;
+        }
+        //将第一个里面的元素全部转换为数组
+        v=v.split('');
+        timer=setInterval(function(){
+            texts[1].value+=v.shift();
+            texts[0].value=v.join('');          //join()方法是将数组 的所有元素连接到一个字符串中
+            if(texts[0].value===''){
+                clearInterval(timer);
+            }
+            span.innerHTML=texts[1].value.length+'/'+len;
+        },30);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Game_main</title>
+	<link rel="stylesheet" href="style/Game_main.css">
+</head>
+<body>
+<div id="wrap">
+	<div class="head">
+		<div id="log"></div>
+		<h3 class="title">你的鼠标有多快?</h3>
+		<p class="explain">游戏说明：“点击游戏”，随机掉下表情点中它，千万别让它掉下去！！</p>
+	</div>
+	<div class="content">
+		<div class="win">
+			<span class="winNum">0分</span>
+			<p>得分</p>
+		</div>
+		<div class="lose">
+			<span class="loseNum">0分</span>
+			<p>失分</p>
+		</div>
+		<a href="javascript:;" class="btn">开始游戏</a>
+	</div>
+</div>
+<script src="js/tween.js"></script>
+<script>
+	/*
+	 *需求:
+	 *	 1.点击开始btn,游戏开始
+	 *	 2.表情随机往下落  Math.ceil()向上取整,Math.random()随机数,setInterval(),clearInterval(),
+	 *	 3,点击表情左右抖动消失得分+1/没点中下落后窗口上下抖动失分+1,失分积满10分则游戏失败!!!
+	 *
+	 **/
+	var data = [			//下落的小动物
+		'img/demonI.png',
+		'img/demonII.png',
+		'img/demonIII.png',
+		'img/demonIV.png',
+		'img/demonV.png'
+	];
+	const content=document.querySelector('.content');
+	const btn=document.querySelector('.btn');
+	let speed=10000;
+	let num1=0;			//得分
+	let num2=0;			//失分
+	//小动物在一个范围内无线下落678px-14px-75px(最大的小动物的宽度)=
+	let arr=[14,590];			//小动物运行的范围
+	let dClick=true;			//当小动物连续被点击的时候
+	//点击开始游戏后，小动物才能出现，所以
+	btn.onclick=function(){
+		init(true,function(){
+			playGame();
+		});
+	};
+	//let offset=true;		//true 表示游戏要开始，false 表示游戏结束，
+	function init(offset,play){
+		const win=content.querySelector('.win');
+		const lose=content.querySelector('.lose');
+		const btn=document.querySelector('.btn');
+		move({
+			el:win,
+			attr:{
+				left:offset?-100:14
+			},
+			d:500
+		});
+		move({
+			el:lose,
+			attr:{
+				left:offset?-100:14
+			},
+			d:500
+		});
+		move({
+			el:btn,
+			attr:{
+				bottom:offset?-70:20,
+				opacity:offset?0:1
+			},
+			d:500,
+			callback(){
+				play && play();		//如果有就运行，没有就不运行。
+			}
+		});
+		if(!offset){			//offset=true 表示游戏开始了
+			const winNum=document.getElementsByClassName('winNum')[0];
+			const loseNum=document.getElementsByClassName('loseNum')[0];
+			winNum.innerHTML=loseNum.innerHTML='0分';
+			num1=num2=0;
+			speed=10000;
+			btn.onclick=function(){
+				init(true,function(){
+					//小动物开始下落
+					playGame();
+				});
+			};
+			setTimeout(function(){
+				alert('GAME OVER!');
+			},500);
+		}
+	};
+
+	//生成小动物
+	function playGame(){
+		let img=`<img src="${data[random(data,0,data.length-1)]}" id="img"
+				  style="top:0;left:${random(arr)}px;position:absolute;"/>
+	        `;
+		content.innerHTML+=img;			//将小动物添加到页面中
+		//小动物开始出现
+		const imgs=document.getElementById('img');
+		const winNum=document.getElementsByClassName('winNum')[0];
+		const loseNum=document.getElementsByClassName('loseNum')[0];
+		//小动物开始下落
+		move({
+			el:imgs,
+			attr:{
+				top:339
+			},
+			d:speed,
+			callback(){
+				//当下落到页面底部没有点击，小动物消失content抖动，失分+1;
+				imgs.remove();		//移出小动物
+				dou(content,'top',10,function(){
+					loseNum.innerHTML = (++num2) + '分';
+					if(num2>=3){		//当失分3分以后，游戏结束
+						init();
+					}else{
+						playGame();
+					}
+				})
+			}
+		});
+		//当下落的时候，点击了小动物，小动物抖动变图片，得分+1;
+		imgs.onclick=function(){
+			//小动物不能连续点击
+			if(!dClick) return;
+			dClick=false;
+			imgs.src='img/demonVI.png';
+			winNum.innerHTML=(++num1)+'分';
+			speed-=1000;
+			if(speed<=1000) speed=1000;
+			cancelAnimationFrame(imgs.timer);
+			dou(this,'left',10,function(){
+				dClick=true;
+				imgs.remove();
+				//移出小动物这后，然后再有新的小动物下落
+				playGame();
+			})
+		}
+
+	}
+
+	//取随机出现在的位置
+	function random(arr,min,max){//例如一个数组[0,1,4,2,6] 取最小的值
+		min=min||Math.min(...arr)||0;		//取数组的最小值，如果没有，就设置为0;
+		max=max||Math.max(...arr)||0;		//取数组的最大值，如果没有，就设置为0;
+		return Math.round(Math.random()*(max-min)+min);
+	}
+
+</script>
+</body>
+</html>
+
+
