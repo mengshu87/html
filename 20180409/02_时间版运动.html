@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            left:100px;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    /*
+    * 时间版运动
+    *
+    *  目标点*(时间差/总的时间)=走了多少距离
+    *  时间差=现在的时间-刚才的时间
+    *
+    * */
+    /*
+    *
+    * */
+
+    const box=document.querySelector('.box');
+    var timer=null;
+    var c=600;
+    var d=1000;
+    var b=parseFloat(getComputedStyle(box).left);           //获取当前元素所在的起始位置
+    document.onclick=function(){
+        var oldTime=Date.now();         //时间戳
+        //真正的目前点的位置=目标点的位置-当前元素所在的起始位置。
+        c=c-b;
+        timer=setInterval(function(){
+            var t=Date.now()-oldTime;
+            //当花费的时间大于或者等于总时间，就让花费时间=总时间
+            if(t>=d){
+                t=d;
+                clearInterval(timer);           //注意不能连续点击，因为连续点击，清除的就不是上一次的时间编号
+            }
+            box.style.left=b+c*t/d+'px';
+        },16.7);
+
+    }
+
+
+
+</script>
+</body>
+</html>

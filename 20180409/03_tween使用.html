@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            left:100px;
+            top:0;
+            border-radius:50%;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script src="tween.js"></script>
+<script>
+    const box=document.querySelector('.box');
+    var c=600;
+    var d=1000;
+    var b=parseFloat(getComputedStyle(box).left);
+    document.onclick=function(){
+        var oldTime=Date.now(); //时间戳
+        c=c-b;      //实际要走的距离
+        var timer=setInterval(function(){
+            var t=Date.now()-oldTime;
+            if(t>=d){
+                t=d;
+                clearInterval(timer);
+            }
+            //box.style.left=Tween.linear(t, b, c, d)+'px';   //一定得传参数     匀速
+            box.style.top=Tween.elasticOut(t,b,c,d) +'px';    //弹动渐出
+        },16.7);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            left:100px;
+            top:0;
+            border-radius:50%;
+            opacity:.8;
+            font-size:12px;
+            color:#fff;
+            line-height:100px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div class="box">你好</div>
+<script src="tween.js"></script>
+<script>
+    /*
+    * 函数的封装达到的效果：
+    *  1.不管元素有啥属性，都可以调用这个公共的函数
+    *  2.元素传入的参数是以对象形式存在，对像里的元素是可以是随机的，想传哪些就传哪些。而且没有顺序的规定
+    *  3.调用函数，如果设置就用设置的值，没有设置就用默认的值
+    *  例如：move({
+    *           el:box,          //el 是element
+    *           attr:{
+    *               left:{
+    *                   c:600   //目标值
+    *                   b,      //起始值
+    *                   }
+    *                top:{
+    *                   c：500，
+    *                   b,
+    *                   }
+    *               },
+    *           sportName:'linear',
+    *           d:1000,                 //运动时间
+    *           callback:function(){}
+    *           })
+    *
+    * */
+
+    const box=document.querySelector('.box');
+    box.onclick=function(){
+        move({
+            el:box,
+            attr:{
+                left: 600,
+                top:400,
+                opacity: 0.3,
+                fontSize:40
+                },
+            d:500,
+            sportName:'elasticBoth'
+        });
+    }
+    function move(opt){
+        /*opt.el=opt.el || null;
+        opt.attr=opt.attr ||{};
+        opt.d=opt.d |1000;
+        opt.sportName= opt.sportName ||'linear';
+        opt.callback=typeof opt.callback ==='function'&& opt.callback ||function(){};*/
+        //默认的配置
+        let obj={
+            el:null,
+            attr:{
+                left:100,
+                opacity:0.5,
+                fontSize:20
+            },
+            d:1000,                 //总共的时间
+            sportName:'linear',
+            callback:function(){}
+        };
+        //浅拷贝------其实可以用一个for...in..循环
+        opt=Object.assign(obj,opt);
+        /*for(var k in opt){
+           obj[k]=opt[k];
+        }*/
+
+        //定义时间戳
+        let oldTime=Date.now();
+        //定义一个对象，用来存放attr里的属性
+        let j={};
+        //将attr里的属性，拷贝到j这个对象中。
+        for(var i in opt.attr){
+            let b=parseFloat(getComputedStyle(opt.el)[i]);      //获取样式中元素的起始位置
+            j[i]={          //j对象里面的值存在的方式
+                c:opt.attr[i]-b,            //元素要运动的实际距离
+                b                   //获取元素中的起始位置。
+            }
+        }
+        //自我执行动画方法
+        ;(function animate(){
+            let timer=requestAnimationFrame(animate);           //自我执行
+            var t=Date.now()-oldTime;       //时间差
+            //达到一样的条件，要停止动画
+            if(t>=opt.d){
+                t=opt.d;
+                cancelAnimationFrame(timer);
+            }
+            //将j 对象里的属性分别获取出来
+            for(let attr in j){
+                //运动的曲线 Tween.linear(t, b, c, d)
+                // 其中t：表示已过的时间，b:表示起始值, c:要运行的实际距离  d:表示总共要运行的时间
+                var v=Tween[opt.sportName](t,j[attr].b,j[attr].c,opt.d);
+                //判断样式，如果是有透明度的情况，后面是不带单位的。
+                if(attr==='opacity'){
+                    opt.el.style.opacity=v;
+                }else{
+                    opt.el.style[attr]=v+'px';
+                }
+            }
+            //判断回调函数
+            if(opt.callback){
+                opt.callback.call(opt.el);
+            }
+        })();
+    }
+</script>
+</body>
+</html>

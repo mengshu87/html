@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            left:100px;
+            top:0;
+            border-radius:50%;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script src="tween.js"></script>
+<script>
+    const box=document.querySelector('.box');
+    var c=600;
+    var d=1000;
+    var b=parseFloat(getComputedStyle(box).left);
+    document.onclick=function(){
+        var oldTime=Date.now();
+        c=c-b;
+        ;(function animate(){
+            var timer=requestAnimationFrame(animate);
+            t=Date.now()-oldTime;
+            if(t>=d){
+                t=d;
+                cancelAnimationFrame(timer);
+            }
+            box.style.left=Tween.linear(t,b,c,d)+'px';
+        })();
+    }
+</script>
+</body>
+</html>

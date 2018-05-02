@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            left:100px;
+            top:0;
+            border-radius:50%;
+        }
+        .box2{
+            width:100px;
+            height:100px;
+            background:green;
+            position:absolute;
+            left:100px;
+            top:150px;
+            border-radius:50%;
+        }
+    </style>
+</head>
+<body>
+<button>停止</button>
+<div class="box"></div>
+<div class="box2"></div>
+<script src="tween.js"></script>
+<script>
+    const box=document.querySelector('.box');
+    const box2=document.querySelector('.box2');
+    const btn=document.querySelector('button');
+    var timer=null;
+    box.onclick=function(){
+        move(this,'left',10000,600);
+    };
+    btn.onclick=function(){
+        cancelAnimationFrame(timer);
+    }
+    box2.onclick=function(){
+        move(this,'left',5000,600);
+    };
+    function move(obj,attr,d,c,callback){
+        var oldTime=Date.now();
+        var b=parseFloat(getComputedStyle(obj)[attr]);
+        c=c-b;
+        ;(function animate(){
+            timer=requestAnimationFrame(animate);
+            t=Date.now()-oldTime;
+            if(t>=d){
+                t=d;
+                cancelAnimationFrame(timer);
+            }
+            obj.style[attr]=Tween.linear(t,b,c,d)+'px';
+            if(callback){
+                callback();
+            }
+        })();
+    }
+</script>
+</body>
+</html>

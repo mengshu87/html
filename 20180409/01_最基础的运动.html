@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    /*
+    * 速度自版运动
+    * */
+    const box=document.querySelector('.box');
+    var timer=null;
+    var speed=0;
+    document.onclick=function(){
+        timer=setInterval(function(){
+            speed+=10;
+            if(speed>=600){
+                speed==600;
+                clearInterval(timer);
+            }
+            box.style.left=speed+'px';
+
+        },16.7);
+    }
+</script>
+</body>
+</html>
