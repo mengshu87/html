@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:448px;
+            height:245px;
+            border:1px solid red;
+            position:relative;
+            margin:20px auto;
+            overflow:hidden;
+        }
+        img{
+            width:100%;
+        }
+        ul{
+            list-style:none;
+            position:absolute;
+        }
+        ul li{
+            width:448px;
+            height:245px;
+            float:left;
+        }
+        a{
+            width:40px;
+            height:90px;
+            line-height:90px;
+            background:#333;
+            position:absolute;
+            top:72px;
+            text-align:center;
+            color:#fff;
+            text-decoration:none;
+        }
+        #prev{
+            left:0;
+        }
+        #next{
+            right:0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li><img src="img1/1.jpg"/></li>
+        <li><img src="img1/2.jpg"/></li>
+        <li><img src="img1/3.jpg"/></li>
+        <li><img src="img1/4.jpg"/></li>
+    </ul>
+    <a href="javascript:;" id="prev">〈</a>
+    <a href="javascript:;" id="next">〉</a>
+</div>
+<script src="tween.js"></script>
+<script>
+    /*
+    * 运用动画函数来制作无缝连接动画
+    *
+    * 解题思路：1.获取所有图片，并连接到一起，这时个ul的宽度都会变长
+    *          2.将图片再复制一份，放到第一次的后面，图片轮播
+    *          3.当图片轮播到第二份图片的最后一张的时候，把图片的位置改成第一份的最后一张图片
+    *          4.然后再继续轮播。
+    *
+    * */
+    //获取元素
+    const ul=document.querySelector('ul');
+    const lis=ul.getElementsByTagName('li');   //querySelector 是静态方法    getElementsByTagName 是动态方法
+    const prev=document.getElementById('prev');
+    const next=document.getElementById('next');
+    let w=448; //一个图片的宽度
+    let num=0;
+    ul.innerHTML+=ul.innerHTML;
+    let len=lis.length;
+    ul.style.width=w*len+'px';
+    let timer=null;
+    //点击下一页
+    next.onclick=function(){
+        clearInterval(timer);
+        num++;
+        if(num>=len){
+           ul.style.left=-(len/2-1)*w+'px';
+            num=len/2;
+        }
+        move({
+            el:ul,
+            attr:{
+                left:-w*num
+            },
+            d:500
+        });
+    }
+    prev.onclick=function(){
+        clearInterval(timer);
+        num--;
+        if(num<0){
+            ul.style.left=-(len/2)*w+'px';
+            num=len/2-1;
+        }
+        move({
+            el:ul,
+            attr:{
+                left:-w*num
+            },
+            d:500
+        });
+    }
+
+</script>
+</body>
+</html>

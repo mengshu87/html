@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div">
+    <img src="img/0.png" />
+    <img src="img/0.png" />
+    <img src="img/second1.png"  class="second"/>
+    <img src="img/0.png" />
+    <img src="img/0.png" />
+    <img src="img/second1.png"  class="second"/>
+    <img src="img/0.png" />
+    <img src="img/0.png" />
+</div>
+<script>
+    const div=document.getElementById('div');
+    const img=document.getElementsByTagName('img');
+    const second=document.getElementsByClassName('second');
+    time();
+    setInterval(function(){
+        time();
+        for(let i=0;i<second.length;i++){
+            second[i].src='img/second.png';
+        }
+        setTimeout(function(){
+            for(let i=0;i<second.length;i++){
+                second[i].src='img/second1.png';
+            }
+        },500);
+    },1000);
+    function time() {
+        let d = new Date();
+        let h = d.getHours();
+        let m = d.getMinutes();
+        let s = d.getSeconds();
+        let str = toDou(h) + ':' + toDou(m) + ':' + toDou(s);
+        for (var i = 0; i < img.length; i++) {
+            if (i != 2 && i != 5) {
+                img[i].src = 'img/' + str[i] + '.png';
+            }
+        }
+    }
+    function toDou(n){
+        /*if(n<10){
+            return '0'+n;
+        }else{
+            return ''+n;
+        }*/
+        return n<10?'0'+n:''+n;
+    }
+
+</script>
+</body>
+</html>

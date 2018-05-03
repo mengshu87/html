@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:448px;
+            height:245px;
+            border:1px solid red;
+            position:relative;
+            margin:20px auto;
+            overflow:hidden;
+        }
+        img{
+            width:100%;
+        }
+        ul{
+            width:896px;
+            list-style:none;
+            position:absolute;
+            transition:1s;
+        }
+        ul li{
+            width:448px;
+            height:245px;
+            float:left;
+        }
+        a{
+            width:40px;
+            height:90px;
+            line-height:90px;
+            background:#333;
+            position:absolute;
+            top:72px;
+            text-align:center;
+            color:#fff;
+            text-decoration:none;
+        }
+        #prev{
+            left:0;
+        }
+        #next{
+            right:0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li><img src="img1/1.jpg"/></li>
+        <li><img src="img1/2.jpg"/></li>
+    </ul>
+    <a href="javascript:;" id="prev">〈</a>
+    <a href="javascript:;" id="next">〉</a>
+</div>
+<script>
+    /*
+    * 利用transfrom 来实现图片轮播
+    *
+    * 解题思路：
+    *       当图片运动到第二张的时候，迅速装图片的第一张放到运动的后面并将图片变成下一张图片
+    *
+    * */
+    const ul=document.querySelector('ul');
+    const lis=ul.getElementsByTagName('li');
+    const imgs=ul.getElementsByTagName('img');
+    let arr=['img1/1.jpg','img1/2.jpg','img1/3.jpg','img1/4.jpg'];
+    let num=0;
+    let len=arr.length;
+    const prev=document.getElementById('prev');
+    const next=document.getElementById('next');
+    let offset=true;
+    next.onclick=function(){
+        if(!offset) return;
+        offset=false;
+        ul.style.transition='1s';
+        imgs[0].src=arr[num];       //将图片的变成是arr里的图片
+        //点击运动，这是css3中transform的动画效果，沿X轴向左运动
+        ul.style.transform='translateX(-448px)';
+        num++;//num++ 图片切换
+        setTimeout(function(){
+            //把第1张图片变成第三张图片，并放到第二张图片的后面
+            imgs[0].src=arr[num%=len];
+            ul.style.transition='none';
+            ul.style.transform='translateX(0px)';
+            /*if(num+1>len){
+                imgs[1].src=arr[0];
+            }else{
+                imgs[1].src=arr[num+1];
+            }   //可以写成三目
+             */
+            imgs[1].src=arr[(num+1>len-1)?0:num+1];
+            offset=true;
+        },1005);
+    }
+    prev.onclick=function(){
+        if(!offset) return;
+        offset=false;
+        ul.style.transition='0s';
+        ul.style.transform='translateX(-448px)';
+        imgs[1].src=arr[num];
+        if(num-1<0){
+            imgs[0].src=arr[arr.length-1];
+        }else{
+            imgs[0].src=arr[num-1];
+        }
+        num--;
+        setTimeout(function(){
+            ul.style.transition='1s';
+            ul.style.transform='translateX(0px)';
+            if(num<0){
+                num=arr.length-1;
+            }
+            offset=true;
+        },30);
+
+    }
+</script>
+</body>
+</html>
