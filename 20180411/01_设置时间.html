@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*let d=new Date();
+    d.setFullYear(2020);            //设置年份
+    console.log(d.getFullYear());      //获取年份
+    */
+    /*//设置成7月
+    let d = new Date;
+    d.setMonth(6);              //设置月份的时候要注意，如想获取7月，就让想获取的这个月-1;
+    console.log(d.getMonth()+1);    //最后再获取的时候，再+1
+    */
+    /*let d=new Date();
+    d.setDate(4);                   //设置今天是多少号
+    console.log(d.getDate());
+    */
+
+
+    /*
+    * 2020年2月有多少天
+    * 思路：
+    *   1、先将年份设置到2020年
+    *   2、然后再设置2月份。如果想获得2月份，就得设置3月份-1;
+    *   3、setDate(0) 就是获取上一个月的最后一天。
+    * */
+    /*
+    let d=new Date();
+    d.setFullYear(2020);
+    d.setMonth(2);
+    d.setDate(0);
+    console.log(d.getDate());           //29
+    console.log(d.getMonth()+1);        //2
+    */
+
+    /*
+    * 1840年12有多少天
+    * 思路：
+    *   1.先将时间设置到1840年
+    *   2.然后再设置到12月份，这时候要将月份设置到1841年的1月份，然后再-1
+    *   3.再使用setDate(0)来获取上一个月的最后一天
+    *
+    * */
+
+    /*
+    let d=new Date();
+    d.setFullYear(1840);
+    d.setMonth(12);         //此处不能设置为0，因为0为上一个年份了。
+    d.setDate(0);           //获取1840年12月份
+    console.log(d.getDate());           //31
+    console.log(d.getFullYear());       //1840
+    */
+
+
+
+</script>
+
+</body>
+</html>

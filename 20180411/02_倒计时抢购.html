@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text" id="text" value="2018,4,11,18:25:00">
+    <button id="btn">点击开始</button>
+    <p>还剩下：<strong id="strong">00分00秒</strong></p>
+</body>
+<script>
+    const text=document.getElementById('text');
+    const btn=document.getElementById('btn');
+    const strong=document.getElementById('strong');
+    let timer=null;
+    btn.onclick=function(){
+        clearInterval(timer);
+        let val = text.value;
+        let f = new Date(val); //获取将来的时间
+        function time(){
+            let d=new Date();   //当前时间
+            let t=Math.floor(f-d)/1000;            //时间差  得换成秒
+            if(t<0){
+                clearInterval(timer);
+                alert('时间到');
+            }else{
+                let day=Math.floor(t/86400);
+                t%=86400;
+                let h=Math.floor(t/3600);
+                t%=3600;
+                let m=Math.floor(t/60);
+                let s=Math.floor(t%60);
+                var str=toDou(day)+'天'+toDou(h)+'小时'+toDou(m)+'分'+toDou(s)+'秒';
+                strong.innerHTML=str;
+            }
+        }
+        time();
+        timer=setInterval(time,1000);
+    }
+    //将时间都变成两位数
+    function toDou(n){
+        return n<10?'0'+n:''+n;
+    }
+</script>
+</html>

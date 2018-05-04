@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            width:100%;
+            height:100%;
+            background:#4f565f;
+        }
+
+        #box ul{
+            width:308px;
+            height:61px;
+            border:1px solid #b9b9ba;
+            list-style:none;
+            position:relative;
+            margin:200px auto;
+            /*overflow:hidden;*/
+
+        }
+        #box ul li{
+            position:relative;
+            width:45px;
+            height:61px;
+            float:left;
+
+        }
+        #box ul li div{
+            height:122px;
+            position:absolute;
+            top:0;
+
+        }
+        #box ul li div img{
+            width:45px;
+            height:61px;
+            transition:1s;
+        }
+        #box ul li:nth-of-type(3), #box ul li:nth-of-type(6){
+            width:19px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="ul">
+            <li>
+                <div>
+                    <img src="img/0.png"/>
+                    <img src="img/0.png"/>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="img/0.png"/>
+                    <img src="img/0.png"/>
+                </div>
+            </li>
+            <li>
+                <img src="img/second1.png"  class="second"/>
+            </li>
+            <li>
+                <div>
+                    <img src="img/0.png"/>
+                    <img src="img/0.png"/>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="img/0.png"/>
+                    <img src="img/0.png"/>
+                </div>
+            </li>
+            <li>
+                <img src="img/second1.png" class="second"/>
+            </li>
+            <li>
+                <div>
+                    <img src="img/0.png"/>
+                    <img src="img/0.png"/>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="img/0.png"/>
+                    <img src="img/0.png"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+<button>button</button>
+</body>
+<script>
+    /*const ul=document.getElementById('ul');
+    const divs=ul.getElementsByTagName('div');     //li里的div
+    const second=ul.getElementsByClassName('second'); //时间的两个闪烁的点
+    let timer=null;
+    time();
+    //定时器
+    timer=setInterval(function(){
+        //中间的点500毫秒闪烁一次。
+        for(var i=0;i<second.length;i++){
+            second[i].src='img/second.png';
+        }
+        setTimeout(function(){
+            for(var i=0;i<second.length;i++){
+                second[i].src='img/second1.png';
+            }
+        },500);
+        time();
+    },1000);
+    //获取本地的时间
+    function time(){
+        let d=new Date();
+        let h=d.getHours();
+        let m=d.getMinutes();
+        let s=d.getSeconds();
+        let str=toDou(h)+toDou(m)+toDou(s);
+        for(var i=0,len=str.length;i<len;i++){              //str.length 是6
+            const img=divs[i].querySelectorAll('img')[0];
+            img.src='img/'+str[i]+'.png'
+        }
+
+    }
+    //将时钟的数字都成两位数
+    function toDou(n){
+       return n<10?'0'+n :''+n;
+    }*/
+
+    //图片滚动
+    /*let arr=['img/0.png','img/1.png','img/2.png','img/3.png','img/4.png','img/5.png','img/6.png','img/7.png','img/8.png','img/9.png']
+    let num=0;
+    move();
+    function move(){
+        for(let i=0;i<divs.length;i++){
+            const imgs=divs[i].querySelectorAll('img');
+            for(let j=0;j<imgs.length;j++){
+                imgs[j].style.transform='translateY(-65px)';
+                imgs[j].src=arr[num];
+                num++;
+                if(num>9){
+                    num=0;
+                }
+            }
+
+        }
+    }*/
+
+</script>
+</html>

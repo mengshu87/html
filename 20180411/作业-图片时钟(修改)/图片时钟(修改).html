@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            width:100%;
+            height:100%;
+            background:#4f565f;
+        }
+
+        #box ul{
+            width:308px;
+            height:61px;
+            list-style:none;
+            position:relative;
+            margin:200px auto;
+            overflow:hidden;
+
+        }
+        #box ul li{
+            float:left;
+            position:relative;
+            width:45px;
+            height:61px;
+            top:0;
+            transition:500ms;
+        }
+        #box ul li:nth-of-type(3),#box ul li:nth-of-type(6){
+            width:19px;
+        }
+       .second{
+           width:19px;
+       }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="ul">
+            <li>
+                <img src="img/0.png"/>
+                <img src="img/0.png"/>
+            </li>
+            <li>
+                <img src="img/0.png"/>
+                <img src="img/0.png"/>
+            </li>
+            <li>
+                <img src="img/second1.png"  class="second"/>
+            </li>
+            <li>
+                <img src="img/0.png"/>
+                <img src="img/0.png"/>
+            </li>
+            <li>
+                <img src="img/0.png"/>
+                <img src="img/0.png"/>
+            </li>
+            <li>
+                <img src="img/second1.png" class="second"/>
+            </li>
+            <li>
+                <img src="img/0.png"/>
+                <img src="img/0.png"/>
+            </li>
+            <li>
+                <img src="img/9.png"/>
+                <img src="img/0.png"/>
+            </li>
+        </ul>
+    </div>
+<button>button</button>
+</body>
+<script>
+    //将时钟的数字都成两位数
+    function toDou(n){
+       return n<10?'0'+n :''+n;
+    }
+
+    //图片滚动
+    const ul=document.getElementById('ul');
+    const lis=ul.getElementsByTagName('li');
+    const second=ul.getElementsByClassName('second'); //时间的两个闪烁的点
+    //获取本地时间
+    let d=new Date();
+    let H=d.getHours();
+    let M=d.getMinutes();
+    let S=d.getSeconds();
+    let oldTime=toDou(H)+':'+toDou(M)+':'+toDou(S); //上当前时间成为过去时间
+    console.log(oldTime);
+    for(let i=0;i<lis.length;i++){
+        if( i!=2 && i!=5 ){
+            lis[i].getElementsByTagName('img')[0].src=`img/${oldTime[i]}.png`;
+        }
+    }
+    let timer=setInterval(function(){
+        let d=new Date();
+        let H=d.getHours();
+        let M=d.getMinutes();
+        let S=d.getSeconds();
+        let str='';
+        str=toDou(H)+':'+toDou(M)+':'+toDou(S);
+        for(let i=0;i<str.length;i++){
+            if( i!=2 && i!=5 ){
+                if(str[i]!=oldTime[i]){
+                    move(lis[i],str[i]);
+                }
+            }
+        }
+        oldTime=str;
+        //中间的点500毫秒闪烁一次。
+        for(var i=0;i<second.length;i++){
+            second[i].src='img/second.png';
+        }
+        setTimeout(function(){
+            for(var i=0;i<second.length;i++){
+                second[i].src='img/second1.png';
+            }
+        },500);
+    },1000);
+
+    function move(li,num){
+        const img=li.getElementsByTagName('img');
+        li.style.transition='500ms';
+        li.style.top='-61px';
+        img[1].src='img/'+num+'.png';
+        setTimeout(function(){
+            li.style.transition='none';
+            li.style.top='4px';
+            img[0].src='img/'+num+'.png';
+        },520);
+    }
+
+
+
+</script>
+</html>
