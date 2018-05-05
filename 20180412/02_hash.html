@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="img/0.png" alt="" id="img">
+<button id="b1">上一张</button>
+<button id="b2">下一张</button>
+</body>
+<!--<script>
+    /*
+    * 当点击页面中的上一张和下一张的时候，图片的改变，
+    * 同时浏览器的左右按钮也能点击
+    * */
+    const b1=document.getElementById('b1');
+    const b2=document.getElementById('b2');
+    const img=document.getElementById('img');
+    let num=0;
+    b2.onclick=function(){
+        /*num++;
+        if(num>9){
+            num=0;
+        }
+        img.src='img/'+num+'.png';*/
+        //上面的代码可以用一句话来写
+        img.src='img/'+(num=(num<9?++num:0))+'.png';
+        location.hash='#page='+num;     //只要hash值改变，就会触发onhashchange事件
+
+    }
+    hashFn(); //得先执行一次。因为页面刚打开的时候，是没有hash值的。
+    //让浏览器的前后按钮也能控制图片的改变
+    window.onhashchange=hashFn;
+    function hashFn(){
+        //console.log(location.hash);   //#page=3
+        let hash=location.hash.split('=')[1] || 0;       //获取后面的num 值。
+        num=hash*1;         //将num 赋值给hush
+        img.src='img/'+hash+'.png';
+    }
+
+    b1.onclick=function(){
+        /*num&#45;&#45;;
+        if(num<0){
+            num=9;
+        }
+        img.src='img/'+num+'.png';*/
+        //上面的代码可以用一句话来写
+        img.src='img/'+(num=(num>0?&#45;&#45;num:9))+'.png';
+        location.hash='#page='+num;
+
+    }
+</script>-->
+<!--以上代码可以简写-->
+<script>
+    const b1=document.getElementById('b1');
+    const b2=document.getElementById('b2');
+    const img=document.getElementById('img');
+    let num=0;
+    b2.onclick=function(){
+        num=(num<9)?++num:0;
+        location.hash='#pash='+num;
+    };
+    window.onhashchange=hashFn;
+    function hashFn(){
+        let hash=location.hash.split('=')[1] || 0;
+        num=hash*1;
+        img.src='img/'+hash+'.png';
+    }
+    b1.onclick=function(){
+        num=(num>0)?--num:9;
+        location.hash='#pash='+num;
+    };
+</script>
+</html>

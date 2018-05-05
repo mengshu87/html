@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+            list-style: none;
+        }
+        ul{
+            width:600px;
+            /* border: 1px solid #000; */
+            overflow: hidden;
+        }
+        li{
+            width:200px;
+            height: 200px;
+            float: left;
+        }
+        img{
+            width:200px;
+            height:200px;
+            opacity: 0;
+            transition:1.2s;
+        }
+    </style>
+</head>
+<body>
+    <ul id="ul">
+        <!--<li>
+            <img src="img/0.png" alt="">
+        </li>
+        <li>
+            <img src="img/1.png" alt="">
+        </li>
+        <li>
+            <img src="img/2.png" alt="">
+        </li>-->
+    </ul>
+</body>
+<script>
+    /*
+    * 思路：
+    *       1.先得到可视区的距离
+    *       2.得到布局中每一个li的位置
+    *       3.通过滚动条来获取滚动的距离 滚动监听事件
+    *       4.li元素的距离-滚动的距离<可视区的距离 就显示
+    * */
+    const ul=document.getElementById('ul');
+    //生成页面结构
+    let html='';
+    for(let i=0;i<102;i++){
+        html+=`<li>
+                    <img src="img/${i%9}.png" alt="">
+               </li>`
+    }
+    ul.innerHTML=html;
+    const lis=document.getElementsByTagName('li');
+    const imgs=document.getElementsByTagName('img');
+    //得到每个li的位置。
+    for(let i=0;i<lis.length;i++){
+        lis[i].style.left=lis[i].offsetLeft+'px';
+        lis[i].style.top=lis[i].offsetTop+'px';
+    }
+    for(let i=0;i<lis.length;i++){
+        lis[i].style.position='absolute';
+    }
+    //获取可视区的距离
+    let iH=window.innerHeight;
+    showFn();
+    window.onscroll = showFn;
+    function showFn(){
+        let bottom=iH+window.pageYOffset;       //底边 = 可视区的高度 + 滚动条的高度
+        console.log(bottom);
+        for(let i=0;i<imgs.length;i++){
+            if(parseFloat(lis[i].style.top)<bottom){
+                imgs[i].style.opacity=1;
+            }
+        }
+    }
+
+</script>
+</html>
