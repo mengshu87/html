@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script>
+    /*console.log(location.host);         //主机名和URL的端口号
+    console.log(location.hostname);     //主机名
+    console.log(location.pathname);     //目录和文件名
+    console.log(location.port);         //端口号
+    console.log(location.protocol);     // URL的协议*/
+
+    /*document.onclick=function(){
+        location.reload();
+    }*/
+    if(location.protocol === 'file:'){
+        box.innerHTML = '你在本地环境下哟!请切换到服务器环境下';
+    }else{
+        box.innerHTML = '你当前在服务器环境下哟!';
+    }
+
+</script>
+</html>

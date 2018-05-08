@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--<button id="btn1">后退</button>
+    <button id="btn2">前进</button>-->
+    <img src="img/0.png" alt="" id="img">
+    <button id="btn1">后退2个</button>
+    <button id="btn2">前进2个</button>
+    <button id="btn3">上一个</button>
+    <button id="btn4">下一个</button>
+<script>
+   /* console.dir(history);
+    /!*btn1.onclick=function(){
+        history.back();
+    }
+    btn2.onclick=function(){
+        history.forward();
+    }*!/
+    history.pushState({num:1},'hehe','http://localhost:88/2018-4-17/6_history1.html');*/
+    const img=document.getElementById('img');
+    const btn1=document.getElementById('btn1');
+    const btn2=document.getElementById('btn2');
+    const btn3=document.getElementById('btn3');
+    const btn4=document.getElementById('btn4');
+    let num=0;
+    btn1.onclick=function(){
+        history.go(-2);
+    }
+   btn2.onclick=function(){
+       history.go(2);
+   }
+    btn3.onclick=function(){
+        num--
+        if(num<0)num=9;
+        history.pushState({name:`img/${num}.png`},'切换','http://localhost:1077/04_history.html'+num);
+        img.src=`img/${num}.png`;
+
+    }
+   btn4.onclick=function(){
+       num++;
+       num%=10;
+       history.pushState({name:`img/${num}.png`},'切换','http://localhost:1077/04_history.html'+num);
+       img.src=`img/${num}.png`;
+   }
+    window.onpopstate=function(evt){
+        img.src=evt.state?evt.state.name:'img/0.png';
+    }
+
+</script>
+</body>
+</html>

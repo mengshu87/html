@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+</head>
+
+<body style="height:3000px;">
+<script>
+    document.write('screen.height:' + screen.height + '/' + screen.width+'<br/>'+
+                    'window.innerHeight:' + window.innerHeight + '/'+ window.innerWidth+'<br/>'+
+                    'document.documentElement.clientHeight:' + document.documentElement.clientHeight+ '/'+ document.documentElement.clientWidth+'<br/>'+
+                    'screen.availHeight:' + screen.availHeight + '/' + screen.availWidth
+                );
+
+
+    /*
+    输出结果：screen.height:768/1366
+    window.innerHeight:280/1366
+    document.documentElement.clientHeight:280/1349
+    screen.availHeight:728/1366
+    */
+    //screen.height/width   和   screen.availHeight/availWidth   手机屏幕的宽度和高度 是应用于手机端， 必须添加<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    //    两者没有什么区别
+    //window.innerHeight/innerWidth  和 document.documentElement.clientHeight/clientWidth  是web 端可视区域的宽度和高度（高度与滚动条无关）
+    //window.innerHeight/innerWidth 是不计算滚动条的宽度的
+    //document.documentElement.clientHeight/clientWidth    是计算滚动条的宽度的
+
+
+</script>
+
+</body>
+</html>
