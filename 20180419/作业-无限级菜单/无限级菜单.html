@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			html {
+
+				width: 100%;
+				height: 100%;
+			}
+			body{
+				margin: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			.main {
+				width: 100%;
+				height: 100%;
+				background: url(./image/bg.png) no-repeat;
+				background-size: 100% 100%;
+				overflow: hidden;
+			}
+			.logo {
+				display: block;
+				width: 200px;
+				height: 55px;
+				background: url(./image/logo.png) no-repeat;
+				margin: 20px auto;
+			}
+			ul{
+				list-style: none;
+				font-size: 22px;
+				color: #8c949c;
+				font-weight: bold;
+
+			}
+
+			ul li {
+				position: relative;
+				padding-left: 10px;
+
+			}
+
+			ul li div{
+				height: 98%;
+				width: 1px;
+				border-left: 1px dotted #ccc;
+				position: absolute;
+				left: 14px;
+				top: 18px;
+			}
+
+			ul ul{
+				display: none;
+			}
+
+			ul li span {
+				float:left;
+				height:32px;
+				display: block;
+				line-height: 32px;
+				padding-left: 15px;
+				background: url(./image/icon.png) no-repeat left 500px;
+
+			}
+
+			ul li span.add {
+				background-position: 0px -32px;
+			}
+			ul li span.line {
+				background-position: 0px 11px;
+			}
+
+
+			.tree {
+				margin-left: 300px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<a href="http://www.miaov.com" class="logo"></a>
+			<div class="tree">
+				<ul id="oUl">
+
+				</ul>
+			</div>
+
+		</div>
+		<script>
+			var arr = [
+				{
+					title : "第一级菜单",
+					child : [
+						{title:"第二集菜单"},
+						{title:"第二集菜单",
+							child:[
+								{title:"第三集菜单"},
+								{title:"第三集菜单",
+									child:[
+										{title:"第四集菜单"},
+										{title:"第四集菜单"},
+										{title:"第四集菜单"}
+									]
+								},
+								{title:"第三集菜单"}
+							]
+						},
+						{
+							title:"第二集菜单",
+							child:[
+								{title:"第三集菜单"},
+								{title:"第三集菜单"}
+							]
+						}
+					]
+				},
+				{
+					title : "第一级菜单",
+					child : [
+						{title:"第二集菜单"},
+						{title:"第二集菜单",
+							child:[
+								{title:"第三集菜单"},
+								{title:"第三集菜单",
+									child:[
+										{title:"第四集菜单"},
+										{title:"第四集菜单"},
+										{title:"第四集菜单"}
+									]
+								},
+								{title:"第三集菜单"}
+							]
+						},
+						{
+							title:"第二集菜单",
+							child:[
+								{title:"第三集菜单"},
+								{title:"第三集菜单"}
+							]
+						}
+					]
+				},
+				{
+					title:"第一集菜单",
+					child : [
+						{title:"第二集菜单"},
+						{title:"第二集菜单"},
+						{
+							title:"第二集菜单",
+							child:[
+								{title:"第三集菜单"},
+								{title:"第三集菜单"}
+							]
+						}
+					]
+
+				}
+			];
+			const oUl=document.getElementById('oUl');
+			//生成数据结构
+			;(function(){
+				createDOM(oUl,arr);
+				clickFn();
+				function createDOM(ul,data){
+					for(let i=0;i<data.length;i++){
+						let li=document.createElement('li');
+						let h4=document.createElement('h4');
+						li.appendChild(h4);
+						h4.innerHTML=data[i].title;
+						if(data[i].child){
+							let ul=document.createElement('ul');
+							createDOM(ul,data[i].child);
+							li.appendChild(ul);
+							h4.innerHTML='<span class="add"></span><div></div>'+ data[i].title;
+						}
+						ul.appendChild(li);
+					}
+				}
+			})();
+			//点击事件
+			function clickFn(){
+				const h4=document.getElementsByTagName('h4');
+				//console.log(h4.length);
+				for(let i=0;i<h4.length;i++){
+					h4[i].onclick=function(){
+						//点击查看下面是否有ul标签
+						const ul=this.nextElementSibling;
+						if(ul){
+							//获取所有的ul
+							const uls=this.parentNode.parentNode.getElementsByTagName('ul');
+							//console.log(uls);
+							//循环所有的ul
+							for(let i=0;i<uls.length;i++){
+								//查看uls[i]中的元素是否是当前这个h4元素的同级ul
+								if(uls[i]!=ul){
+									//不是就全部隐藏掉
+									uls[i].style.display='none';
+									//并且将隐藏的同级的h4内的span样式改为+号
+									uls[i].previousElementSibling.children[0].className='add';
+								}
+							}
+							//将前的ul的display改为block;将+号改为-号
+							if(getComputedStyle(ul).display=='none'){
+								this.children[0].className='line';
+								ul.style.display='block';
+							}else{
+								this.children[0].className='add';
+								ul.style.display='none';
+							}
+						}
+					}
+				}
+			}
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+<section class="wrap">
+	<div class="wrap-left">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>AJAX</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>JS基础-2</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>移动端实战</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>canvas游戏</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--<div class="wrap-right">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>小程序</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-上</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-下</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+		</ul>
+	</div>-->
+</section>
+<script src="js/tween.js"></script>
+<script>
+	const wrapLeft=document.querySelector('.wrap-left');
+	const list=document.getElementsByClassName('list')[0];
+	const up=document.getElementsByClassName('up');
+	const down=document.getElementsByClassName('down');
+	const lis=wrapLeft.getElementsByTagName('li');
+	for(let i=0;i<lis.length;i++){
+		up[i].onclick=function(){
+			let thisLi=this.parentNode.parentNode;
+			//console.log(thisLi);
+			let parent=thisLi.parentNode;
+			let prev=thisLi.previousElementSibling;
+			let first=parent.firstElementChild;
+			let last=parent.lastElementChild;
+			//只是单纯的移动，没有动画效果
+			//parent.insertBefore(thisLi,prev);
+			if(!prev){
+				move({
+					el:thisLi,
+					attr:{
+						top:62*(lis.length-1)
+					},
+					d:300,
+					callback:function(){
+						thisLi.style.top='0px';
+						parent.insertBefore(thisLi,first);
+					}
+				});
+				for(let i=1;i<lis.length;i++){
+					move({
+						el:lis[i],
+						attr:{
+							top:-62
+						},
+						d:300,
+						callback:function(){
+							lis[i].style.top='0px';
+							lis[1].style.top='0px';
+						}
+					})
+				}
+			}else{
+				moveFn(thisLi,prev);
+			}
+		};
+		down[i].onclick=function(){
+			let thisLi=this.parentNode.parentNode;
+			let parent=thisLi.parentNode;
+			let next=thisLi.nextElementSibling;
+			let first=parent.firstElementChild;
+			let last=parent.lastElementChild;
+			//只是单纯的移动，没有动画效果
+			/*if(!next){
+				parent.insertBefore(thisLi,first);
+			}else{
+				parent.insertBefore(next,thisLi);
+			}*/
+			if(!next){
+				move({
+					el:thisLi,
+					attr:{
+						top:-62*(lis.length-1),
+					},
+					d:300,
+					callback:function(){
+						thisLi.style.top='0px';
+						parent.insertBefore(thisLi,first);
+					}
+				})
+				for(let i=0;i<lis.length-1;i++){
+					move({
+						el:lis[i],
+						attr:{
+							top:62
+						},
+						d:300,
+						callback:function(){
+							lis[i].style.top='0px';
+							lis[4].style.top='0px';
+						}
+					})
+				}
+			}else{
+				moveFn(next,thisLi);
+			}
+		}
+	}
+
+	function moveFn(thisLi,prev){
+		move({
+			el:thisLi,
+			attr:{
+				top:-62,
+			},
+			d:300
+		});
+		move({
+			el:prev,
+			attr:{
+				top:62,
+			},
+			d:300,
+			callback:function(){
+				thisLi.style.top='0px';
+				prev.style.top='0px';
+				thisLi.parentNode.insertBefore(thisLi,prev);
+			}
+
+		});
+	}
+
+</script>
+</body>
+</html>

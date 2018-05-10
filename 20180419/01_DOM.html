@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div id="box" index="hehe">
+    <p>123</p>
+    5432
+    <!--{"name":"肾肾"}-->
+    3u892738921
+    <span id="span" ></span>
+</div>
+<script>
+    const box=document.getElementById('box');
+    //console.log(box.childNodes.length);     //7
+    //console.log(box.childNodes);
+//    console.log(box.childNodes[1].nodeName);        //P
+//    console.log(box.childNodes[1].tagName);         //P
+//    console.log(box.childNodes[0].nodeName);
+//    console.log(box.childNodes[2].nodeValue);
+ /*   console.log(document.nodeType);     //9
+    console.log(document.nodeName);  //#document
+    console.log(document.nodeValue); //null*/
+    //console.log(box.attributes.length);     //2
+    console.log(box.attributes[0].nodeType);        //2 属性节点
+    console.log(box.attributes[0].nodeValue);           //box
+    console.log(box.childNodes[1].nodeValue);
+    console.log(box.children[1].nodeValue);
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

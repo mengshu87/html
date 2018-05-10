@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		    html,body{
+		    	width: 100%;
+		    	height: 100%;
+		    	margin: 0;
+		    }
+		    body{
+		    	background: url(img/zpbg.png) no-repeat center center;
+		    	background-size: cover;
+		    	display: flex;
+		    }
+		    ul,li{
+		    	margin: 0;
+		    	padding: 0;
+		    	list-style: none;
+		    }
+		    p{
+		    	margin: 0;
+		    }
+		    a{
+		    	text-decoration: none;
+		    	color:#b6bdcf;
+		    }
+		    #content{
+		    	width: 700px;
+		    	height: 460px;
+		    	border-radius: 10px;
+		    	border: 1px solid #30343f;
+		    	margin: auto;
+		    	background: url(img/logo.png) no-repeat 25px 25px #252934;
+		    	box-sizing: border-box;
+		    	padding: 84px 0px 0px 25px;
+		    }
+		    #leftList{
+		    	float: left;
+		    	width: 60px;
+		    	padding-right: 12px;
+		    	height: 100%;
+		    	background: url(img/leftListBg.png) no-repeat right top;
+		    }
+		    #leftList li{
+		    	text-align: right;
+		    	height: 68px;
+		    	padding-top: 12px;
+		    	color: #6a7686;
+		    	font: 10px/18px "微软雅黑";
+		    }
+		    #leftList li span{
+		    	font-size: 12px;
+		    	display: block;
+					cursor: pointer;
+		    }
+		    #leftList .active span{
+		    	color: #ff2c4f;
+		    }
+		    #right{
+		    	width: 600px;
+		    	height: 100%;
+		    	float: left;
+		    }
+		    #rightList li{
+		    	height: 82px;
+		    	width: 100%;
+		    	box-sizing: border-box;
+		    	padding: 20px 25px 20px 30px;
+		    	position: relative;
+					cursor: pointer;
+		    }
+		    #rightList li:hover{
+		    	background-color: #1e212a;
+		    }
+		    #rightList li:hover .num{
+		    	color: #ff2c4f;
+		    }
+		    #rightList li:hover:before{
+		    	content: "";
+		    	width: 2px;
+		    	height: 54px;
+		    	position: absolute;
+		    	background-color: #ff2c4f;
+		    	left: -3px;
+		    	top: 10px;
+		    }
+		    #rightList li:after{
+		    	content: "";
+		    	width: 543px;
+		    	height: 1px;
+		    	position: absolute;
+		    	bottom: 0px;
+		    	right: 25px;
+		    	background:url(img/lineBg.png) repeat-x;
+		    }
+		    #rightList .num{
+		    	font-size: 30px;
+		    	font-family: arial;
+		    	color:#6a7686;
+		    	float: left;
+		    	width: 36px;
+		    	height: 40px;
+		    	border-right: 1px solid #303642;
+		    }
+		    #rightList .list{
+		    	float: left;
+		    	width: 500px;
+		    	margin-left: 6px;
+		    	font-size: 14px;
+		    	color: #b6bdcf;
+		    	font-family: "微软雅黑";
+		    }
+		    #rightList .list span{
+		    	float: left;
+		    }
+		    
+		    .list>a:nth-of-type(1){
+		    	height: 26px;
+		    	float: none;
+		    	font-size: 14px;
+		    }
+		    .job{
+		    	margin-right: 15px;
+		    }
+		    #rightList .list time{
+		    	float: right;
+		    	color: #606a7a;
+		    }
+		    .list .text{
+		    	float: left;
+		    	width: 430px;
+		    	overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+		    }
+		    .list a{
+		    	float: right;
+		    	font-size: 12px;
+		    }
+		    nav{
+		    	font-size: 0px;
+		    	text-align: center;
+		    }
+		    nav a{
+		    	font: 12px/46px "微软雅黑";
+		    	display: inline-block;
+		    	vertical-align: middle;
+		    	width: 24px;
+		    }
+		    nav a.active{
+		    	color: #eb2a4b;
+		    }
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<ul id="leftList">
+				<!-- <li><span>社会招聘</span>society</li>
+				<li class="active"><span>校园招聘</span>campus</li> -->
+			</ul>
+			<div id="right">
+				<ul id="rightList">					
+					<!--<li>
+						<span class="num">01</span>
+						<div class="list">
+							<a href=""><span class="job">职位需求：前端开发工程师</span><span>需求人数：2名</span><time>2014-04-10</time></a>
+							<p><span class="text">岗位要求：布拉布拉布拉一大段话布拉布拉布拉一大段话布拉布拉布拉一大段话</span><a href="javascript:;">查看详情>></a></p>
+						</div>
+					</li>
+					<li>
+						<span class="num">02</span>
+						<div class="list">
+							<a href=""><span class="job">职位需求：前端开发工程师</span><span>需求人数：2名</span><time>2014-04-10</time></a>
+							<p><span class="text">岗位要求：布拉布拉布拉一大段话布拉布拉布拉一大段话布拉布拉布拉一大段话</span><a href="javascript:;">查看详情>></a></p>
+						</div>
+					</li>
+					<li>
+						<span class="num">03</span>
+						<div class="list">
+							<a href=""><span class="job">职位需求：前端开发工程师</span><span>需求人数：2名</span><time>2014-04-10</time></a>
+							<p><span class="text">岗位要求：布拉布拉布拉一大段话布拉布拉布拉一大段话布拉布拉布拉一大段话</span><a href="javascript:;">查看详情>></a></p>
+						</div>
+					</li>
+					<li>
+						<span class="num">04</span>
+						<div class="list">
+							<a href=""><span class="job">职位需求：前端开发工程师</span><span>需求人数：2名</span><time>2014-04-10</time></a>
+							<p><span class="text">岗位要求：布拉布拉布拉一大段话布拉布拉布拉一大段话布拉布拉布拉一大段话</span><a href="javascript:;">查看详情>></a></p>
+						</div>
+					</li>-->
+				</ul>
+				<nav id="nav">
+					<!-- <a href="javascript:;">&lt;</a>
+					<a class="active" href="javascript:;">1</a>
+					<a href="javascript:;">2</a>
+					<a href="javascript:;">3</a>
+					<a href="javascript:;">4</a>
+					<a href="javascript:;">&gt;</a> -->
+				</nav>
+			</div>
+		</div>
+<script src="js/data.js"></script>
+<script>
+
+
+	/*
+		渲染导航
+		<li><span>社会招聘</span>society</li>
+		<li class="active"><span>校园招聘</span>campus</li>
+	*/
+
+	const leftList=document.getElementById('leftList');
+	const rightList=document.getElementById('rightList');
+	const nav=document.getElementById('nav');
+	//获取左侧的数据，并转换成数组
+	let dataLeft=Array.from(data['list']);
+	//生成左侧页面结构
+	let leftHtml='';
+	//遍历左侧数据的数组，将元素添加到页面中;
+	dataLeft.forEach((e,i)=>leftHtml+=`<li><span>${dataLeft[i].text}</span>${dataLeft[i].eng}</li>`);
+	leftList.innerHTML=leftHtml;
+	//console.log(dataLeft);
+
+	//初始化
+	const list=Array.from(leftList.children);
+	//console.log(list);
+	let def='sh';           //默认显示社会招聘
+	let hashNum=1;         //给当前一个初始的page的值为第一页
+	let first='';
+	let last='';
+	let maxPage=0;
+	list[0].className='active';
+
+	//console.log(arr);
+	//初始化页面的数据，如果有hash就用hash，没有hash，就给一个默认值
+	if(location.hash){ //如果有hash值，刷新页面的话或都点content的返回按钮的时候，要返回到相就的页面
+		let hashData=location.hash.split('&');
+		//查看当前的地址是否存在data 和page ,如果存在，获取相对应的值
+		hashNum=hashData.find(e=>e.includes('page'));			//得到的是含有page的数组
+		let hashDef=hashData.find(e=>e.includes('data'));		//得到的是含有data的数组
+		//console.log(hashDef);
+		if(hashNum){//如果有page 把相对就的值给获取
+			hashNum=hashNum.split('=')[1]*1;
+			def=hashDef.split('=')[1];
+			//console.log(def);
+			list.map(e=>e.className = '');
+			list[(def=='sh')?0:1].className='active';
+		}
+	}else{
+		location.hash='data=sh&page=1';
+	}
+	let arr=data[def].text;			//页面右侧的数据
+	creatDateRight(arr,hashNum);
+	//console.log(hashNum);
+
+	list.forEach((e,i)=>{			//遍历左侧数据，
+		e.onclick=function(){
+			if(i==0){
+				def='sh';
+			}else{
+				def='xy';
+			}
+			list.map(e=>e.className='');		//先将所有li的class 删除
+			this.className='active'; //当点击哪一个的时候，哪一个添加active样式
+			arr=data[def].text;		//并获取相对应的右侧列表
+			//同时生成相就的hash值
+			location.hash='data='+def+'&page=1';
+			//creatDateRight(arr,1);
+
+		}
+	});
+	//生成对就的右侧数据
+	function creatDateRight(arr,dataNum=1){
+		let html='';
+		let num=4;  //默认每页显示4个
+
+		/*  1 0-3
+		 	2 4-7
+		 	3 8-11
+		 	4 12-15
+		 */
+		dataNum=dataNum-1;  //控制每页的第一个显示的是哪一条数据。
+		//循环相就的页码并生成相就的数据
+		for(let k=dataNum*num;k<dataNum*num+num;k++){
+			//每一页生成的数据
+			if(arr[k]){
+				html+=`<li>
+						<span class="num">${data.add0(k+1)}</span>
+						<div class="list">
+							<a href="./content.html?data=${def}&page=${dataNum+1}&n=${k}"><span class="job">职位需求：${arr[k].zw}</span><span>需求人数：${arr[k].rs}名</span><time>${data.formateDate(arr[k].sj)}</time></a>
+							<p><span class="text">岗位要求：${arr[k].info[0].l.join('')}</span><a href="javascript:;">查看详情>></a></p>
+						</div>
+					</li>`;
+			}
+		}
+		rightList.innerHTML=html;
+
+		//页码有多少页
+		let len=arr.length;
+		//console.log(len);
+		let pageArr=[];
+		let pageNum=Math.ceil(len/num); //生成的页数，总条数/每页显示的个数，要向上取整
+		let navHtml='';
+		navHtml+=`<a href="javascript:;">&lt;</a>`;
+		for(let i=0;i<pageNum;i++){
+			navHtml+=`<a href="javascript:;" class="${i==dataNum?'active':''}">${i+1}</a>`;
+		}
+		navHtml+=`<a href="javascript:;">&gt;</a>`;
+		nav.innerHTML=navHtml;
+		//console.log(nav);
+
+		//每次重新生成页面，都要重新获取第一个和最后一个分页按钮
+		first=nav.firstElementChild;
+		last=nav.lastElementChild;
+		maxPage=nav.children[nav.children.length-2].innerHTML*1;
+		hashNum=location.hash.split('&')[1].split('=')[1]*1;
+		//console.log(hashNum);
+		//console.log(maxPage);
+		//给分布的< 、 >添加点击事件
+		first.onclick=function(){
+			location.hash=`#data=${def}&page=${hashNum=hashNum>1?hashNum-1:1}`;
+		};
+		last.onclick=function(){
+			location.hash=`#data=${def}&page=${hashNum=hashNum<maxPage?hashNum+1:maxPage}`;
+
+		}
+
+	}
+	//给分布的< 、 >添加点击事件
+	//console.log(nav.firstElementChild);
+	first.onclick=function(){
+		let syy=0;
+		location.hash=`#data=${def}&page=${syy=hashNum>1?hashNum-1:1}`;
+
+	};
+	nav.lastElementChild.onclick=function(){
+		let xyy=0;
+		location.hash=`#data=${def}&page=${xyy=hashNum<maxPage?hashNum+1:maxPage}`;
+
+	}
+
+	//切换页码获取hash值
+	nav.onclick=function(ev){  //ev.target 是点击哪一个是哪一个
+		if(ev.target.tagName==='A'&&!isNaN(parseInt(ev.target.innerHTML))){
+			location.hash=`#data=${def}&page=${ev.target.innerHTML}`;
+		}
+	}
+
+	//当hash值改变的时候，就会触发onhashchange
+	window.onhashchange=function(){
+		let hash=location.hash.split('&');		//获取page后面的值
+		//判断有没有page的值
+		let hashValue = hash.find(e=>e.includes('page'));
+		if(hashValue){
+			hashValue=hashValue.split('=')[1]*1;
+		}
+		//console.log(hashValue);
+		//生成相对应的页面
+		creatDateRight(arr,hashValue);
+	}
+
+</script>
+</body>
+</html>

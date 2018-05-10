@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        li{
+            width:50px;
+            height: 50px;
+            background: red;
+            margin: 5px;
+            transition:1s;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">按钮</button>
+<ul id="ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<script>
+    const btn=document.getElementById('btn');
+    const ul=document.getElementById('ul');
+   /* const lis=ul.childNodes;
+     console.log(lis.length); //7  连空格也算在内了，所以再用下面的点击事件是不起作用的。
+     btn.onclick=function(){
+     for(let i=0;i<lis.length;i++){
+     lis[i].style.width='300px';
+     }
+
+     }*/
+    /*const lis=ul.children;
+    console.log(lis.length);        //3   建议用这个
+    btn.onclick=function(){
+        for(let i=0;i<lis.length;i++){
+            lis[i].style.width='500px';
+        }
+    }*/
+
+    //如果非要用childNodes 就要做判断
+    const lis=ul.childNodes;
+    btn.onclick=function(){
+        for(let i=0;i<lis.length;i++){
+            if(lis[i].nodeType!==3&&lis[i].nodeType!==8){
+                lis[i].style.width='400px';
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

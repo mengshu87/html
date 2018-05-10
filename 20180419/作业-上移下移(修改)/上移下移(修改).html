@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+<section class="wrap">
+	<div class="wrap-left">
+		<ul class="list" id="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>AJAX</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>JS基础-2</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>移动端实战</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li>
+				<span>canvas游戏</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--<div class="wrap-right">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>小程序</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-上</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-下</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+		</ul>
+	</div>-->
+</section>
+<script src="js/tween.js"></script>
+<script>
+	/*
+	* 不要将li转成数组，因为在使用的过程中，需要获取当前点击的这个，和点击的上一个或下一个元素
+	*                 如果用数组的方法，在获取上一个或下一个的时候，就会有混乱的情况
+	*                 不如用for循环简单
+	*
+	* 给每一个li都固定位置并存入数组中
+	*
+	* */
+	//获取元素
+	const list=document.getElementById('list');
+	const lis=list.children;
+	let arr=[];
+
+	//给每一个li都确定位置 并存入数组中
+	for(let i=0;i<lis.length;i++){
+		arr.push(lis[i].offsetTop);
+		lis[i].style.top=lis[i].offsetTop+'px';
+	}
+	console.log(arr);
+	//给每一个元素添加一个绝对定位
+	for(let i=0;i<lis.length;i++){
+		lis[i].style.position='absolute';
+		lis[i].onclick=function(ev){
+			//console.log(ev.target);		//ev.target 点击哪个就是哪个
+			if(ev.target.innerHTML=='上移'){
+				//获取ev对应的li
+				let thisLi=ev.target.parentNode.parentNode;
+				console.log(thisLi);
+				//获取ev对应的li 的上一个兄弟节点
+				let prev=thisLi.previousElementSibling;
+				console.log(prev);
+				//点击上移就是交当前元素的下一个兄弟节点插入到当前元素的前面
+				list.insertBefore(thisLi,prev);
+				moveFn()
+
+			}
+			if(ev.target.innerHTML=='下移'){
+				//获取ev对应的li
+				let thisLi=ev.target.parentNode.parentNode;
+				console.log(thisLi);
+				//获取ev对应的li 的下一个兄弟节点
+				let next=thisLi.nextElementSibling;
+				//获取第一个节点
+				let first=list.children[0];
+				//假如有下一个兄弟节点
+				if(next){
+					list.insertBefore(next,thisLi);
+					moveFn();
+				}else{
+					list.insertBefore(thisLi,first);
+					moveFn();
+				}
+			}
+		}
+
+	}
+	function moveFn(){
+		for(let i=0;i<lis.length;i++){
+			move({
+				el:lis[i],
+				attr:{
+					top:arr[i]
+				},
+				d:500
+			});
+		}
+	}
+
+
+
+</script>
+</body>
+</html>

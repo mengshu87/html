@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>
+        <a href="javascript:;">1点击隐藏</a>
+    </li>
+    <li>
+        <a href="javascript:;">2点击隐藏</a>
+    </li>
+    <li>
+        <a href="javascript:;">3点击隐藏</a>
+    </li>
+
+</ul>
+<script>
+    const as=document.getElementsByTagName('a');
+    const lis=document.getElementsByTagName('li');
+    /*for(let i=0;i<as.length;i++){
+        as[i].onclick=function(){
+            lis[i].style.display='none';
+        }
+    }*/
+    //改成箭头函数
+    //要用到数组的方法：forEach 所以要把as类数组转换成数组才能用数组的方法
+    let a=Array.from(as);
+    //console.log(a);
+    /*a.forEach((e,i)=>{
+        e.onclick=function(){
+        lis[i].style.display='none';
+        }
+    });*/
+    a.forEach((e,i)=>{
+        e.onclick=function(){
+        lis[i].parentNode.style.display='none';         //parentNode  父级节点
+        }
+    });
+</script>
+</body>
+</html>
