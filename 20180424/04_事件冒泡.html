@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            padding:100px;
+        }
+        #box{
+            background: red;
+        }
+        #box2{
+            background: green;
+        }
+        #box3{
+            background: yellow;
+        }
+        #btn{
+            background: skyblue;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3">
+            <button id="btn">按钮</button>
+        </div>
+    </div>
+</div>
+<script>
+    /*冒泡：当触发某个元素事件时，如果自己及祖先级节点都绑定了同样的事件函数，那么就会从下而上依次触发，直到window结束，
+            这个过程就叫做冒泡过程
+    *
+    *  从下而上，依次触发一个事件，直到window结束，这就叫冒泡
+    * */
+
+    /*box.onclick=function(){
+        alert('red');
+    }
+    box2.onclick=function(){
+        alert('green');
+    }
+    box3.onclick=function(){
+        alert('yellow');
+    }
+    btn.onclick=function(){
+        alert('btn');
+    }
+    //以上的这个过程就叫冒泡
+*/
+    btn.addEventListener('click',fn,false);
+    box.addEventListener('click',fn,false);
+    box2.addEventListener('click',fn,false);
+    box3.addEventListener('click',fn,false);
+    function fn(){
+        console.log(this);
+    }
+
+</script>
+
+</body>
+</html>

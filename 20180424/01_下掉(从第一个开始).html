@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+        li{
+            float:left;
+            width:50px;
+            height:50px;
+            background:yellowgreen;
+            margin:0px 5px;
+            transition:.5s;
+        }
+    </style>
+</head>
+<body>
+    <ul id="ul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+<script>
+    const ul=document.getElementById('ul');
+    const lis=ul.getElementsByTagName('li');
+    let num=0;
+    for(let i=0;i<lis.length;i++){
+        lis[i].onclick=function(){
+            let timer=setInterval(function(){
+                lis[num].style.transform='translateY(550px)';
+                num++;
+                num%=lis.length;
+            },100)
+        }
+    }
+
+
+</script>
+</body>
+</html>

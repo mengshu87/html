@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<ul id="ul">
+
+</ul>
+<script>
+    /*
+    * 需求：点击按钮，在ul里生成li li里的内容分别是1，2，3’....
+    *      再点击每个li ,都弹出li里的内容
+    *
+    * */
+    const btn=document.getElementById('btn');
+    const ul=document.getElementById('ul');
+    let num=0;
+    btn.onclick=function(){
+        let li=document.createElement('li');
+        li.innerHTML=++num;
+        ul.appendChild(li);
+    }
+    ul.onclick=function(ev){
+        if(ev.target.nodeName='LI'){
+            alert(ev.target.innerHTML);
+        }
+    }
+</script>
+</body>
+</html>

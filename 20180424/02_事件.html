@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script>
+    /*事件：当用户操作浏览器页面的时候，会触发各种事件,这个时候如果对应的事件有绑定事件函数，那么就触发
+     *
+     * 用户是被监听者
+        浏览器是监听者
+     *
+     */
+//    document.onclick=function(){
+//        alert(1);
+//    }
+
+//    console.log(btn.childNodes.length);     //1
+//    console.log(btn.children.length);       //0
+//    console.log(btn.childNodes[0].nodeValue);   //按钮
+//    console.log(btn.children[0].nodeValue);//   会报错
+    console.dir(btn.onclick);       //null
+                                    //就是本身btn 点击的属性，只是没有添加点击的函数而已
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            padding:100px;
+        }
+        #box{
+            background: red;
+        }
+        #box2{
+            background: green;
+        }
+        #box3{
+            background: yellow;
+        }
+        #btn{
+            background: skyblue;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3">
+            <button id="btn">按钮</button>
+        </div>
+    </div>
+</div>
+<script>
+    /* 捕获： 其实就是冒泡的反过程
+             从上而下，从window 到目标节点的过程
+    *
+    *     传统的事件绑定是不能监听到捕获的
+    *     on 的事件绑定是只有冒泡，没有捕获的
+    *     只有addEventListener 才能监听到捕获的状态的
+    * */
+    //addEventListener('不带on的事件名','事件函数','是否捕获')  true表示捕获， false表示冒泡
+
+    function fn(){
+        console.log(this);
+    }
+    btn.addEventListener('click',function(){
+        console.log(1);
+    },false);
+    btn.addEventListener('click',fn,true);
+    box3.addEventListener('click',fn,true);
+    box2.addEventListener('click',fn,true);
+    box.addEventListener('click',fn,true);
+
+    //执行顺序是，先是捕获，然后是目标节点，最后是冒泡，
+    //目标节点是按代码的顺序执行的。
+    //以上的这种，就形成了事件流
+
+
+</script>
+</body>
+</html>
