@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            position:absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+<img src="logo.png" id="img"/>
+<script>
+    /*
+    * 默认行为：自己不想干，而且计算机偷偷帮你干的了的事
+    * 例如：点击鼠标右键，就会出来一些快捷菜单
+    *       点击图片，就能托拽
+    *
+    * 阻止默认行为的方法
+    *
+    *      return false;    //只在传统的事件中有效
+    *      ev.preventDefault();//这个是最常用的
+    *
+    * oncontextmenu 鼠标右键点击
+    *
+    * */
+
+   /* document.onkeydown = function(){
+         //return false;
+     }
+*/
+    /*document.oncontextmenu=function(ev){
+        //console.log(ev);
+        //return false;
+    }*/
+    const img=document.getElementById('img');
+    img.onmousedown=function(ev){
+        ev.preventDefault();
+    }
+    /*document.oncontextmenu=function(ev){
+        ev.preventDefault();
+        img.style.display='block';
+        img.style.top=ev.pageY+'px';
+        img.style.left=ev.pageX+'px';
+
+    }
+    document.onmousedown=function(){
+        img.style.display='none';
+    }*/
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * onmousewheel   滚轮事件     只有IE和chrome支持  ------火狐不支持
+    *
+    * ev.wheelDelta  获得滚轮滚动的情况
+    * 向下滚动为负数   向上滚动为正数
+    *
+    *
+    * FF要通过事件绑定来实现
+    *  window.addEventListener('DOMMouseScroll',function(ev){
+         console.log(ev.detail);
+         })
+    *  ev.detail   获取滚轮滚动的情况
+    *  向下滚动为正数，向上滚动为负数
+    *
+    *
+    * */
+
+    /*window.onmousewheel=function(ev){
+        console.log(ev.wheelDelta);
+    }
+    window.addEventListener('DOMMouseScroll',function(ev){
+        console.log(ev.detail);
+    })*/
+
+
+    console.log(window.onmousewheel===null);
+    console.log(typeof window.onmousewheel==='undefined');
+    //滚轮兼容函数
+    let o=true;  //true 表示向上滚动， false 表示向下滚动
+
+    if(window.onmousewheel==null){
+        window.onmousewheel = function(ev){
+            o = ev.wheelDelta>0?true:false;
+            fn(o);
+        }
+    }else{
+        window.addEventListener('DOMMouseScroll',function(ev){
+            o=ev.detail<0?true:false;
+            fn(o);
+        })
+
+    }
+    function fn(o){
+        console.log(o);
+    }
+
+</script>
+</body>
+</html>

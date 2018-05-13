@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function wheel(obj,cb){
+        let o=true;     //true  表示向上滚动， false 表示向下滚动
+        if(typeof obj.onmousewheel==='object'){
+            obj.addEventListener('mousewheel',fn);
+        }else{
+            obj.addEventListener('DOMMouseScroll',fn);
+        }
+        function fn(ev){
+           if(ev.wheelDelta){
+               o = ev.wheelDelta>0?true:false;
+           }else{
+               o=ev.detail<0?true:false;
+           }
+            cb(o);//钩子函数
+        }
+    }
+    wheel(window,function(o){
+        console.log(o);
+    })
+
+
+
+</script>
+</body>
+</html>

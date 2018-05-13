@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width:100px;
+            height:100px;
+            background-color:pink;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    /*
+    * 在按下按键的时候，为什么会停顿一下？
+    *   为了用户体验
+    *
+    *   这是因为:当用户在按按键的时候，计算机会去判断在指定的时间内，如果没有抬起，才会认定为是长按
+    *   如果没有这种机制，我们在按按键的时候，只要随便小按一下，就会出现多个文字出来的效果。所以会有停顿一下
+    *   经检测这个停顿的时间为400毫秒左右
+    *
+    *   解决这种方法
+    *     当按下的时候，所有的按键频率设置在24毫秒左右即可
+    *
+    *
+    *
+    *
+    * */
+    const box=document.getElementById('box');
+    //let oldTime=new Date();
+    let timer=null;
+    document.onkeydown=function(ev){
+        clearInterval(timer);           //每次点击之前要清理一下定时器
+        timer=setInterval(function(){
+            //let nowTime=new Date();
+            //console.log(nowTime-oldTime)/1000;
+            //oldTime=nowTime;
+            switch(ev.keyCode){
+                case 37:
+                    box.style.left=box.offsetLeft-5+'px';
+                    break;
+                case 38:
+                    box.style.top=box.offsetTop-5+'px';
+                    break;
+                case 39:
+                    box.style.left=box.offsetLeft+5+'px';
+                    break;
+                case 40:
+                    box.style.top=box.offsetTop+5+'px';
+                    break;
+            }
+        },15);
+    }
+    document.onkeyup = function(ev){
+        clearInterval(timer);
+    }
+</script>
+</body>
+</html>

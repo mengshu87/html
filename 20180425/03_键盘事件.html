@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="t">
+<ul id="ul"></ul>
+<script>
+    /*
+        keyCode    可以得到键盘上按键的值    是number类型
+       左键  37
+       上键  38
+       右键  39
+       下键  40
+
+       shift 16
+       ctrl  17
+       alt   18
+       回车  13
+        //如果要同时使用两个按键的话，不能使用ev.keyCode===13&&ev.keyCode===17 这种方法，因为当按下第二个按键的时候
+            会把第一个覆盖掉    要使用组和键
+
+       组和键    这些按钮，返回的是布尔值    如果按下时返回的是true, 没有按返回的是false
+       ev.ctrlKey
+       ev.shiftKey
+       ev.altKey
+
+    *
+    * */
+    const t=document.getElementById('t');
+    const ul=document.getElementById('ul');
+    t.onkeydown=function(ev){
+        //console.log(ev.keyCode);
+        /*if(ev.keyCode===13){
+            let li=document.createElement('li');
+            li.innerHTML=t.value;
+            ul.appendChild(li);
+            t.value='';
+        }*/
+        //console.log(ev.keyCode);
+        if(ev.keyCode===13 && ev.ctrlKey){
+
+            let li=document.createElement('li');
+            li.innerHTML=t.value;
+            ul.appendChild(li);
+            t.value='';
+        }
+        console.log(ev.shiftKey,ev.keyCode);
+    }
+</script>
+</body>
+</html>

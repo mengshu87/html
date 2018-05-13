@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="http://www.miaov.com" method="get" id="form">
+        用户名：<input type="text" id="user" name="user"/><br/>
+        密码：<input type="password"  id="pass" name="pass"/>
+        <input type="submit" value="登录">
+    </form>
+</body>
+<script>
+    /*
+    * 表单的提交分两种情况
+    * 1.get 方式提交   --------- url传输  给大家看的（新闻接口）
+    *     ?user=肾肾&pass=123456
+    *
+    * 2.post 方式提交 ------------服务器传输  不给大家看的（用户信息、上传）
+    *
+    *
+    * 在form 上可以加 onsubmit 事件
+    * 如果触发提交 就可以用 form.submit();
+    *
+    *
+    *  try ...catch  防止某段代码报错
+    *       try{
+    *           //可能会报错的代码
+    *       }catch(e){
+    *           报错的原因
+    *       }
+    * */
+    const arr=[
+        {
+            name:'肾肾',
+            pass:123456
+        },
+        {
+            name:'张辉',
+            pass:4321
+        }
+    ];
+    const form=document.getElementById('form');
+    const user=document.getElementById('user');
+    const pass=document.getElementById('pass');
+    form.onsubmit=function() {
+        //如果担心下面的一段代码出错，就放到try catch内
+        try {
+            //查找数据库中有没有这个人
+            //如果没有，arr2会返回undefined 如果有，刚返回这个对象
+            let arr2 = arr.find(e => e.name = user.value);
+            console.log(arr2);
+            if (arr2) {
+                //如果有这这个人，然后验证密码
+                if(arr2.pass==pass.value){      //注意，这里不能使用一个 = 号
+                    alert('过！')
+                    form.submit();
+                }else{
+                    alert('用户名或密码错误！');
+                }
+            }else{
+                alert('用户名不存在！')
+            }
+        }catch(error){
+            console.log(error);
+        }
+        return false; //如果没有审核通过，就阻止默认行为
+    }
+</script>
+</html>

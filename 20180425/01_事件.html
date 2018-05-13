@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--<textarea name="" id="textarea" cols="30" rows="10"></textarea>
+<span id="span">0/200</span>
+<input type="checkbox" id="check">-->
+<!--<input type="input" id="text"/>-->
+<form id="form">
+    <input type="text" value="请输入用户名" />
+    <input type="text" value="请输入密码" />
+</form>
+<script>
+    /*
+    * 事件：
+    *     onclick           //单击
+    *     ondblclick        //双击
+    *
+    *     onmouseover       //鼠标划过
+    *     onmouseout        //鼠标离开
+    *     onmousedown       //鼠标按下
+    *     onmouseup         //鼠标抬起
+    *     onmousemove       //鼠标移动
+    *     oncontextmenu     //鼠标右键
+    *
+    *    //没有冒泡
+    *     onmouseenter      //鼠标进入
+    *     onmouseleave      //鼠标移出
+    *
+    *     onkeyup           //键盘抬起
+    *     onkeydown         //键盘按下
+    *
+    *     onhashchange      //hash值改变的时候触发
+    *     onpopstate        //操作历史记录的时候触发
+    *     onresize          //当窗口大小改变的时候
+    *     onscroll          //当滚动条滚动的时候
+    *
+    *     onchange          //当表单内容发生改变的时候触发
+    *     oninput           //当value值发生改变的时候，不失焦就能触发
+    *
+    *     onmousewheel       //当鼠标滚轮滚动的时候触发
+    *
+    *
+    *     onfocus           //获得焦点时触发
+    *     onblur            //失去焦点时触发
+    *
+    *     onsubmit         //表单提交
+    *
+    *
+    *     box.focus()       //自动聚焦
+    *
+    *     select   文字选中聚焦
+    *
+    *     reset    form表单重置(恢复到默认状态)   和form 表单一起用
+    *
+    *
+    *
+    *      初始document中有焦点，一个页面有一个焦点
+    *
+    *
+    * **/
+    /*text.onchange=function(){     //onchange 当表单内容发生改变的时候触发
+        console.log(this.value);
+    }*/
+    /*text.oninput=function(){        //oninput 当value值发生改变的时候不失焦就能触发
+        console.log(this.value);
+    }*/
+
+    /*const textarea=document.getElementById('textarea');
+    const span=document.getElementById('span');
+    const check=document.getElementById('check');
+    let maxLength=200;
+    span.innerHTML=textarea.value.length+'/'+maxLength;
+    textarea.oninput=function(){
+        //console.log(textarea.value.length);
+        /!*if(textarea.value.length>maxLength){
+            textarea.value=textarea.value.substring(0,maxLength);
+        }else{
+            span.innerHTML=textarea.value.length+'/'+maxLength;
+        }*!/
+        if(textarea.value.length<=maxLength){
+            span.innerHTML=textarea.value.length+'/'+maxLength+'字';
+        }else{
+            textarea.value=textarea.value.substring(0,maxLength);
+        }
+    }
+    check.onchange=function(){
+        if(this.checked){
+            textarea.select();          //select文字选中并聚焦
+        }
+    }*/
+
+    const form=document.getElementById('form');
+    document.onclick=function(){
+        form.reset();
+    }
+</script>
+</body>
+</html>

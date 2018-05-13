@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,html{
+            overflow-y:hidden;
+        }
+        *{
+            margin: 0;
+            padding:0;
+            list-style: none;
+        }
+        ul{
+            transition: 1s;
+        }
+
+    </style>
+</head>
+<body>
+<ul id="ul"></ul>
+<script>
+    let arr=['yellow','red','green','pink','blue'];
+    const ul=document.getElementById('ul');
+    let iW=window.innerWidth;
+    let iH=window.innerHeight;
+    let html='';
+    arr.forEach(e=>html+=`<li style="width:${iW}px;height:${iH}px;background:${e};"></li>`);
+    ul.innerHTML=html;
+    let num=0;
+    //当窗口的大小发生变化时，页面也跟着发生变化
+    window.onresize=function(){
+        //重新或取页面的尺寸
+        html='';
+        iW=window.innerWidth;
+        iH=window.innerHeight;
+        arr.forEach(e=>html+=`<li style="width:${iW}px;height:${iH}px;background:${e}"></li>`);
+        ul.innerHTML=html;
+        ul.style.transition='none';
+        ul.style.transform='translateY('+(-num*iH)+'px'+')';
+
+
+    }
+    let offset=true;        //true 表示页面可以滚动
+    wheel(ul,function(o){
+        if(!offset) return;     // false 表示页面正处于滚动的状态中，不可以再滚动，得让这个滚动完成之后才能再滚动  连续滚动滚轮是不起作用的
+        offset=false;
+
+        if(o){//o为true 表示向上滚动
+            num--;
+            if(num<0){
+                num=0;
+            }
+
+        }else{
+            num++;
+            if(num>arr.length-1){
+                num=arr.length-1;
+            }
+        }
+        ul.style.transition='1s';
+        ul.style.transform='translateY('+(-num*iH)+'px'+')';
+        setTimeout(()=>offset=true,1050);       //表示页面可以继续滚动
+    });
+
+
+    //封装滚轮事件
+    function wheel(obj,cb){
+        let o=true; //目的：如果是true 表示向上滚动， false 表示向下滚动
+        if(typeof obj.onmousewheel==='object'){
+            obj.addEventListener('mousewheel',fn);
+        }else{
+            obj.addEventListener('DOMMouseScroll',fn);
+        }
+        function fn(ev){
+            if(ev.wheelDelta){
+                o=ev.wheelDelta>0?true:false;
+            }else{
+                o=ev.detail<0?true:false;
+            }
+            cb(o);
+        }
+    }
+
+</script>
+</body>
+</html>
