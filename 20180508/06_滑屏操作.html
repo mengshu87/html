@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            height: 100%;
+        }
+        .wrap {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
+        .list {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .list li {
+            font: 16px/30px "宋体";
+            border-bottom: 1px solid #000;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="list">
+
+    </ul>
+</div>
+<script>
+    const wrap=document.querySelector('.wrap');
+    const list=document.querySelector('.list');
+    //生成li
+    let html='';
+    for(let i=0;i<100;i++){
+        html+=`<li>${i}</li>`;
+    }
+    list.innerHTML=html;
+
+    /* 添加滑动  封装的css样式文件*/
+    function css(el,attr,val){
+        if(typeof val === 'undefined'){
+            return parseFloat(getComputedStyle(el)[attr]);
+        }
+        if(attr == "transition"){
+            el.style[attr] = val;
+        }else if
+        if(attr == "opacity"){
+            el.style[attr] = val;
+        } else {
+            el.style[attr] = val + "px";
+        }
+    }
+
+
+    let startPointY=0;          //手指按下时点击的位置Y轴坐标
+    let startListY=0;           //当前ul在页面中的Y轴坐标
+    var maxT=css(wrap,"height")-css(list,"height");     //屏幕的高度-list的总高度，就是超出屏幕有多少的高度
+    //console.log(css(list,"height"));
+    wrap.addEventListener('touchstart',function(ev){
+        startPointY=ev.changedTouches[0].pageY;
+        startListY=css(list,'top');
+        console.log(startListY);
+    });
+    wrap.addEventListener('touchmove',function(ev){
+        let nowPointerY=ev.changedTouches[0].pageY;     //获取移动后的手指的Y轴坐标
+        let t=nowPointerY-startPointY+startListY;       //得到ul要移动的距离=move的距离-touchstart的距离+起始list的位置
+        t=t>0?0:t;              // 移动的距离最小不能小于0，最大不能大于超出屏幕的宽度。
+        t=t<maxT?maxT:t;
+        css(list,'top',t);      //将手指移动的距离赋值给list 让其他也跟着运动。
+
+    })
+
+
+</script>
+</body>
+</html>

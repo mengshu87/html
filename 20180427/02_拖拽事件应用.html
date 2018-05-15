@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width:100px;
+            height:100px;
+            background:pink;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    /*
+    * 拖拽 事件的三大事件
+    *       onmousedown
+    *       onmousemove
+    *       onmouseup
+    *   原理：1.当鼠标按下的时候获取此时按下的点的位置  ev.pageX   ev.pageY
+    *        2.可以获取当前元素的位置    box.offsetLeft   box.offsetTop
+    *        3.disX=ev.pageX-box.offsetLeft    dixY=ev.pageY-offsetTop  就可以获取你点的位置在元素中的位置是多少
+    *        4.当随便拖拽的时候，就可以获取拖拽的点在可视区的距离 ev.pageX ev.pageY    *
+    *        5.box.style.left=ev.pageX-disX   box.style.top=ev.pageY-disY   这样就可以得到每次拖拽之后，box的位置
+    *
+    *   注意：mouse事件和up 事件要绑定在document 上
+    *        因为有时候如果移动过快，就会脱离box,这时候box就不动了
+    *
+
+        *
+    * */
+    box.onmousedown=function(ev){
+        let disX=ev.pageX-box.offsetLeft;
+        let disY=ev.pageY-box.offsetTop;
+        document.onmousemove=function(ev){
+            box.style.left=ev.pageX-disX+'px';
+            box.style.top=ev.pageY - disY +'px';
+        };
+        document.onmouseup=function(){
+            //当鼠标抬起的时候，要将box 放开不能移动。
+            document.onmouseup=document.onmousemove=null;
+        };
+        return false;           //取消默认行为  如果是点击图片或者文字的话，就会有默认行为，所以要取消默认行为。
+    }
+
+</script>
+</body>
+</html>

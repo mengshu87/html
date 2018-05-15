@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    document.onclick=function(ev){
+        console.log(ev.which);          //1  和button 一样
+    }
+    document.onkeydown=function(ev){
+        console.log(ev.which);        //ev.which  是记录鼠标或者键盘按下的键值
+    }
+    */
+
+
+
+/*
+    let obj={
+        age:18,
+        name:'你好'
+    }
+    delete obj.age;
+    console.log(obj);       //{name: "你好"}   delete 是删除对象的属性
+
+    var a=10;           //window.a 这种全局定义的变量，是自动（默认）挂在window 上的属性，是不能用delete 删除的
+    console.log(window.a);      // 10
+    delete window.a;
+    console.log(a);             // 10
+
+*/
+
+    window.a=20;
+    delete window.a;        //这种人为主动在window上绑定的属性，就可以被删除
+    console.log(window.a);          //undefined
+
+
+
+</script>
+</body>
+</html>

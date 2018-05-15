@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<style type="text/css">
+    div{
+        padding:0px;
+        box-sizing:border-box;
+        margin:0px;
+        border:0px;
+    }
+    #div-5{
+        width: 700px;
+        height: 500px;
+        border:1px solid black;
+        position: relative;
+        overflow: hidden;
+    }
+    .ribbit-OF-div1{
+        width: 20px;
+        background-color: rgb(239, 238, 238);
+        border:1px solid rgba(0,0,0,0.5);
+        position: absolute;
+        right:0px;
+        top: 0px;
+        cursor:default;
+    }
+    .ribbit-OF-div2{
+        position: absolute;
+        top:0px;
+        right: 0px;
+        width: 100%;
+        height: 100px;
+        background-color:rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+    .ribbit-OF-div3{
+        width: 100%;
+        height:auto;
+        background-color: lime;
+    }
+</style>
+<body>
+<div id="div-1">
+    <div id="div-2">
+
+    </div>
+</div>
+<div id="div-3"><div id="div-4"></div></div>
+<div id="div-5">
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+    123123<br/>
+    qwe<br/>
+    12asd23<br/>
+    asd3123<br/>
+    qwe123<br/>
+    235423423<br/>
+    azxc123<br/>
+</div>
+</body>
+<script type="text/javascript">
+    var div_5 = document.getElementById('div-5');
+    function OverFlow(element){
+        this.element = element;
+        this.ribbit_OF_div1 = document.createElement("div");
+        this.ribbit_OF_div2 = document.createElement("div");
+        this.ribbit_OF_div3 = document.createElement("div");
+        this.createDiv = function(){
+            this.ribbit_OF_div1.className = "ribbit-OF-div1";
+            this.ribbit_OF_div2.className = "ribbit-OF-div2";
+            this.ribbit_OF_div3.className = "ribbit-OF-div3";
+            this.ribbit_OF_div3.innerHTML = this.element.innerHTML;
+            this.element.innerHTML="";
+            this.element.appendChild(this.ribbit_OF_div3);
+            this.ribbit_OF_div1.appendChild(this.ribbit_OF_div2);
+            document.body.appendChild(this.ribbit_OF_div1);
+            this.ribbit_OF_div1.style.height = getComputedStyle(this.element,null).height;
+            this.ribbit_OF_div1.style.left = (this.element.offsetLeft+(parseInt(getComputedStyle(this.element,null).width)-parseInt(getComputedStyle(this.ribbit_OF_div1,null).width)))+"px";
+            this.ribbit_OF_div1.style.top = this.element.offsetTop+"px";
+            this.ribbit_OF_div2.style.top = "0px";
+        }
+        this.addAudo=function(){
+            var YY=null;//前鼠标位置
+            var topXX = 0;//前top位置
+            var topX = 0;//后top值
+            var vherght = parseInt(getComputedStyle(this.ribbit_OF_div3,null).height)-parseInt(getComputedStyle(this.element,null).height);//可移动
+            var dst = 0;
+            //最大top移动位置
+            var top_x = parseInt(getComputedStyle(this.ribbit_OF_div1,null).height)-parseInt(getComputedStyle(this.ribbit_OF_div2,null).height);
+            var thio = this;
+            window.onmousemove = function(e){
+                fun(e.clientY);
+            };
+            this.ribbit_OF_div2.onmousedown=function(e){
+                YY = e.clientY;
+                topXX =parseInt(this.style.top);
+                return false;
+            }
+            window.onmouseup=function(){
+                YY = null;
+                return true;
+            }
+            function fun(y){
+                if(top_x>=topX&&topX>=0&&YY!=null){
+                    topX = y-YY+topXX;
+                    if(topX<0)topX=0;
+                    if(topX>top_x)topX=top_x-1;
+                    thio.ribbit_OF_div2.style.top = (topX-1)+"px";
+                    dst = topX*vherght/top_x;
+                    thio.element.scrollTop = dst;
+                }
+            }
+        }
+        this.createDiv();
+        this.addAudo();
+    }
+    new OverFlow(div_5);
+</script>
+</html>

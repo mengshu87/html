@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #img{
+            margin:0;
+            padding:0;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<img src="img/logo.png" id="img"/>
+<script>
+    const img=document.getElementById('img');
+    let timer=null;
+    let obj={
+        down:false,
+        up:false,
+        left:false,
+        right:false
+    }
+    //console.log(obj);
+    document.onkeydown=function(ev){
+
+        switch(ev.keyCode){
+            case 37:
+                obj.left=true;
+                break;
+            case 38:
+                obj.up=true;
+                break;
+            case 39:
+                obj.right=true;
+                break;
+            case 40:
+                obj.down=true;
+                break;
+        }
+        move ();
+        //console.log(obj);
+
+
+    }
+    document.onkeyup=function(ev){
+
+        switch(ev.keyCode){
+            case 37:
+                obj.left=false;
+                break;
+            case 38:
+                obj.up=false;
+                break;
+            case 39:
+                obj.right=false;
+                break;
+            case 40:
+                obj.down=false;
+                break;
+        }
+        //console.log(obj);
+    }
+    function move (){
+        if(obj.left){
+            img.style.left=img.offsetLeft-5+'px';
+        }
+        if(obj.up){
+            img.style.top=img.offsetTop-5+'px';
+        }
+        if(obj.right){
+            img.style.left=img.offsetLeft+5+'px';
+        }
+        if(obj.down){
+            img.style.top=img.offsetTop+5+'px';
+        }
+
+    }
+</script>
+</body>
+</html>

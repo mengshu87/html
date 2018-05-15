@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width:100px;
+            height:100px;
+            background:pink;
+            position:absolute;
+            top:100px;
+            left:200px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+    <!--<img src="logo.png" id="box"/>-->
+<script>
+    /*
+    * getComputed(box).width=100px   获取样式内的box 的宽度   （带px 的字符串）
+    * box.offsetWidth                box 的宽度 +padding+border 的距离
+    * box.clientWidth                box 的宽度 +padding 的距离
+    * box.style.width                这是给box的宽度赋值，不能获取
+    *
+    * box.offsetLeft                box 距离左侧的距离
+    *
+    *
+    * */
+
+    //划边界的拖拽
+    //let num=0;
+    box.onmousedown=function(ev){
+        //先获取点击的这个点在box中的位置
+        let disX=ev.pageX-box.offsetLeft;
+        let disY=ev.pageY-box.offsetTop;
+        document.onmousemove=function(ev){
+            let l=ev.pageX-disX;
+            let t=ev.pageY-disY;
+            if(l<0){        //box 不能超过可视区的范围
+               l=0;
+            }
+            //console.log(box.offsetWidth)
+            //console.log(getComputedStyle(box).width);           //100px 带单位  字符串
+            if(l>window.innerWidth-box.offsetWidth){
+                l=window.innerWidth-box.offsetWidth;
+            }
+            /*if(t<0){
+                t=0;
+            }*/
+
+            //如果想做吸顶的效果，可以
+            if(t<90){
+                t=0;
+            }
+            box.style.left=l+'px';
+            box.style.top=t+'px';
+        }
+        document.onmouseup=function(){
+            //如果没有将onmouseup 清空，他每次点击document的时候，up 方法总是会调用，所以结束的时候，也要将up 清空
+            document.onmouseup=document.onmousemove=null;
+
+           // console.log(++num);
+        }
+        return false;           //取消默认行为  如果是点击图片或者文字的话，就会有默认行为，所以要取消默认行为。
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style type="text/css">
+        /*#box1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        #box2 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 0, 0,.5)
+        }*/
+        .box {
+            margin: 30px auto;
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<!--<a id="box1" href="http://www.baidu.com">百度</a>
+<div id="box2"></div>-->
+<div id="page">
+    <a href="http://www.baidu.com">百度</a>
+    <div class="box">box1</div>
+    <div class="box" id="box2">box2</div>
+    <div class="box">box3</div>
+    <div class="box">box4</div>
+    <div class="box">box5</div>
+</div>
+<script type="text/javascript">
+
+    /*
+     *
+     * 新版 webkit 内核不支持 给 document  和 body 这些元素添加 touch 的阻止默认行为
+     *
+     * 阻止默认行为带来的问题：
+     *       1. 禁止滑动
+             2. 阻止所有的鼠标事件
+             3. 阻止内容选中
+             4. 阻止长按时菜单
+             5. 阻止输入框输入
+             6. 阻止默认的多指操作
+             7. 阻止页面回弹(橡皮筋效果)
+     *
+     *
+     *
+     * */
+    /*document.addEventListener('touchend',function(ev){
+        ev.preventDefault();        //新版 webkit 内核不支持 给 document  和 body 这些元素添加 touch 的阻止默认行为
+    })
+    box2.addEventListener('touchend',function(){
+        box2.style.display='none';
+    })*/
+    /*const box1=document.getElementById('box1');
+    const box2=document.getElementById('box2');
+    box1.onclick=function(){
+        console.log(box1);
+    }
+    box2.addEventListener('touchend',function(ev){
+        ev.preventDefault();            //可以需要的元素身上暂时加阻止默认行为，但是也有问题
+        box2.style.display='none';
+    })*/
+    /*;(function(){
+        const page=document.getElementById('page');
+        page.addEventListener('touchstart',function(ev){  //用touchstart 就能阻止所有的默认行为
+            ev.preventDefault();                          //用touchend 就不能阻止所有的默认行为 会有警告
+        })
+    })();*/
+    //可以给需要的元素身上取消默认为行为
+    const page=document.getElementById('page');
+    const box2=document.getElementById('box2');
+    page.addEventListener('touchstart',function(ev){
+        ev.preventDefault();
+    })
+    box2.addEventListener('touchstart',function(ev){
+        ev.stopPropagation();       //可以给需要的元素身上取消默认为行为
+    })
+
+</script>
+</body>
+</html>

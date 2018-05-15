@@ -232,6 +232,7 @@
 
     allSelect.onclick=function(){
         var ret=allSelect.classList.toggle('active');
+        //console.log(ret);
         current=ret ? listLen : 0;
         for(var i=0;i<listLen;i++){
             list[i].classList.toggle('active',ret);

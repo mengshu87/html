@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            margin:10px 100px;
+            width:533px;
+            position:absolute;
+        }
+        #box1{
+            float:left;
+            width:500px;
+            height:500px;
+            border:1px solid #4cae4c;
+            position: relative;
+            overflow: hidden;
+        }
+        #box2{
+            float:left;
+            width:480px;
+            padding:10px;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        #box3{
+            float:right;
+            width:30px;
+            height:500px;
+            border:1px solid #4cae4c;
+            border-left:none;
+
+        }
+        #box4{
+            width:30px;
+            height:30px;
+            background:#999;
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box1">
+        <div id="box2">
+            <p>在这个例子中，person1 的 name 被一个新值给屏蔽了。但无论访问 person1.name 还是访问person2.name 都能够正常地返回值，即分别是"Greg"（来自对象实例）和"Nicholas"（来自原型）。当在 alert()中访问 person1.name 时，需要读取它的值，因此就会在这个实例上搜索一个名为 name的属性。这个属性确实存在，于是就返回它的值而不必再搜索原型了。当以同样的方式访问 person2. name 时，并没有在实例上发现该属性，因此就会继续搜索原型，结果在那里找到了 name 属性。当为对象实例添加一个属性时，这个属性就会屏蔽原型对象中保存的同名属性；换句话说，添加这个属性只会阻止我们访问原型中的那个属性，但不会修改那个属性。即使将这个属性设置为null，也只会在实例中设置这个属性，而不会恢复其指向原型的链接。不过，使用delete操作符则可以完全删除实例属性，从而让我们能够重新访问原型中的属性。</p>
+            <p>在这个例子中，person1 的 name 被一个新值给屏蔽了。但无论访问 person1.name 还是访问person2.name 都能够正常地返回值，即分别是"Greg"（来自对象实例）和"Nicholas"（来自原型）。当在 alert()中访问 person1.name 时，需要读取它的值，因此就会在这个实例上搜索一个名为 name的属性。这个属性确实存在，于是就返回它的值而不必再搜索原型了。当以同样的方式访问 person2. name 时，并没有在实例上发现该属性，因此就会继续搜索原型，结果在那里找到了 name 属性。当为对象实例添加一个属性时，这个属性就会屏蔽原型对象中保存的同名属性；换句话说，添加这个属性只会阻止我们访问原型中的那个属性，但不会修改那个属性。即使将这个属性设置为null，也只会在实例中设置这个属性，而不会恢复其指向原型的链接。不过，使用delete操作符则可以完全删除实例属性，从而让我们能够重新访问原型中的属性。</p>
+            <p>在这个例子中，person1 的 name 被一个新值给屏蔽了。但无论访问 person1.name 还是访问person2.name 都能够正常地返回值，即分别是"Greg"（来自对象实例）和"Nicholas"（来自原型）。当在 alert()中访问 person1.name 时，需要读取它的值，因此就会在这个实例上搜索一个名为 name的属性。这个属性确实存在，于是就返回它的值而不必再搜索原型了。当以同样的方式访问 person2. name 时，并没有在实例上发现该属性，因此就会继续搜索原型，结果在那里找到了 name 属性。当为对象实例添加一个属性时，这个属性就会屏蔽原型对象中保存的同名属性；换句话说，添加这个属性只会阻止我们访问原型中的那个属性，但不会修改那个属性。即使将这个属性设置为null，也只会在实例中设置这个属性，而不会恢复其指向原型的链接。不过，使用delete操作符则可以完全删除实例属性，从而让我们能够重新访问原型中的属性。</p>
+            <p>在这个例子中，person1 的 name 被一个新值给屏蔽了。但无论访问 person1.name 还是访问person2.name 都能够正常地返回值，即分别是"Greg"（来自对象实例）和"Nicholas"（来自原型）。当在 alert()中访问 person1.name 时，需要读取它的值，因此就会在这个实例上搜索一个名为 name的属性。这个属性确实存在，于是就返回它的值而不必再搜索原型了。当以同样的方式访问 person2. name 时，并没有在实例上发现该属性，因此就会继续搜索原型，结果在那里找到了 name 属性。当为对象实例添加一个属性时，这个属性就会屏蔽原型对象中保存的同名属性；换句话说，添加这个属性只会阻止我们访问原型中的那个属性，但不会修改那个属性。即使将这个属性设置为null，也只会在实例中设置这个属性，而不会恢复其指向原型的链接。不过，使用delete操作符则可以完全删除实例属性，从而让我们能够重新访问原型中的属性。</p>
+            <p>在这个例子中，person1 的 name 被一个新值给屏蔽了。但无论访问 person1.name 还是访问person2.name 都能够正常地返回值，即分别是"Greg"（来自对象实例）和"Nicholas"（来自原型）。当在 alert()中访问 person1.name 时，需要读取它的值，因此就会在这个实例上搜索一个名为 name的属性。这个属性确实存在，于是就返回它的值而不必再搜索原型了。当以同样的方式访问 person2. name 时，并没有在实例上发现该属性，因此就会继续搜索原型，结果在那里找到了 name 属性。当为对象实例添加一个属性时，这个属性就会屏蔽原型对象中保存的同名属性；换句话说，添加这个属性只会阻止我们访问原型中的那个属性，但不会修改那个属性。即使将这个属性设置为null，也只会在实例中设置这个属性，而不会恢复其指向原型的链接。不过，使用delete操作符则可以完全删除实例属性，从而让我们能够重新访问原型中的属性。</p>
+        </div>
+    </div>
+    <div id="box3">
+        <div id="box4"></div>
+    </div>
+</div>
+<script>
+    const box=document.getElementById('box');
+    const box1=document.getElementById('box1');
+    const box2=document.getElementById('box2');
+    const box3=document.getElementById('box3');
+    const box4=document.getElementById('box4');
+    let box2H=box2.scrollHeight;    //获取box2被内容撑开的总高度
+    //let box2H2=box2.offsetHeight;
+    //console.log(box2H);
+    //console.log(box2H2);
+    let box1H=box1.clientHeight;    //获取box1的总高度;
+
+    if(box2H<box1H){ //如果box2有内容没有超过box1有高度，那么box3和box4是隐藏的，反之再显示出来
+        box3.style.display='none';
+    }else{
+        box3.style.display='block';
+    }
+    let scale=box1H/box2H;      //box1H/box2H 是得到box1占box2总高度的百度分
+    if(scale<0.1) scale=0.1;        //当box2的内容过于多时，让滚动条的最小高度scale=0.1的值。
+    box4.style.height=scale*box1H+'px';     //滚动条box4的大小为 scale*box1H
+    //console.log(scale);
+    //鼠标点击box4出现在的滑动
+    box4.addEventListener('mousedown',function(ev){   //可以理解为在Y轴方向的拖拽
+        let disY=ev.pageY-this.offsetTop;       //获取点击的点的位置
+        let move=function(ev){          //这是一个函数的表达式，优先级不会提升，所以要让addEventListener 放到move 下面
+            let t=ev.pageY-disY;
+            if(t<0){
+                t=0;    //不能让t出去
+            }else if(t>=box3.clientHeight-box4.clientHeight){       //t 不能超出box3的位置
+                t=box3.clientHeight-box4.clientHeight;
+            }
+            let scale1=t/(box3.clientHeight-box4.clientHeight);     //滚动的距离占总滚动距离的百分比。
+            //console.log(scale1);
+            box4.style.top=t+'px';
+            //console.log(box2H-box1H);
+            box2.style.top=scale1*(box1H-box2H)+'px';
+            console.log(scale1*(box2H-box1H));
+        };
+        let up=function(){
+            document.removeEventListener('mousemove',move);
+            document.removeEventListener('mouseup',up);
+        }
+        document.addEventListener('mousemove',move);
+        document.addEventListener('mouseup',up);
+        ev.preventDefault();
+    })
+    //鼠标点击box3空白位置时滑动
+    let timer=null;
+    box3.addEventListener('mousedown',function(ev){
+        //用定时器控制
+        timer=setInterval(function(){
+            let t=box4.offsetTop;       //获取此时的box4的位置
+            //console.log(t);
+            if(ev.pageY<t){         //假如点击的点在box4位置的上面
+                t-=5;
+            }else if(ev.pageY>box4.getBoundingClientRect().bottom){     //如果点击的点在box4的下面（此刻能获取box4的底边的绝对位置）
+                t+=5;
+            }else{//box4的位置和按下的位置相等，就说明到了目标点了
+                clearInterval(timer);
+            }
+            let scale2=t/(box3.clientHeight-box4.clientHeight);
+            //console.log(scale2);
+            box2.style.top=scale2*(box1H-box2H)+'px';
+            box4.style.top=t+'px';
+            console.log(1);
+        },16.7);
+        box3.addEventListener('mouseup',function(){
+            clearInterval(timer);
+        })
+    })
+
+    //当选择文本内容的时候，滚动条滚动
+    let timer2=null;
+    box2.addEventListener('mousedown',function(){
+        document.onmousemove=function(ev){
+            if(ev.pageY > box1.offsetHeight-20){
+                //console.log(1);
+                if(timer2)return;
+                timer2=setInterval(function(){
+                    let t=box4.offsetTop;       //获取此时的box4的位置
+                    t+=1;
+                    if(t<0){
+                        t=0;
+                        clearInterval(timer2);
+                    }else if(t>box3.clientHeight-box4.clientHeight){
+                        t=box3.clientHeight-box4.clientHeight;
+                        clearInterval(timer2);
+                    }
+                    let scale3=t/(box3.clientHeight-box4.clientHeight);
+                    console.log(scale3);
+                    box2.style.top=scale3*(box1H-box2H)+'px';
+                    box4.style.top=t+'px';
+                },16.7);
+            }else if(ev.pageY<20){
+                //console.log('向上');
+                if(timer2)return;
+                timer2=setInterval(function(){
+                    let t=box4.offsetTop;       //获取此时的box4的位置
+                    t-=1;
+                    if(t<0){
+                        t=0;
+                        clearInterval(timer2);
+                    }else if(t>box3.clientHeight-box4.clientHeight){
+                        t=box3.clientHeight-box4.clientHeight;
+                        clearInterval(timer2);
+                    }
+                    let scale3=t/(box3.clientHeight-box4.clientHeight);
+                    //console.log(scale3);
+                    box2.style.top=scale3*(box1H-box2H)+'px';
+                    box4.style.top=t+'px';
+                },16.7);
+            }
+        };
+        document.onmouseup=function(){
+            clearInterval(timer2);
+            timer2=null;
+            document.onmousemove=document.onmouseup=null;
+        }
+
+    });
+    //滚轮滚动时页面滚动
+    myScroll(box,function(o){
+        let t=box4.offsetTop;
+        if(o){
+            t-=5;
+            if(t<0){
+                t=0;
+            }else if(t>box3.clientHeight-box4.clientHeight){
+                t=box3.clientHeight-box4.clientHeight;
+            }
+
+        }else{
+            t+=5;
+            if(t<0){
+                t=0;
+            }else if(t>box3.clientHeight-box4.clientHeight){
+                t=box3.clientHeight-box4.clientHeight;
+            }
+        }
+        let scale4=t/(box3.clientHeight-box4.clientHeight);
+        box2.style.top=scale4*(box1H-box2H)+'px';
+        box4.style.top=t+'px';
+    });
+
+    //滚轮函数
+    function myScroll(obj,cb){
+        let o = true; //目的:如果滚动的时候o为true说明向上滚,false向下滚
+        if(typeof obj.onmousewheel === 'object'){
+            obj.addEventListener('mousewheel',fn)
+
+        }else{
+            window.addEventListener('DOMMouseScroll',fn);
+        }
+        function fn(ev){
+            //console.log(1);
+            if(ev.wheelDelta){ //IE||chrome
+                o = ev.wheelDelta>0?true:false;
+            }else{
+                o = ev.detail < 0?true:false;
+            }
+            cb(o);//钩子函数
+        }
+    }
+
+
+</script>
+</body>
+</html>

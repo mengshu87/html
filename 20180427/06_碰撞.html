@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width:100px;
+            height:100px;
+            /*border-radius:50%;*/
+        }
+        .box{
+            background:pink;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+        .box2{
+            background:green;
+            position:absolute;
+            left:300px;
+            top:300px;
+        }
+        .box2.active{
+            background:red;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<div class="box2"></div>
+</body>
+<script>
+    //让box 移动去碰撞box2
+    const box=document.querySelector('.box');
+    const box2=document.querySelector('.box2');
+    box.onmousedown=function(ev){
+        let disX=ev.pageX-box.offsetLeft;
+        let disY=ev.pageY-box.offsetTop;
+        document.onmousemove=function(ev){
+            //分别获取box ,box2 四个边的在页面的位置
+            let b2l=box2.offsetLeft;
+            let b2t=box2.offsetTop;
+            let b2r=b2l+box2.offsetWidth;
+            let b2b=b2t+box2.offsetHeight;
+            //console.log(b2l,b2t,b2r,b2b);
+            let bl=ev.pageX-disX;
+            let bt=ev.pageY-disY;
+            let br=bl+box.offsetWidth;
+            let bb=bt+box.offsetHeight;
+            box.style.left=bl+'px';
+            box.style.top=bt+'px';
+            //发生碰撞的话，只能是
+            //                 box的左侧和box2的右侧进行碰撞
+            //                 box的上侧和box2的下侧进行碰撞
+            //                 box的右侧和box2的左侧进行碰撞
+            //                 box的下侧和box2的上侧进行碰撞
+            if(bl>b2r||br<b2l||bt>b2b||bb<b2t){
+                //没有碰撞到
+                box2.classList.remove('active');
+            }else{
+                //碰到了
+                box2.classList.add('active');
+            }
+
+        }
+        document.onmouseup=function(){
+            document.onmouseup=document.onmousemove=null;
+        }
+        return false;
+    }
+</script>
+</html>

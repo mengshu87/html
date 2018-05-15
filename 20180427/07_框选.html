@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:0px;
+            height:0px;
+            background:rgba(0,0,0,0.2);
+            border:1px dashed #000;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body id="body">
+<script>
+    /*
+    * 框选：需要把所有的左侧位置和上侧的位置找出来，同时要也算出框的大小
+    *    思路：
+    *          分四种情况
+    *          1.点击的框选的最后点是起始位置的右下方
+    *              这时候，框的左侧位置在起始点击的点，高度为最后的点的ev.pageY-起始点的ev.pageY;
+    *          2.点击的框的位置在起始位置的左下方
+        *          这时候，框的左侧应该在最后点击的点，高度为最后的点的ev.pageY-起始点的ev.pageY;
+        *      3.点击的框的位置在起始位置的左上方
+            *      这时候，框的左侧应该在最后点击的点，高度为起始点击的点ev.pageY-最后点击的点的ev.pageY;
+            *  4.点击的框的位置在起始位置的右上方
+                *  这时候，框的左侧应该在起始点击的点。高兴为起始点击的点ev.pageY-最后点击的点的ev.pageY;
+    *
+    *
+    * */
+    const body=document.getElementById('body');
+    document.onmousedown=function(ev){
+        let box=document.createElement('div');
+        box.className='box';
+        body.appendChild(box);
+        box.style.left=ev.pageX+'px';
+        box.style.top=ev.pageY+'px';
+        let el=ev.pageX;
+        let et=ev.pageY;
+        document.onmousemove=function(ev){
+            if(ev.pageX<el&&ev.pageY>et){
+                box.style.left=ev.pageX+'px';
+                box.style.top=et+'px';
+
+                box.style.width=el-ev.pageX+'px';
+                box.style.height=ev.pageY-et+'px';
+
+            }else if(ev.pageX<el&&ev.pageY<et){
+
+                box.style.left=ev.pageX+'px';
+                box.style.top=ev.pageY+'px';
+
+                box.style.width=el-ev.pageX+'px';
+                box.style.height=et-ev.pageY+'px';
+
+            }else if(ev.pageX>el&&ev.pageY<et){
+
+                box.style.left=el+'px';
+                box.style.top=ev.pageY+'px';
+
+                box.style.width=ev.pageX-el+'px';
+                box.style.height=et-ev.pageY+'px';
+
+            }else{
+
+                box.style.left=el+'px';
+                box.style.top=et+'px';
+
+                box.style.width=ev.pageX-el+'px';
+                box.style.height=ev.pageY-et+'px';
+            }
+
+        }
+        document.onmouseup=function(){
+            box.remove();
+            document.onmouseup=document.onmousemove=null;
+        }
+
+
+    }
+</script>
+</body>
+</html>

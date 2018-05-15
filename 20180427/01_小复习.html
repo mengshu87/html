@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //   ev ||event ;
+
+    document.onmousedown=function(ev){    //FF浏览器就不支持event会报错，chrome和IE 会返回undefined
+        console.log(window.event||ev);             //所以可以这样写 ev||event   或者  ev || window.event
+    }
+</script>
+</body>
+</html>

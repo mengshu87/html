@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+
+    </style>
+</head>
+<body id="body">
+<div class="box"></div>
+<script>
+    const box=document.querySelector('.box');
+    const body=document.getElementById('body');
+
+    box.onmousedown=function(ev){
+        //box 点击的时候，获取点击点在box 中的位置
+        let disX=ev.pageX-box.offsetLeft;
+        let disY=ev.pageY-box.offsetTop;
+        //生成一个div ,样式和box 一样，只是透明度低一些
+        let div = document.createElement('div');
+        div.className='box';
+        div.style.opacity='.5';
+        body.appendChild(div);
+        //设置两个变量，分别有div 移动的距离
+        let l=0;
+        let t=0;
+        //此时，div的位置和box 的位置一样
+        div.style.left=box.offsetLeft;
+        div.style.top=box.offsetTop;
+        //移动的时候，只移动div;
+        document.onmousemove=function(ev){
+            l=ev.pageX-disX;
+            t=ev.pageY-disY;
+            div.style.left=l+'px';
+            div.style.top=t+'px';
+        }
+        document.onmouseup=function(){
+            //当鼠标抬起的时候，再让box 移到div 所在的位置，并将div 移除
+            box.style.left=l+'px';
+            box.style.top=t+'px';
+            div.remove();
+            document.onmouseup=document.onmousemove=null;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

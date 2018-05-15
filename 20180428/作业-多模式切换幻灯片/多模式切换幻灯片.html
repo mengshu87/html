@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多模式切换幻灯片</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:448px;
+            height:245px;
+            border:1px solid red;
+            position:relative;
+            margin:20px auto;
+            overflow:hidden;
+        }
+        img{
+            width:100%;
+        }
+        ul{
+            list-style:none;
+            position:absolute;
+        }
+        ul li{
+            width:448px;
+            height:245px;
+            float:left;
+        }
+        a{
+            width:40px;
+            height:90px;
+            line-height:90px;
+            background:#333;
+            position:absolute;
+            top:72px;
+            text-align:center;
+            color:#fff;
+            text-decoration:none;
+        }
+        #prev{
+            left:0;
+        }
+        #next{
+            right:0;
+        }
+    </style>
+</head>
+<body>
+<div id="box" >
+    <ul>
+        <li><img src="img/1.jpg"/></li>
+        <li><img src="img/2.jpg"/></li>
+        <li><img src="img/3.jpg"/></li>
+        <li><img src="img/4.jpg"/></li>
+    </ul>
+    <a href="javascript:;" id="prev">〈</a>
+    <a href="javascript:;" id="next">〉</a>
+</div>
+<script src="tween.js"></script>
+<script>
+    const ul=document.querySelector('ul');
+    const lis=ul.getElementsByTagName('li');
+    const prev=document.getElementById('prev');
+    const next=document.getElementById('next');
+    let w=448; //一个图片的宽度
+    let num=0;
+    ul.innerHTML+=ul.innerHTML;
+    let len=lis.length;
+    ul.style.width=w*len+'px';
+    let timer=null;
+    function up() {
+        clearInterval(timer);
+        num--;
+        if(num<0){
+            ul.style.left=-(len/2)*w+'px';
+            num=len/2-1;
+        }
+        move({
+            el:ul,
+            attr:{
+                left:-w*num
+            },
+            d:500
+        });
+
+    }
+    function down(){
+        clearInterval(timer);
+        num++;
+        if(num>=len){
+            ul.style.left=-(len/2-1)*w+'px';
+            num=len/2;
+        }
+        move({
+            el:ul,
+            attr:{
+                left:-w*num
+            },
+            d:500
+        });
+    }
+    //点击下一页
+    next.onclick=function(){
+       down();
+    }
+    //点击上一页
+    prev.onclick=function(){
+       up();
+    }
+    //键盘操作
+    document.onkeydown=function(ev) {
+        if (ev.keyCode == 37) {
+            up();
+        }
+        if (ev.keyCode == 38) {
+            up();
+        }
+        if (ev.keyCode == 39) {
+            down();
+        }
+        if (ev.keyCode == 40) {
+            down();
+        }
+        /* if(ev.keycode==37 || ev.keycode==38 )
+        {
+            console.log("左上键")
+            clearInterval(timer);
+            num--;
+            if(num<0){
+                ul.style.left=-(len/2)*w+'px';
+                num=len/2-1;
+            }
+            move({
+                el:ul,
+                attr:{
+                    left:-w*num
+                },
+                d:500
+            });
+        }
+        if(ev.keycode==39 || ev.keycode==40){
+            console.log("左上键以外")
+            clearInterval(timer);
+            num++;
+            if(num>=len){
+                ul.style.left=-(len/2-1)*w+'px';
+                num=len/2;
+            }
+            move({
+                el:ul,
+                attr:{
+                    left:-w*num
+                },
+                d:500
+            });
+        }
+
+    }*/
+   }
+    //鼠标拖动
+    //onmousedown.取鼠标位置X1，onmouseup 取鼠标位置x2，判断x2-x1>0切换上一张图片，x2-x1<0，切换下一张图片
+    document.onmousedown=function mouse() {
+        const box1 = document.getElementById('box');
+        box1.onmousedown=function (ev) {
+            let disX = ev.pageX;
+            let disY = ev.pageY;
+            console.log(disX);
+
+        }
+        box1.onmouseup=function (ev) {
+            let disX1 = ev.pageX;
+            let disY1 = ev.pageY;
+            console.log(disX1);
+        }
+        /*if(disX<disX1){
+            up();
+        }else{
+            down();
+        }
+        if(disY<disY1){
+            up();
+        }else{
+            down();
+        }*/
+
+
+    }
+
+
+</script>
+
+</body>
+</html>

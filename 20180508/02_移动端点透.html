@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        #box{
+            width:100px;
+            height:100px;
+            background:rgba(255,0,0,0.5);
+            position:absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+<a href="http://www.baidu.com">百度</a>
+<a href="http://www.taobao.com">点击2</a>
+<div id="box"></div>
+<script>
+    /*
+    * 当元素下正好是一个焦点元素的时候，
+    *           上面那个元素如果在300ms之内有touchstart，或touchend（隐藏或者漂移）的操作
+    *           那么就会触发下面焦点元素的行为。
+    *
+    * 这是因为：在300ms之内会把触发事件的坐标记录下来，所以才会触发下面焦点元素的行为。
+    *
+    *    问题 ：300ms、焦点元素
+    *    解决：1. 不使用焦点元素
+    *               如果使用焦点元素，会对网络爬虫有影响，对网站优化很好
+    *           缺点：不会被网络爬虫爬到
+    *
+    *          2. 超过300ms 再执行
+    *                隐藏或者漂移在300ms之后执行
+    *            缺点： 300ms用户是看得出来的，用户体验不佳
+    *
+    * (强烈推荐)3. 阻止焦点元素的默认行为
+    *                在document上阻止所有的默认行为
+    *                使用js去实现点击跳转
+    *
+       *
+    *
+    *
+    * */
+    const box=document.getElementById('box');
+    const as=Array.from(document.getElementsByTagName('a'));
+    /*box.addEventListener('touchend',function(){     //手指抬起时，让div消失
+        box.style.display='none';
+    });*/
+    document.addEventListener('touchend',function(ev){
+        ev.preventDefault();        //在document上阻止所有的默认行为
+    })
+    box.addEventListener('touchend',function(){     //手指抬起时，让div消失
+        box.style.display='none';
+    });
+    let arr=['http://www.baidu.com','http://www.taobao.com'];
+    as.forEach((e,i)=>{
+        e.addEventListener('touchend',function(){
+            console.log(e);
+            window.location.href=arr[i];        //将地址改为数组中的地址
+            console.log(arr[i]);
+        });
+    });
+
+</script>
+</body>
+</html>

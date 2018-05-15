@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            top:50px;
+            left:0;
+        }
+
+    </style>
+</head>
+<body>
+<button id="btn">回放</button>
+<div class="box"></div>
+</body>
+<script>
+    const btn=document.getElementById('btn');
+    const box=document.querySelector('.box');
+    //将每一步box移动的位置存一个数组;首先先把当前位置存入数组
+    let objX=[box.offsetLeft];
+    let objY=[box.offsetTop];
+    box.onmousedown=function(ev){
+        let disX=ev.pageX-box.offsetLeft;
+        let disY=ev.pageY-box.offsetTop;
+        //console.log(objX,objY);
+        document.onmousemove=function(ev){
+            let l=ev.pageX-disX;
+            let t=ev.pageY-disY;
+            //将每一次移动的值放入数组中
+            objX.push(l);
+            objY.push(t);
+            box.style.left=l+'px';
+            box.style.top=t+'px';
+        }
+        document.onmouseup=function(){
+            document.onmouseup=document.onmousemove=null;
+        }
+        return false;
+    }
+    btn.onclick=function(){
+        let timer=setInterval(function(){
+            //回放的时候，box移动的距离就是objX ，objY 数组的反相。
+            box.style.left=objX.pop()+'px';
+            box.style.top=objY.pop()+'px';
+            //console.log(0);
+            if(objX.length===0&&objY.length===0){//回来原来的位置后，我清除定时器
+                clearInterval(timer);
+            }
+        },16.7);
+
+    }
+</script>
+</html>

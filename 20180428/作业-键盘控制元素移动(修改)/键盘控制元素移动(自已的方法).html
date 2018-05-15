@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #img{
+            margin:0;
+            padding:0;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<img src="img/logo.png" id="img"/>
+<script>
+    /*
+    * 同时按两个按键，让img运动
+    *
+    * 采用发动机和方向盘分离的情况
+    *
+    * */
+    const img=document.getElementById('img');
+    let timer=null;
+    let obj={
+        37:false,
+        38:false,
+        39:false,
+        40:false
+    };
+    //发动机
+    timer=setInterval(fn,16.7);
+    function fn(){
+        if(obj[37]){
+            img.style.left=img.offsetLeft-5+'px';
+        }
+        if(obj[38]){
+            img.style.top=img.offsetTop-5+'px';
+        }
+        if(obj[39]){
+            img.style.left=img.offsetLeft+5+'px';
+        }
+        if(obj[40]){
+            img.style.top=img.offsetTop+5+'px';
+        }
+        console.log(1);
+    }
+    //方向盘
+    document.onkeydown=function(ev){
+        clearInterval(timer);
+        //按下哪个按键，obj对应的按键的值就变为true 所以同时按下也没有问题
+        obj[ev.keyCode]=true;
+        timer = setInterval(fn,16.7);
+        console.log(obj);
+    }
+    document.onkeyup=function(ev){
+        obj[ev.keyCode]=false;      //只要抬起，就将obj内对应的按键的值变成false
+        clearInterval(timer);
+    }
+
+</script>
+</body>
+</html>

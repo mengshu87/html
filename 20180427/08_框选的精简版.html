@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:0px;
+            height:0px;
+            background:rgba(0,0,0,0.2);
+            border:1px dashed #000;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+<body id="body">
+<script>
+    const body=document.getElementById('body');
+    document.onmousedown=function(ev){
+        //创建div
+        let div=document.createElement('div');
+        div.className='box';
+        body.appendChild(div);
+        //获取鼠标按下时的位置
+        let disX=ev.pageX;
+        let disY=ev.pageY;
+        document.onmousemove=function(ev){
+            //获取鼠标移动时的位置
+            let l=ev.pageX;
+            let t=ev.pageY;
+            div.style.left=Math.min(l,disX)+'px';
+            div.style.top=Math.min(t,disY)+'px';
+            div.style.width=Math.abs(l-disX)+'px';
+            div.style.height=Math.abs(t-disY)+'px';
+        }
+        document.onmouseup=function(){
+            div.remove();
+            document.onmouseup=document.onmousemove=null;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    *  移动端的事件，其实和PC拖拽类似也有三大事件
+    *  使用移动端的事件，一定都要用事件绑定来写(因为有些浏览器，模拟器可能不支持)
+    *  移动端的三大事件：
+    *   ontouchstart      手指按下
+    *   ontouchmove       手指移动
+    *   ontouchend        手指抬起
+    *
+    *   移动端的滑屏、点击、长按...都是基于这三大事件来完成的
+    *
+    *   注意：pc端的click要比移动端的事件慢，这个时间据记载是300ms;
+    *
+    *
+    * */
+    document.addEventListener('click',function(){
+        console.log('click');
+    })
+    document.addEventListener('touchstart',function(){
+        console.log('手指按下');
+    })
+    document.addEventListener('touchmove',function(){
+        console.log('手指移动');
+    })
+    document.addEventListener('touchend',function(){
+        console.log('手指抬起');
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        .container{
+            width:100%;
+            height:100%;
+            position:relative;
+        }
+        .sliders{
+            width:100%;
+            height:calc(100% - 18px);
+            position:relative;
+        }
+        .sliders .slider-item{
+            width:100%;
+            height:100%;
+            position:absolute;
+            top:0;
+            left:0;
+            background-size:cover;
+            transition: .3s linear;
+            opacity:0;
+        }
+        .sliders div.active{
+            opacity:1;
+        }
+        .nav-btns{
+            height:18px;
+            display:flex;
+        }
+        .nav-btns .nav-item{
+            height:100%;
+            display:block;
+            flex:1;
+            background-color:#ccc;
+            position:relative;
+        }
+        .nav-btns .nav-item + .nav-item {
+            margin-left: 2px;
+        }
+        .nav-btns .nav-item::after{
+            content:'';
+            display:block;
+            transition:200ms;
+            width:0;
+            height:100%;
+            background-color:pink;
+        }
+        .nav-btns .nav-item:hover::after{
+            width:100%;
+        }
+        .nav-btns .nav-item.active:hover::after {
+            width: 0;
+        }
+        .nav-btns .nav-item.active {
+            background-color: rgb(50, 172, 217);
+        }
+        .prev,.next{
+            width:50px;
+            height:92px;
+            position:absolute;
+            top:50%;
+            transform: translateY(-50%);
+            right:0;
+            cursor:pointer;
+        }
+        .prev{
+            background:rgba(0,0,0,0.2) url('img/prev.png') no-repeat center center;
+            left:0;
+        }
+        .prev:hover{
+            background:rgba(0,0,0,0.6) url('img/prev.png') no-repeat center center;;
+        }
+        .next{
+            background:rgba(0,0,0,0.2) url('img/next.png') no-repeat center center;
+        }
+        .next:hover{
+            background:rgba(0,0,0,0.6) url('img/next.png') no-repeat center center;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sliders">
+        <div class="slider-item active" style="background-image:url('img/1.jpg')"></div>
+        <div class="slider-item" style="background-image:url('img/2.jpg')"></div>
+        <div class="slider-item" style="background-image:url('img/3.jpg')"></div>
+        <div class="slider-item" style="background-image:url('img/4.jpg')"></div>
+        <div class="slider-item" style="background-image:url('img/5.jpg')"></div>
+    </div>
+    <div class="prev"></div>
+    <div class="next"></div>
+    <nav class="nav-btns">
+        <span class="nav-item active"></span>
+        <span class="nav-item"></span>
+        <span class="nav-item"></span>
+        <span class="nav-item"></span>
+        <span class="nav-item"></span>
+    </nav>
+</div>
+<script>
+    var sliders = document.querySelectorAll('.sliders div');
+    var btns = document.querySelectorAll('.nav-btns span');
+    var prev=document.querySelector('.prev');
+    var next=document.querySelector('.next');
+    var len=sliders.length;
+    var current=0;
+    //默认图片加载
+    defImg();
+    function defImg(){
+        btns[current].classList.add('active');
+        sliders[current].classList.add('active');
+    }
+    for(var i=0;i<len;i++){
+        btns[i].index=i;
+        btns[i].onclick=function(){
+            for(var i=0;i<len;i++){
+                sliders[i].classList.remove('active');
+                btns[i].classList.remove('active');
+            }
+            sliders[this.index].classList.add('active');
+            this.classList.add('active');
+            current=this.index;
+        }
+    }
+
+
+
+
+
+    next.onclick=function(){
+        current++;
+        if(current>sliders.length-1) current=0;
+        for(var i=0;i<len;i++){
+            sliders[i].classList.remove('active');
+            btns[i].classList.remove('active');
+        }
+        sliders[current].classList.add('active');
+        btns[current].classList.add('active');
+    };
+
+    prev.onclick=function(){
+        current--;
+        if(current<0) current=sliders.length-1;
+        for(var i=0;i<len;i++){
+            sliders[i].classList.remove('active');
+            btns[i].classList.remove('active');
+        }
+        sliders[current].classList.add('active');
+        btns[current].classList.add('active');
+    };
+</script>
+
+</body>
+</html>

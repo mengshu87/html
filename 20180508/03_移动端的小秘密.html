@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        #box1{
+            width:100px;
+            height:100px;
+            background:red;
+        }
+        #box2{
+            width:100px;
+            height:100px;
+            background:green;
+        }
+    </style>
+</head>
+<body>
+<div id="box1"></div>
+<div id="box2"></div>
+<script>
+    /*
+    * 在移动端中，touchmove,touchend都基于touchstart的
+    * 从start到end 是一套事件流程，如果没有触发end,那么是不会在别的元素是重新触发的，就算是在别的元素上move 或者end,
+    *  也都是第一个触发的元素的事件行为。
+    *
+    *
+    * */
+    const box1=document.getElementById('box1');
+    const box2=document.getElementById('box2');
+    box1.addEventListener('touchstart',function(){
+        console.log('box1按下');
+    })
+    box1.addEventListener('touchmove',function(){
+        console.log('box1移动');
+    })
+    box1.addEventListener('touchend',function(){
+        console.log('box1抬起');
+    })
+    box2.addEventListener('touchstart',function(){
+        console.log('box2按下');
+    })
+    box2.addEventListener('touchmove',function(){
+        console.log('box2移动');
+    })
+    box2.addEventListener('touchend',function(){
+        console.log('box2抬起');
+    })
+</script>
+</body>
+</html>
