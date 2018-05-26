@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    //将敏感词用 * 号代替
+    let str='中国共产党总书记习近平说:"法轮功是邪教"';
+    //console.log(str.replace(/共产党|习近平|法轮|邪/g,'*'));
+    let s=str.replace(/共产党|习近平|法轮|邪/g,function($0){    // $0  表示找到匹配的数据
+        let temp='';
+        for(let i=0;i<$0.length;i++){
+            temp+='*';
+        }
+        return temp;      //必须有返回值
+    })
+    document.write(s)
+    //console.log(s);
+
+</script>
+
+</body>
+</html>

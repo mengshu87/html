@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #contain {
+            width: 400px;
+            height: 400px;
+            border: 1px solid yellowgreen;
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 60px 30px 30px 30px;
+            box-sizing: border-box;
+        }
+
+        #contain div {
+            margin-bottom: 30px;
+        }
+
+        #contain div span {
+            font-size: 20px;
+            color: #555;
+            width: 80px;
+            display: inline-block;
+        }
+
+        #contain div input {
+            width: 200px;
+            height: 30px;
+            outline: none;
+            padding-left: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid yellowgreen;
+        }
+
+        #btn {
+            display: block;
+            outline: none;
+            width: 100px;
+            height: 40px;
+            border: 1px solid yellowgreen;
+            background-color: #fff;
+            border-radius: 10px;
+            font-size: 20px;
+            margin: 20px auto;
+            cursor:no-drop;
+            color: #555;
+
+        }
+
+        #contain .ok {
+            border-color: yellowgreen;
+        }
+
+        #contain .error {
+            border-color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div id="contain">
+    <div id="qq">
+        <span>QQ：</span>
+        <input type="text" name="qq" placeholder="请输入QQ">
+    </div>
+    <div id="email">
+        <span>Email：</span>
+        <input type="text" name="email" placeholder="请输入邮箱">
+    </div>
+    <div id="mobile">
+        <span>Mobile：</span>
+        <input type="text" name="phone" placeholder="请输入手机号码">
+    </div>
+    <div id="date">
+        <span>Date：</span>
+        <input type="text" name="birth" placeholder="请输入生日" value="2018-02-28">
+    </div>
+
+    <p><input type="submit" value="注册" id="btn"></p>
+
+</div>
+<script>
+    const contain=document.getElementById('contain');
+    const qq=document.getElementById('qq');
+    const email=document.getElementById('email');
+    const mobile=document.getElementById('mobile');
+    const date=document.getElementById('date');
+    const btn=document.getElementById('btn');
+    //设置当前都是没有验证通过的状态。
+    let qq_state=false;
+    let email_state=false;
+    let mobile_state=false;
+    let date_state=false;
+
+    const qqInput=qq.querySelectorAll('input')[0];
+    qqInput.onkeyup=function(){
+        qqFn();
+        //console.log(qq_state);
+    }
+    const emailInput=email.querySelectorAll('input')[0];
+    email.onkeyup=function(){
+        emailFn();
+        //console.log(email_state);
+    }
+    const mobileInput=mobile.querySelectorAll('input')[0];
+    mobile.onkeyup=function(){
+        mobileFn();
+        //console.log(mobile_state);
+    }
+    const dateInput=date.querySelectorAll('input')[0];
+    date.onkeyup=function(){
+        dateFn();
+        //console.log(date_state);
+    }
+    /*
+    * QQ验证的规则:
+         开头不能为0
+         整个都是数字
+         最小5位，最多12位
+     */
+    function qqFn(){
+        let val=qqInput.value;
+        let s=/^[1-9]\d{4,11}$/g.test(val);
+        if(s){
+            qqInput.className='ok';
+            qq_state=true;
+
+        }else{
+            qqInput.className='error';
+            qq_state=false;
+        }
+        submit();
+
+    }
+    /*邮箱验证的规则：6~18个字符，可使用字母、数字、下划线，需以字母开头
+    */
+    function emailFn(){
+        let val=emailInput.value;
+        let s=/^[A-Za-z]\w{5,17}@[0-9a-pr-z]{2,8}(\.com|\.cn|\.net){1,2}$/g.test(val);
+        //console.log(s);
+        let h=/^[1-9]\d{4,11}@qq(\.com|\.cn|\.net){1,2}$/g.test(val);
+        if(s||h){
+            emailInput.className='ok';
+            email_state=true;
+        }else{
+            emailInput.className='error';
+            email_state=false;
+        }
+        submit();
+    }
+    /*手机号验证的规则：
+        1.第一位必须是1
+        2.第二位不能是2，6
+        3.必须是11位
+    * */
+    function mobileFn(){
+        let val=mobileInput.value;
+        let str=/^1[1,3-5,7-9]\d{9}$/g.test(val);
+        if(str){
+            mobileInput.className='ok';
+            mobile_state=true;
+        }else{
+            mobileInput.className='error';
+            mobile_state=false;
+        }
+        submit();
+    }
+    /*日期验证的规则：
+        1.不能输入当前日期之后的日期
+        2.能正确知道以前的每个月是多少天
+    * */
+    function dateFn(){
+        let val=dateInput.value;
+        let ss=/^([12][0-9]{3})\D+([0][1-9]|[1][1-2])\D+([0][1-9]|[12][0-9]|[3][0-1])$/g.test(val);
+        if(ss){
+            let s=val.replace(/^([12][0-9]{3})\D+([0][1-9]|[1][1-2])\D+([0][1-9]|[12][0-9]|[3][0-1])$/g,function($0,$1,$2,$3){
+                return $1+':'+$2+':'+$3;
+            });
+            s=s.split(':');
+            //console.log(s);
+            let Y=s[0]*1;
+            let M=s[1]*1;
+            let D=s[2]*1;
+            //设置输入的时间
+            let d2=new Date();
+            d2.setFullYear(Y);  //设置年
+            d2.setMonth(M);     //设置月
+            d2.setDate(0);      //设置月的最后一天。
+            console.log(d2.getDate());
+            //比较
+            Y=tDou(Y);
+            M=tDou(M);
+            D=tDou(D);
+            let T=(Y+M+D)*1;
+            //获取本地的时间
+            let d3=new Date();
+            let Year=tDou(d3.getFullYear());
+            let Month=tDou(d3.getMonth()+1);
+            let Day=tDou(d3.getDate());
+            console.log(Month);
+            let nowT=(Year+Month+Day)*1;
+            console.log(T,nowT);
+            console.log(T-nowT);
+            if(T>nowT|| D>d2.getDate()){
+                dateInput.className='error';
+                date_state=false;
+            }else{
+                dateInput.className='ok';
+                date_state=true;
+            }
+        }else{
+            dateInput.className='error';
+            date_state=false;
+        }
+        submit();
+    }
+    function submit(){
+        if(qq_state && email_state && mobile_state && date_state){
+            btn.style.cursor='pointer';
+        }else{
+            btn.style.cursor='no-drop';
+        }
+    }
+    function tDou(n){
+        return n<10?'0'+n:''+n
+    }
+</script>
+
+</body>
+</html>

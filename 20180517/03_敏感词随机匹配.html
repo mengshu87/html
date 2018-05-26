@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" value="" id="text"/>
+<ul id="ul"></ul>
+<script>
+
+    let arr = ['艹','干你','靠','你妹','你大爷','金三胖','kao'];
+    const text=document.querySelector('#text');
+    const ul=document.querySelector('#ul');
+    text.focus();
+    /*text.onkeyup=function(ev){
+        if(ev.keyCode===13){
+            let val=text.value;
+            let str=arr.join('|');          //将数组转成字符串，并用|分割
+            //console.log(str);
+            let ze = new RegExp(str,'gi');      //将str 再转成正则
+            //console.log(re);
+            let s=val.replace(ze,function($0){
+                let temp='';
+                for(let i=0;i<$0.length;i++){
+                    temp+='*';
+                }
+                return temp;
+            });
+            ul.innerHTML+=`<li>${s}</li>`;
+            text.value ='';
+        }
+    }*/
+    text.onkeyup=function(ev){
+        if(ev.keyCode===13){
+            let val=text.value;
+            let str=arr.join('|');          //将数组转成字符串，并用|分割
+            //console.log(str);
+            let ze = new RegExp(str,'gi');      //将str 再转成正则
+            //console.log(re);
+            let s=val.replace(ze,function($0){
+                let temp='';
+                let arr=['#','*','%'];
+                for(let i=0;i<$0.length;i++){
+                    temp+=arr[Math.floor(Math.random()*arr.length)];  //取数组中的随机
+                }
+                return temp;
+            });
+            ul.innerHTML+=`<li>${s}</li>`;
+            text.value ='';
+        }
+    }
+
+
+</script>
+</body>
+</html>
