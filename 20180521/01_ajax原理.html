@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 内容在helloworld   public   下面-->
+
+
+
+用户名:<input type="text" name="name" id="user"/>
+<script>
+    user.onbluer=function(){
+        let ajax=new XMLHttpRequest();      //1.有个电话，就是选建一个ajax
+        //2.拨号  ajax.open('get',接口（url）,true)   第一个参数是以什么方式发送（get 或 post），
+        //                                            第二个参数是url
+        //                                           第三个参数是同步还是异步 默认为true 异步
+        ajax.open('get','/get?name='+user.value,true);
+        ajax.send();                                    //3.发送电话号码
+        ajax.onload=function(data){                     //4.等待的过程
+            console.log(ajax.responseText(data));       //5.通话
+        }
+    }
+</script>
+</body>
+</html>

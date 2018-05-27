@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+用户名：<input type="text" id="user"/>
+<script>
+    const user=document.getElementById('user');
+    user.onblur=function(){
+        const ajax=new XMLHttpRequest();
+        ajax.open('get','/get?name='+user.value,true);
+        ajax.send();
+        ajax.onload=function(){
+            console.log(ajax.responseText);
+        }
+    }
+</script>
+</body>
+</html>

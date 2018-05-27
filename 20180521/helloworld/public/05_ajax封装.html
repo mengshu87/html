@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+用户名:<input type="text" id="user"/>
+<script>
+    const user=document.getElementById('user');
+    user.onblur=function(json){
+        ajax({
+            url:'',
+            data:{
+                name:user.value
+            },
+            success:function(){},
+        });
+    }
+    function ajax(json){
+        //先设置一个默认  ，如果设置了就走设置，没有设置就走默认
+        json.opt={
+            url:'',
+            success:function(){},
+            fail:function(){},
+            methods:'get',
+            data:{}
+        }
+        Object.assign(json.opt,json); //浅拷贝
+        /*IE不支持上面的浅拷贝，可以用for ..in 代替
+        for(let attr in json){
+            json.opt[attr]=json[attr];
+        }*/
+        //把对象转成字符串
+        let arr=[];
+        for(let attr in json.opt.data){
+            arr.push(attr + '='+ encodeURI(json.opt.data[attr]));
+        }
+        let ajax=new XMLHttpRequest();      //创建ajax
+        if(json.opt.methods.toLowerCase()==='get'){
+            ajax.open('get',json.opt.url+'?'+arr.join('&'),true);
+            ajax.send();
+        }else if(json.opt.methods.toLowerCase()==='post'){
+            ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            ajax.open('post',json.opt.url,true);
+            ajax.send(arr.join('&'));
+        }
+        /*ajax.onload=function(){
+            json.opt.success(ajax.responseText);
+        }*/
+        ajax.onreadystatechange=function(){     //等待响应的过程
+            if(ajax.readyState==4){     //说明请求完成
+                if(ajax.status>=200 && ajax.status <=207 ||ajax.status==302){
+                    json.opt.success(ajax.responseText);        //表示请求成功
+                }else{
+                    json.opt.fail(ajax.status);     //表示请求失败
+                }
+            }
+        }
+        ajax.onreadystatechange = function(){ //等待
+            if(ajax.readyState == 4){ //4说明请求完成
+                if(ajax.status >= 200 && ajax.status <= 207 || ajax.status==302||ajax.status==304){
+                    json.opt.success(ajax.responseText);
+                }else{
+                    json.opt.fail(ajax.status);
+                }
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

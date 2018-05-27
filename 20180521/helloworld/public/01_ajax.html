@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    AJAX: Aysnchronous JavaScript And XML
+          异步js 和 XML
+          是前后端数据交互的一种技术，为的是拿到后台的数据
+          别的语言都是同步的，js是异步的
+          不是新技术，是由老技术级合成的
+          由google搜索引擎推出来的
+
+          需要把json数据变成js能使用的数据--->转成对象或是数组
+
+    使用ajax的优点：
+         减轻服务器的压力，节约空间和宽带租用成本
+         无刷新就能获取数据，优化用户的体验
+
+       XML数据格式：
+            长得像html 但xml可以自定义元素
+            需要在服务器上操作
+
+    在以前的form表格中，
+     <form action="/get" method="GET">
+         用户名：<input type="text" name="user" id="user"/>
+         密码：<input type="password" name="pass" id="pass"/>
+         <input type="submit" value="提交"/>
+     </form>
+    使用ajax，需要-
+      1.接口：
+        /get
+        /post
+      2.请求方式：
+        method
+           get:
+           post
+      3.字段名
+            name  || pass  前后端要统一，一般后台给提供
+
+
+     现在的ajax
+     user.onblur=function(){
+         const ajax=new XMLHttpRequest();
+         ajax.open('get','/get?name='+user.value,true);
+         ajax.send();
+         ajax.onload=function(){
+            console.log(ajax.responseText);
+         }
+     }
+     1.原理（ajax的交互原理）
+         1>创建ajax（有个电话）
+           const ajax=new XMLHttpRequest();
+         2>拨号
+           ajax.open('get',url,true) 第一个参数是以什么方式发送（get 或 post），第二个参数是url，第三个参数是同步还是异步 默认为true 异步
+         3>发送号码
+           ajax.send();
+         4.等待相应
+           ajax.onload=function(){}
+         5.通话
+            ajax.responseText
+     2.如果要使用ajax
+        1>要接口
+        2>要字段----->
+        3>请求的方式
+        4>把填写的数据运行一下     ******
+
+     3.get方式
+         是通过url的方式给后端传输的数据
+         相对来说不安全
+         体积：比较小    ？后面的字段的个数是有限制的
+         /get?user=shen&pass=123
+
+         get方式在提交的时候会有一些小问题
+           在IE中，如果是中方的用户名，会出现错误 所以要通过使用URI编码
+                   中文转URI码---> encodeURI('中文');
+                   URI转中文  ---> decodeURI('%E8%AF%97')
+
+
+     4.post方式
+         相对来说安全
+         一般常用在用户信息上、上传（传输一些大体积的文件）后端会去做限制
+
+     ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+         1>open('post','接口'),不需要写？后面的数据
+         2> ?后面的数据要放到send中
+         3> 请求数据头 ajax.setRequestHeader('Content-type','application/x-www-form-urlencoded');  要放到send前面
+         4> 在send之前，要告诉服务器，当前的数据格式是什么样的。
+
+    5、onreadystatechange
+
+         5个阶段（0-4） -> 1-4
+
+         如果要监听1，那么要把onreadystatechange放到send之前
+
+    6.http状态码
+         onreadystatechange
+
+         5个阶段（0-4） -> 1-4
+
+         ajax.readyState
+
+         如果要监听1，那么要把onreadystatechange放到send之前
+                1,2,3,4,5,6开头的编码
+
+                1开头，消息类
+
+                200   200-207成功
+
+                304,302 重定向  302.304也算成功
+
+                404  请求错误
+
+                5-6  服务器错误
+
+
+
+     */
+</script>
+</body>
+</html>

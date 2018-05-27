@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+用户名：<input type="text" id="user"/>
+<script>
+    const user=document.getElementById('user');
+    user.onblur=function(){
+        const ajax=new XMLHttpRequest();
+        ajax.open('post','/post');
+        ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');//请求数据头
+        ajax.send('user='+user.value);  //通过服务器发送的方式传输数据
+        ajax.onload=function(){
+            console.log(ajax.responseText);
+        }
+    }
+</script>
+</body>
+</html>
