@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<button id="btn">点击生成数据</button>
+<ul id="ul"></ul>
+<script>
+    /*
+     IE10-11  textContent
+     IE9 text
+     chrome innerHTML | textContent
+
+     解决:
+     1.判断内核来解决
+     2.用对象存数据
+     */
+    var html = '';
+    btn.onclick = function() {
+        var ajax = new XMLHttpRequest;
+        ajax.open('get', 'data.xml');
+        ajax.send();
+        ajax.onload = function () {
+            var xml = ajax.responseXML;
+            console.log(xml);
+
+        }
+    }
+
+
+</script>
+</body>
+</html>

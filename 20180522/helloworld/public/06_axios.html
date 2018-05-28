@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="text" id="t">
+<script src="axios.js"></script>
+<script>
+    /*
+      axios 是一个基于 promise 的 HTTP 库
+
+    */
+    /*t.onblur=function(){
+        let pp=new　Promise(function(resolve,reject){
+            let ajax=new XMLHttpRequest();
+            ajax.open('get','/get?name='+t.value,true);
+            ajax.send();
+            ajax.onload=function(){
+             resolve(ajax.responseText);
+            }
+            //resolve(ajax.responseText);
+        });
+        pp.then(function(resolve){
+            console.log(resolve);
+        }).then(function(){
+            alert(1);
+        });
+        alert(2);
+    }*/
+
+    /*t.onblur = function() {       //get 方式
+        axios.get('/get?name=' + this.value)
+        .then((data)=>data.data)
+        .then((data)=>{
+            console.log(data);
+        })
+    }*/
+    t.onblur=function(){        //post 方式
+        axios.post('/post',{name:t.value}).then(data=>data.data).then(rep=>console.log(rep));
+    }
+</script>
+</body>
+</html>
