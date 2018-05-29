@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="H">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="t">
+<ul id="ul"></ul>
+<script>
+    /*
+    在工作时：
+         1.要接口
+         2.要字段---->一定要知道每个字段的意思
+         3.要亲自在浏览器上测试接口接口是不是通的
+         4.要判断是ajax 请求还是jsonp 请求
+    * */
+    const H=document.getElementById('H');
+    const t=document.getElementById('t');
+    t.onkeyup=function(){       //在输入的时候就要去请求数据
+        let oS=document.createElement('script');
+        oS.src='https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+t.value+'&cb=fn';
+        H.appendChild(oS);
+        oS.remove();        //用完数据后要记得删除
+    }
+    function fn(data){          //前面定义一个函数来接收后端数据
+        console.log(data);
+        let html='';
+        data.s.forEach(e=>{
+            html+=`<li>${e}</li>`
+        })
+        ul.innerHTML=html;
+
+    }
+</script>
+</body>
+</html>

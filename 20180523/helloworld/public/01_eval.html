@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let s='[1,2,3,4]';
+    let ss='{name:1}';
+    //json 转对象或数组
+    //console.log(JSON.parse(s));           //[1,2,3,4]
+    //console.log(JSON.parse(ss));//------会报错
+    //数组或对象转成json
+    //console.log(JSON.stringify(s));     //"[1,2,3,4]"
+    //console.log(JSON.stringify(ss));   //"{name:\"momo\"}"
+    //对于不标准json转对象或数组
+    //console.log(eval('('+s+')'));       //  [1, 2, 3, 4]
+    //console.log(eval('('+ss+')'));      //  {name: "momo"}
+
+    //也可以使用new Function 来完成不标准json格式转成对象
+    let s4=(new Function('','return'+ss))();
+    console.log(s4);            //{name: 1}
+
+    //标准的json数据格式:'{"key":"value"}' 、'{"key":number}'
+    //非标准的json数据格式： key值不加引号的    这时候就得eval 来操作转成标准格式
+    //对于低版本浏览器（IE9 以下）就要使用eval 或者引入json2.js 来转成标准格式。
+
+
+
+
+
+</script>
+</body>
+</html>

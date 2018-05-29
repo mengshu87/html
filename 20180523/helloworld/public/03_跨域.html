@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="t">
+<script>
+    /*
+         跨域(跨源)
+            字面上超出某个范围
+
+         源:
+             域名:www.baidu.com,为ip的别名 119.75.217.109
+             端口:类似于不同店铺
+             协议:http/https,ftp,file..
+
+         同源策略:
+             同源策略（Same origin policy）是一种约定，
+             它是浏览器最核心也是最基本的安全功能，
+             如果缺少了同源策略，
+             则浏览器的正常功能可能都会受到影响。
+             可以说Web是构建在同源策略基础之上的，
+             浏览器只是针对同源策略的一种实现。
+
+         同源:
+            同域名、同端口、同协议
+         跨源:
+            不同域名、不同端口、不同协议
+
+        解决跨域的方案
+           1.通过高版本的XMLHttpRequest + 后端设置请求头权限 header('Access-Control-Allow-Origin:*');
+             优点：
+                一套ajax请求，既能够完成ajax请求，也能完成跨域的请求。
+             缺点：
+                低版本用不了
+          2.服务器代理
+              原理： a能访问b ,b能访问c ,就等同与a能访问c
+                   （a 和 b 是同源的）
+                   a：前面请求
+                   b: 是同源下的后端文件
+                   c: 第三方数据
+
+           缺点：
+              如果第三方改了，那么你就被动的一起改了。
+
+
+
+    * */
+    t.onblur=function(){
+        let ajax=new XMLHttpRequest();
+        //ajax.open('get','http://www.kaola.com/getSuggestKeyword.html?query=猫&size=10');//这样就跨域了---外网的跨域。
+        //ajax.open('get','/get?name='+t.value+'&sj='+Date.now());      //这是本地的get文件，所以没有跨域
+        //ajax.open('get','http://localhost:8080/kuayu?name='+t.value+'&sj='+Date.now());
+        ajax.open('get','/ymjz');
+        ajax.send();
+        ajax.onload=function(){
+            console.log(ajax.responseText);
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

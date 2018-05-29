@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="h">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+     jsonp: json+padding(内填充)
+
+        fn(数据);
+
+         function fn(a){
+            console.log(a);
+         }
+
+        核心：
+           1.后端返回数据的时候必须为函数名+括号的形式并且把数据放到括号中
+           2.前端需要定义一个全局的函数去接收数据
+
+        通俗的说：
+            前端定义一个全局函数给后端调用
+
+        当需要数据的时候，动态创建script标签，通过url的方式去访问后端script标签就能解析js,所以等同于函数调用
+
+        动态创建script是异步，静态的script类似于走同步
+
+        注意：接口的数据，用完之后一定要记住删除，可以拿到数据之后就删除，也可以使用数据后再删除
+
+         优点:
+         兼容非常好
+
+        script 标签可以直接解析js
+
+
+        jsonp 和ajax的获取的数据的区别
+           ajax的数据是没有函数名+小括号的
+           jsonp的数据是函数名+括号的
+
+           jsonp 只有get 没有post
+           ajax的数据jsonp 一定用不了，而jsonp的数据ajax有可能能用(可以用正则给截取)
+
+     ajax和jsonp都有一个致命的问题:
+     不能使用前进和后退。
+
+
+
+     */
+    /*window.onload=function(){
+        let oS=document.createElement('script');
+        oS.src='http://localhost/data.js';
+        h.appendChild(oS);
+    }*/
+</script>
+</body>
+</html>
