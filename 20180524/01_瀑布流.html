@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background:skyblue;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .pic{
+            width: 236px;
+            box-shadow:0 1px 3px rgba(0,0,0,.3);
+            overflow:hidden;
+            margin-top:10px;
+        }
+        img{
+            width:236px;
+            border: none;
+            display: block;
+        }
+        ul{
+            list-style: none;
+            position: relative;
+            margin: 0 auto;
+            border:1px solid #000;
+            /* width:1050px; */
+            /* overflow: hidden; */
+        }
+        li{
+            position: absolute;
+            /* border: 1px solid #ccc; */
+            /* float: left; */
+            /* margin: 8px; */
+            width:236px;
+            transition: 500ms;
+        }
+        #loading{
+            height: 50px;
+            position: fixed;
+            bottom:0;
+            background: #fff;
+            width:100%;
+            transition: 500ms;
+        }
+        #loading img{
+            width:80px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul">
+    <!--<li>
+        <div class="pic">
+          <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+        </div>
+        <div class="pic">
+          <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+        </div>
+        <div class="pic">
+              <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+        </div>
+    </li>-->
+</ul>
+<div id="loading">
+    <img height="50" src="1.gif" >
+</div>
+<script src="jsonp.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    //获取元素
+    const ul=document.getElementById('ul');
+    const loading=document.getElementById('loading');
+    const iw=document.documentElement.clientWidth; //获得屏幕的宽度
+    const picW=236;     //一张图片的宽度
+    const marginL=10;   //两张图片的间距
+    const lisW=picW+marginL;       //图片+间距=一个图片的总宽度
+    const len=Math.floor((iw-marginL)/lisW);        //一张屏幕可以放多个张图片  向下取整
+    //console.log(len);
+    //创建数组，用来存放图片的坐标
+    let arrL=[];    //用来存放left坐标
+    let arrT=[];    //用来存放top坐标
+    for(let i=0;i<len;i++){
+        arrL.push(lisW*i);      //先将第一排的每张图片的位置放到数组中。
+        arrT.push(0);
+    }
+    //console.log(arrL,arrT);
+    //动态获取数据
+    let num=0;      //num 表示每加载一张图就让它+1;
+    let url='http://www.wookmark.com/api/json/popular';
+    fetchJsonp(url,{jsonpCallback:'callback'}).then(res=>res.json())
+    .then(res=>{
+        console.log(res);
+        let html='';
+        res.forEach(e=>{
+            let img=new Image();
+            img.src=e.preview;
+            img.onload=function(){      //加载成功的图片放到页面中
+                num++;
+                let index=getMinIndex(arrT);
+                html+=`<li style="left:${arrL[index]}px;top:${arrT[index]}px;">
+                            <div class="pic">
+                                <img style="${picW}px" src="${e.preview}">
+                            </div>
+                        </li>
+                        `;
+                //图片的容器的宽度为236px ,通过res就能查看到图片的实际宽高，所以可以记算出图片的高度
+                let picH= (picW/e.width)*e.height;
+                console.log(picH);
+                arrT[index]+=(picH+marginL);        //将加载成功的图片的高度添加到数组中。
+                if(num===50){       //num==50 说明图片加载完成了，就将图片添加到页面中
+                    ul.innerHTML=html;
+                }
+            }
+            img.onerror=function(){     //如果图片加载失败，也得让num++
+                num++;
+                if(num===50){
+                    ul.innerHTML=html;
+                }
+            }
+
+        })
+
+    });
+    //获取数组中，最小的值的索引
+    function getMinIndex(arr){
+        return arr.findIndex(e=>e==Math.min(...arr));
+    }
+
+</script>
+</body>
+</html>
