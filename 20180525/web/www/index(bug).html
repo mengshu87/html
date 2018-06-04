@@ -1,0 +1,242 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="nArea">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="text"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="submit" class="inputs" value=""/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+            <!--<div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>-->
+        </div>
+        <div class="page" id="page">
+           <!-- <a href="#" class="active">1</a>-->
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const div1=document.getElementById('div1');
+    const page=document.getElementById('page');
+    const submit=document.getElementById('submit');
+    const text=document.getElementById('text');
+    const pageNum=document.getElementById('page');
+
+    //点击进来，要记得先加载一下后台的数据
+    async function getWb(num){
+        let res=await fetch('/api/weibo?act=get&page='+num);
+        return await res.json();
+    }
+
+    //渲染数据  生成页面
+    getWb(1).then(res=>{
+        //console.log(res);
+        res.forEach(e=>{
+            div1.appendChild(render(e.content,e.time,e.id,e.like,e.dislike));
+            //console.log(e);
+        })
+    })
+    //点击添加数据
+    submit.addEventListener('click',function(){
+        let val=text.value;
+        //rander(val);
+        setWb(val).then(res=>{
+            //console.log(res);
+            if(res.code===0){
+                div1.innerHTML='';      //页面清空
+                getWb(1).then(res=>{        //强制跳转到第一页
+                    res.forEach(e=>{
+                        div1.appendChild(render(e.content,e.time,e.id,e.like,e.dislike));
+                    })
+                });
+                const pageAs=pageNum.getElementsByTagName('a');
+                for(let i=0;i<pageAs.length;i++){
+                    pageAs[i].className='';
+                }
+                pageAs[0].className='active';
+                text.value='';
+            }
+        });
+    })
+
+    //将前台数据发送给后台
+    async function setWb(val){
+        let res=await fetch('/api/weibo?act=add&content='+val);
+        return await res.json();
+    }
+    //渲染数据   val 是输入的值 time 是后台返回的时间
+    function render(val,time,id,like=0,dislike=0){
+        let date=new Date(time);        //将服务器的后台时间传入现在的时间
+        //console.log(date);              //通过传入的时间来获具体的时分秒   这样 比通过毫秒数来计算时间要方便很多
+        let Year=date.getFullYear();
+        let Month=date.getMonth()+1;        //获取月份的时候记得要+1
+        let Day=date.getDate();
+        let iH=date.getHours();
+        let iM=date.getMinutes();
+        let iS=date.getSeconds();
+        let str=Year+'-'+tDou(Month)+'-'+tDou(Day)+' '+tDou(iH)+':'+tDou(iM)+':'+tDou(iS);
+        //动态创建数据
+        let div=document.createElement('div');
+        div.className='reply';
+        div.dataset.id=id;
+        div.innerHTML=`<p class="replyContent">${val}</p>
+                       <p class="operation">
+                            <span class="replyTime">${str}</span>
+                            <span class="handle">
+                                <a href="javascript:;" class="top">${like}</a>
+                                <a href="javascript:;" class="down_icon">${dislike}</a>
+                                <a href="javascript:;" class="cut">删除</a>
+                            </span>
+                       </p>`;
+        delFn();            //删除的页面
+        zanFn();           //赞的页面
+        caiFn();            //踩的页面
+        return div;
+    }
+    //将一位数转成两位数
+    function tDou(n){
+        return n<10?'0'+n :''+n;
+    }
+
+    //从后台获取页面的数据
+    async function getPage(pNum){
+        let res=await fetch('/api/weibo?act=get_page_count&page='+pNum);
+        return await res.json();
+    }
+    getPage().then(res=>{
+        let html='';
+        for(let i=1;i<=res.count;i++){
+            html+=`<a href="javascript:;">${i}</a>`
+         }
+        pageNum.innerHTML=html;
+        let pageAs=pageNum.getElementsByTagName('a');
+        pageAs[0].className='active';       //默认第一页处于选中的状态
+        //console.log(pageAs);
+        pageNum.onclick=function(ev){
+            for(let i=0;i<pageAs.length;i++){
+                pageAs[i].className='';
+            }
+            if(ev.target.tagName=='A'){
+                ev.target.className='active';
+                //点击渲染相对应的页面
+                //渲染数据  生成页面
+                getWb(ev.target.innerHTML).then(res=>{
+                    //console.log(123);
+
+                    div1.innerHTML='';
+                    res.forEach(e=>{
+                        div1.appendChild(render(e.content,e.time,e.id,e.like,e.dislike))
+                    })
+                    delFn();            //删除的页面
+                    zanFn();           //赞的页面
+                    caiFn();            //踩的页面
+                })
+            }
+
+        }
+    })
+
+    //点赞
+    async function getZan(id){
+        let res=await fetch('/api/weibo?act=like&id='+id);
+        return await res.json();
+    }
+    function zanFn(){
+        let top=Array.from(div1.getElementsByClassName('top'));
+        top.forEach(e=>{
+            e.onclick=function(){
+                console.log(1234);
+                let zanId=e.parentNode.parentNode.parentNode.dataset.id;
+                getZan(zanId).then(res=>{
+                    e.innerHTML=e.innerHTML *1 +1;
+                    const actNum=pageNum.querySelector('.active').innerHTML;
+                    //console.log(actNum);
+                    getWb(actNum).then(res=>{
+                        //console.log(res);
+                        res.forEach(e=>{
+                            render(e.content,e.time,e.id,e.like,e.dislike);
+                        })
+                        delFn();
+                        zanFn();
+                        caiFn();
+                    })
+                })
+            }
+        })
+
+    }
+    //点踩
+    async function getCai(id){
+        let res=await fetch('/api/weibo?act=dislike&id='+id);
+        return await res.json();
+    }
+    function caiFn(){
+         let down=Array.from(div1.getElementsByClassName('down_icon'));
+         down.forEach(e=>{
+             e.onclick=function(){
+                 let caiId=e.parentNode.parentNode.parentNode.dataset.id;
+                 getCai(caiId).then(res=>{
+                     e.innerHTML=e.innerHTML *1 +1;
+                     let actNum=pageNum.querySelector('.active').innerHTML;
+                     getWb(actNum).then(res=>{
+                         res.forEach(e=>{
+                            render(e.content,e.time,e.id,e.like,e.dislike);
+                         })
+                     })
+                 })
+             }
+         })
+     }
+
+    //获取div1页面下的所有的删除按钮
+    //删除
+    async function setDel(id){
+        let res=await fetch('/api/weibo?act=del&id='+id);
+        return await res.json();
+    }
+    //删除  从后台获取页面的数据
+    function delFn(){
+        let cut=Array.from(div1.getElementsByClassName('cut'));
+        cut.forEach(e=>{
+            e.onclick=function(){
+                let id=e.parentNode.parentNode.parentNode.dataset.id;
+                let pgNum=pageNum.querySelector('.active').innerHTML;
+                setDel(id).then(res=>{
+                    if(res.code ===0){
+                        getWb(pgNum).then(re=>{
+                            div1.innerHTML='';
+                            re.forEach(ee=>{
+                                div1.appendChild(render(ee.content,ee.time,ee.id,ee.like,ee.dislike));
+                            })
+
+                        })
+                    }
+                })
+            }
+        });
+    }
+
+
+</script>
+</html>

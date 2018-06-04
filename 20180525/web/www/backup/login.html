@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="Reddy.Huang"/>
+    <link rel="stylesheet" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/register.css">
+    <title>Title</title>
+    <style>
+        h2 {
+            display: none;
+        }
+        #info{
+          display: none;
+        }
+    </style>
+</head>
+<body>
+<h2 id="userInfo">欢迎回来,<span id="user"></span></h2>
+<div class="form-wrapper">
+    <div class="banner"></div>
+    <form id="form">
+        <div class="item-wrapper"><label for="username">登陆名</label><input type="text" name="username" id="username" value=""></div>
+        <div class="item-wrapper"><label for="password">密码</label><input type="password" name="password" id="password" value=""></div>
+        <input type="button" value="登陆" id="submit">
+        <input type="button" value="注册" id="register">
+    </form>
+    <p id="info" >请输入信息</p>
+</div>
+<script>
+    /*
+        async函数返回一个 Promise 对象，可以使用then方法添加回调函数。
+        当函数执行的时候，一旦遇到await就会先返回，
+        等到异步操作完成，再接着执行函数体内后面的语句。
+     */
+    const register=document.getElementById('register');
+    const uName=document.getElementById('username');
+    const uPass=document.getElementById('password');
+    const info=document.getElementById('info');
+    const submit=document.getElementById('submit');
+    //点击注册按钮
+    register.addEventListener('click',function(){
+        let uNameV=uName.value;
+        let uPassV=uPass.value;
+        reg(uNameV,uNameV).then(e=>{
+            if(e.code===0){     //注册成功
+                info.style.display='block';
+                info.innerHTML='注册成功！';
+                setTimeout(function(){      //一分钟后隐藏
+                    info.style.display=register.style.display='none';
+                },1000)
+            }else if(e.code===1){       //注册失败
+                info.style.display='block';
+                info.innerHTML='用户名已注册！';
+                setTimeout(function(){
+                    info.style.display='none';
+                },1000)
+            }
+            uName.value=uPass.value='';
+        })
+    })
+    //注册发送的数据
+    async function reg(uv,pv){
+        let res=await fetch('/api/user/register',{
+            method:'post',
+            body:new URLSearchParams(`username=${uv}&password=${pv}`).toString(),
+            headers:{'Content-Type':'application/x-www-form-urlencoded'}
+        })
+        return await res.json();
+    }
+
+    //点击登录按钮
+    submit.addEventListener('click',function(){
+        login(uName.value,uPass.value).then(e=>{
+            if(e.code=='0'){
+                location.href='http://localhost:88/'
+            }else if(e.code=='-3'){
+                info.style.display='block';
+                info.innerHTML='用户名或密码错误！';
+                setTimeout(function(){
+                    info.style.display='none';
+                },1000);
+            }
+        })
+    })
+    //登录发送的数据
+    async function login(uv,pv){
+        let res=await fetch('/api/user/login',{
+            method:'post',
+            body:new URLSearchParams({username:uv,password:pv}).toString(),
+            headers:{'Content-Type':'application/x-www-form-urlencoded'}
+        })
+        return await res.json();
+    }
+</script>
+</body>
+</html>
