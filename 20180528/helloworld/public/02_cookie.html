@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+      cookie
+            起初是后端的技术。一般由后端进行设置。
+            前端使用一般是把它当做一个仓库
+            存一些用户的相关信息（加密）
+
+            用处：爱好搜索-->猜你喜欢
+
+        document.cookie='name=momo'   写入cookie
+        每个浏览器的cookie体积大小是不一样的。
+
+        document.cookie   读
+            以key=val; key=val 这样的方式，会把所有的cookie都打印出来
+            一个cookie与一个cookie之间是由（; 空格）来分割
+
+        生命周期：
+            只要关闭浏览器生命就结束了。、
+
+        还可以设置生命周期:
+        document.cookie = "key=val; expires=" + 设置的时间;
+
+             如果你要设置分钟(比如：设置15分钟)
+             new Date(+new Date + (60 * 1000) * 15)
+
+
+
+     * */
+    /*document.cookie = 'name=momo';
+    console.log(document.cookie);*/
+    /*let data=new Date();
+    data.setDate(data.getDate()+1000);
+    document.cookie='name=momo;expires='+data;          //设置生命周期
+    */
+    removeCookie('name','momo');
+
+
+    //封装cookie
+    //设置
+    function setCookie(key,val,time){
+        if(time){
+            let iDate=new Date;
+            iDate.setDate(iDate.getDate()+time)
+            document.cookie=key+'='+val+'; expires='+iDate;
+        }else{
+            document.cookie=key+'='+val;
+        }
+    }
+    //获取
+    function getCookie(key){
+        let str=document.cookie;
+        let arr=str.split('; ');
+        let offset=false;
+        for(let i=0;i<arr.length;i++){
+            let s=arr[i].split('=');
+            if(s[0]===key){
+                return s[1];
+            }
+        }
+        if(!offset) return null;
+    }
+    //删除
+    function removeCookie(key,val){
+        if(val){
+            setCookie(key,val,-1);
+        }else{
+            let v=getCookie(key);
+            setCookie(key,v,-1);
+        }
+    }
+
+
+
+</script>
+</body>
+</html>

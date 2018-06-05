@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div{
+            width:0%;
+            height: 3px;
+            background: skyblue;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<input type="file" id="f">
+<input type="button" value="上传" id="btn">
+<script>
+    /*
+       上传文件
+           需要通过file空间下的files[0]来获取上传的数据
+           需要通过file空间下的files[0]来获取上传的数据
+
+            progress  进步   onprogress 进展
+            ajax.upload.onprogress   监听上传的进度
+                ev.loaded:每次上传的大小
+                ev.total:要上传文件的总大小
+
+         FormData:
+            专门把数据设置为multipart/form-data
+
+            它下面只有append方法
+                (key,val)
+            如果有多个字段就继续append....
+
+
+
+    * */
+    const div=document.getElementById('div');
+    const f=document.getElementById('f');
+    const btn=document.getElementById('btn');
+    btn.onclick=function(){
+        let ajax=new XMLHttpRequest();
+        ajax.open('post','post_file.php');
+        ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        ajax.upload.onprogress=function(ev){
+            let scale=ev.loaded/ev.total;
+            div.style.width=scale*100+'%';
+            if(scale===1){
+                setTimeout(function(){
+                    div.style.opacity='0';
+                    document.documentElement.style.transition='1s';
+                    document.documentElement.style.backgroun='pink';
+                },1000);
+            }
+        }
+        let fd=new FormData
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ();
+        ajax.append('file',f.files[0]);
+        ajax.send(fd);
+        ajax.onload=function(){
+            console.log(ajax.responseText);
+        }
+    }
+</script>
+</body>
+</html>

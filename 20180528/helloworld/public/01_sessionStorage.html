@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+     sessionStorage:
+        存储的空间比较大，现在是每个域名（同域名）有5M 未来还会加
+
+        获取：sessionStorage.getItem('key')---->返回的是value;
+        设置：sessionStorage.setItem('key','value')
+        删除：sessionStorage.removeItem('key);
+        清空：sess下ionStorage.clear();
+    注意：
+        在存储数据的时候，value值默认会使用toString转一道
+        例如：{}-->[object,Object]
+    解决：
+        在传递进去的时候，用JSON.stringify转一下。
+
+        生命周期：
+           关闭页面就会消失
+
+        不支持onstorageg事件
+
+
+     */
+
+    let arr = [1,2,3,4];
+     btn.onclick = function(){
+         arr.push(5);
+         sessionStorage.setItem('key',JSON.stringify(arr));
+         sessionStorage.setItem('key2','1234');
+     }
+     arr = JSON.parse(sessionStorage.getItem('key')) || arr;
+     alert([1,2,3,4]);
+
+     localStorage.clear();//全部都清掉了
+</script>
+</body>
+</html>

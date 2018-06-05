@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            background: yellow;
+        }
+        #p{
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<button data-index="movie" class="active">电影</button>
+<button data-index="music">音乐</button>
+<button data-index="game">游戏</button>
+<button data-index="fushi">服饰</button>
+<p id="p">猜你喜欢</p>
+<ul id="ul"></ul>
+<script>
+    const p=document.getElementById('p');
+    const ul=document.getElementById('ul');
+    const btns=Array.from(document.querySelectorAll('button'));
+    let obj={
+        movie:['复仇者3','金刚狼','惊奇队长','西游记','三国演义','喜洋洋','铁巨人'],
+        music:['腾格尔-隐形的翅膀','猪八戒背媳妇-童话','不爱我拉倒','等你下课','小哥-爱情买卖'],
+        game:['WOW','LOL','炉石','植物大战僵尸','超级玛丽','王者荣耀','坦克大战','红警','罗马帝国'],
+        fushi:['四角裤子','破洞裤子','背带裤','霹雳手套','衬衣','露眼丝袜']
+    }
+    let btn=btns[0];//设置一个btn，用来存放当前点击的是哪一个。
+    if(getCookie('key')){       //如果有cookie,就让猜你喜欢打开，渲染数据
+        render(JSON.parse(getCookie('key')));
+        p.style.display='block';
+        btn.className='';
+    }else{                      //没有cookie,就让默认显示第一个电影
+        btn.className='active';
+        render('movie');
+    }
+    btns.forEach(e=>{
+        e.onclick=function(){  //点击btns,来形成对应的cookie, 点击哪个有哪个。
+            btn.className='';
+            this.className='active';
+            p.style.display='none';
+            let key = getCookie('key');     //用来存放你点击的cookie 你点击了，说明是你喜欢的
+            if(key){          //如果cookie,那么还要判断当前点击的哪个是否在cookie内，
+                let arr2=JSON.parse(key);       //获取现有的cookie，并转成数组格式。因为在cookie内存入的格式为json
+                if(!arr2.includes(e.dataset.index)){        //查看cookie中是否有你点击的，没有就存入数组中
+                    arr2.push(e.dataset.index);
+                    setCookie('key',JSON.stringify(arr2),1);
+                }
+            }else{                  //如果cookie中没有你当前点击的这个元素，那么就让他添加到cookie 中。
+                setCookie('key',JSON.stringify([e.dataset.index]),1);
+            }
+            render(e.dataset.index);            //渲染数据
+            btn=this;                           //而且还要让当前哪个就是选中的状态
+        }
+    })
+    function render(key){
+        let html='';
+        let arr;
+        if(Array.isArray(key)){            //渲染数据的时候，是通过 key值来渲染对应的数据的，所以要看一下他是不是数组，
+            arr=[];                         //如果是数组，就要把数组中的key值里的数组来展开，因为key本身也是一个数组。
+            key.forEach(e=>{
+                let cloneArr=obj[e].concat();       //key 值是一个数组，所以先将中的某一个元素给拆开来
+                //console.log(cloneArr);
+                let sj=cloneArr.sort((a,b)=>Math.random()-.5);      //取数组中的随机3个
+                sj.length=3;
+                arr.push(...sj);        //key对就的值也是一个数组，所以要再展开放到数组内。
+            })
+        }else{          //key值不是数组，那么就直接让他获取key所对就的值就可以。
+            arr=obj[key];
+        }
+        arr.forEach(e=>{
+            html += '<li>'+e+'</li>';
+        });
+        ul.innerHTML=html;
+    }
+    //封装cookie
+    //设置
+    function setCookie(key,val,time){
+        if(time){
+            let iDate=new Date;
+            iDate.setDate(iDate.getDate()+time)
+            document.cookie=key+'='+val+'; expires='+iDate;
+        }else{
+            document.cookie=key+'='+val;
+        }
+    }
+    //获取
+    function getCookie(key){
+        let str=document.cookie;
+        let arr=str.split('; ');
+        let offset=false;
+        for(let i=0;i<arr.length;i++){
+            let s=arr[i].split('=');
+            if(s[0]===key){
+                return s[1];
+            }
+        }
+        if(!offset) return null;
+    }
+    //删除
+    function removeCookie(key,val){
+        if(val){
+            setCookie(key,val,-1);
+        }else{
+            let v=getCookie(key);
+            setCookie(key,v,-1);
+        }
+    }
+
+    
+</script>
+</body>
+</html>
