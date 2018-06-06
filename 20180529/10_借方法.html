@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<script>
+    /*
+        借方法
+         1.查数据类型
+            Object.prototype.toString  [object Type]
+            Array.isArray()
+
+         2.类数组转数组
+         Array.prototype.slice
+
+         3.找最小或者最大
+         [1,2,3,4]
+         Math.min.apply(null,[1,2,3,4])
+    * */
+
+   /* Object.prototype.toStr=function(){
+     let s=Object.prototype.toString;
+     return s.call(this);
+     }
+     let obj={};
+     console.log(obj.toStr());           //[object Object]*/
+
+    //平时使用的方法，Array.from() 将类数组转成数组，就是通过这种方法来实现它们的内部转换的。
+/*
+    let lis=document.querySelectorAll('li');
+    let slice=Array.prototype.slice;
+    lis=slice.call(lis);
+    //console.log(lis);           //[li, li, li]
+    //lis.push(5);
+    //console.log(lis);           [li, li, li, 5]
+    console.log(lis.constructor===Array);           //true
+    console.dir(lis);
+    console.log(HTMLCollection.prototype == Array.prototype);
+
+*/
+
+    let arr2 = [1,2,3,4,5];
+    console.log( Math.min.apply([],arr2) );     //1
+</script>
+</body>
+</html>

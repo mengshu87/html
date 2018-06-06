@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            background: yellow;
+        }
+        div{
+            width:100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<button class="active">选项一</button>
+<button>选项二</button>
+<button>选项三</button>
+<div class="show">1111111</div>
+<div>222222222</div>
+<div>3333333333</div>
+<script>
+    function Tab(){
+        this.btns=document.getElementsByTagName('button');
+        this.divs=document.getElementsByTagName('div');
+    }
+    Tab.prototype.events=function(eventName){
+        let that = this;
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i][eventName]=function(){
+                console.log(this);      //点谁是谁
+                for(let j=0;j<that.btns.length;j++){
+                    that.btns[j].className='';
+                    that.divs[j].className='';
+                }
+                this.className='active';
+                that.divs[i].className='show';
+            }
+        }
+    }
+    let t = new Tab();          //new 一个实例化对象
+    t.events('onclick');
+
+</script>
+</body>
+</html>

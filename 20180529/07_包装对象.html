@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+     包装对象：
+        当你去调用简单类型的属性或者方法时系统默认会偷偷的把这个简单类型包装成对象类型，
+        去取某个属性或者方法   使用完之后，自动销毁
+
+     ***只有对象身上才能添加属性或方法
+
+    就算对象类型的简单类型中的length也是不可以写的，只可以读
+
+    * */
+
+//    let str='hehe';
+//    str.a=0;
+//    console.log(str.a);         //undefined;
+
+    let a = new String('1234');         //new 函数的运算符，专门用来运算函数的
+    //a.a = 1;
+    a.length=2;//就算对象类型的‘简单’类型中的length也是不可以写的，只可以读。
+
+    console.log(a.a);      //4
+</script>
+</body>
+</html>

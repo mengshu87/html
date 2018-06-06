@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            background: yellow;
+        }
+        div{
+            width:100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<section id="box">
+    <button class="active">选项一</button>
+    <button>选项二</button>
+    <button>选项三</button>
+    <div class="show">1111111</div>
+    <div>222222222</div>
+    <div>3333333333</div>
+</section>
+<script>
+    //先创建构造函数 把用到的数据都存入进去
+    //init 初始化的意思
+    function Tab(id){
+        this.box=document.querySelector('#'+id);
+        this.btns=document.querySelectorAll('button');
+        this.divs=document.querySelectorAll('div');
+        this.timer=null;
+        this.num=0;
+        this.init();
+    }
+    Tab.prototype.init=function(){
+        this.events('onclick')
+    }
+    Tab.prototype.events=function(eventName){
+        let that=this;
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i][eventName]=function(){
+                that.change(i);
+            }
+        }
+    }
+    Tab.prototype.change=function(index){
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i].className='';
+            this.divs[i].className='';
+        }
+        this.btns[index].className='active';
+        this.divs[index].className='show';
+    }
+    Tab.prototype.play=function(){
+        let that=this;
+        timer=setInterval(function(){       //在定时器内的this 都指向的是window
+            that.num++;
+            that.num%=that.btns.length;
+            that.change(that.num);
+        },1000);
+    }
+    let t=new Tab('box');
+    //t.init();选项卡切换
+    t.play();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+        constructor(构造函数)：
+            实例化对象的.constructor===实例化对象的构造函数
+
+                不是100%准确，容易被修改
+
+        因为对象与对象之间赋址了，constructor就会被修改。
+
+         解决:
+         在对象上加一个属性 constructor:Person，把指针指向Person,
+
+     */
+
+    function Person(name){
+        this.name=name;
+    }
+    let obj={
+        say:function(){
+            console.log(1);
+        },
+        constructor:Person          //把constructor指向了person
+    }
+    Person.prototype=obj;
+    let p=new Person;
+    console.log(p.constructor);    //Object() { [native code] }
+    //console.log(p.constructor);
+    console.log(obj.constructor);
+    console.dir(p.constructor);
+
+
+    /*function Person(name){
+        this.name = name;
+    }
+    let obj={
+        say:function(){
+            alert(1);
+        },
+        run:function(){
+            alert(2);
+        },
+
+        constructor:Person    //添加这句，p就能正确的指向他的构造函数。 //Person(name){
+                               //     this.name = name;
+                               // }
+
+    }
+    Person.prototype=obj;
+    let p=new Person;
+    console.log(p.constructor);     //指向的是Object() { [native code] }*/
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+        toString() 方法可把一个逻辑值转换为字符串，并返回结果。
+
+        toString()方法的原理：
+            就是借通过Object.prototype.toString()
+                    Array.prototype.toString()
+                    Function.Prototype.toSting() 来完成的。
+
+     Object.prototype.toString()方法返回一个代表该对象的字符串
+
+    * */
+    /*let arr=[1,2,3];
+    let toStr=Object.prototype.toString;
+    console.log(toStr.call(arr)==='[object Array]');*/
+    /*console.log(Array.prototype.toString=function(){
+        alert('呵呵,我就是把你改了');
+    })*/
+    Array.prototype.toString=function(){
+        alert('呵呵,我就是把你改了');
+    }
+    let arr=[1,2,3];
+    let obj = {};
+    let str = '';
+    let b = true;
+    console.log(typeof Array);          //function
+    console.log(Object.prototype.toString.call(b));    //[object Boolean]
+    console.log(Object.prototype.toString.call());     //[object Undefined]
+
+
+
+</script>
+</body>
+</html>
