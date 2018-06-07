@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width:100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+        #box2{
+            width:100px;
+            height: 100px;
+            background: yellow;
+            position: absolute;
+            top:0;
+            left:150px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<div id="box2"></div>
+<script>
+    /*class 的继承
+        class Drag2 extends Drag
+             继承中如果在constructor中要使用this
+             那么必须要写super() 而且constructor中要传入父类（Drag）中的参数，super 内也要传入Drag中的参数，否则会报错
+
+             注意:
+             this必须写在 super()的下面
+
+    */
+    class Drag{
+        constructor(id){
+            this.box=document.getElementById(id);
+            this.disX=this.disY=0;
+        }
+        init(){
+            this.down();
+        }
+        down(){
+            let that=this;
+            this.box.onmousedown=function(ev){
+                that.disX=ev.pageX-that.box.offsetLeft;
+                that.disY=ev.pageY-that.box.offsetTop;
+                document.onmousemove=function(ev){
+                    that.move(ev);
+                };
+                document.onmouseup=function(ev){
+                    that.up(ev);
+                };
+                return false;
+            };
+        }
+        move(ev){
+            this.box.style.left=ev.pageX-this.disX+'px';
+            this.box.style.top=ev.pageY-this.disY+'px';
+        }
+        up(ev){
+            document.onmousemove=document.onmouseup=null;
+        }
+    }
+    let d=new Drag('box');
+    d.init();
+
+
+    class Drag2 extends Drag {
+        constructor(id){
+            super(id);
+
+        }
+        move(ev){
+            let l = ev.pageX - this.disX;
+            if(l < 0){
+                l = 0;
+            }
+            this.box.style.left = l + 'px';
+            this.box.style.top = ev.pageY - this.disY + 'px';
+        }
+    }
+    let d2=new Drag2('box2','12');
+    d2.init();
+
+    /*
+     看一看Drag2有没有继承Drag
+     */
+    console.log(Object.getPrototypeOf(Drag2) === Drag);
+
+
+
+</script>
+</body>
+</html>

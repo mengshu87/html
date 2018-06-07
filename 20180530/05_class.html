@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+        class ES6中的内容
+
+        class  关键字  是面向对象中的一个类
+
+        function Person(){}  ===  class Person {}
+
+        class 静态方法和动态方法
+
+            动态方法：实例化对象上可以调用的方法
+
+            静态方法：构造函数上可以调用的方法
+                Array.form()
+                static + 方法名 = 静态方法
+
+        注意：
+                在写class 中的方法的时候，方法和方法之间***不能***加标点符号
+
+
+    * */
+
+    /*class Person{
+        constructor(name,age){
+            this.name=name,
+            this.age=age,
+            console.log(arguments);
+        }
+        static say(){       //静态方法
+            console.log(1);
+        }
+        say(){      //动态方法
+            console.log(2);
+        }
+    }
+
+    let p=new Person('momo',2);
+    //console.log(p);
+    p.say();
+    Person.say();*/
+
+
+    class Person{
+        constructor(name,age){
+            this.name=name,
+            this.age=age
+        }
+        static say(){       //静态方法
+            console.log(1);
+        }
+        say(){      //动态方法
+            console.log(2);
+        }
+    }
+
+    let p=new Person('momo',2);
+
+    class Person2 extends Person{
+        constructor(name,age,job){
+            super(name,age);
+            this.job=job;
+        }
+    }
+    let p2=new Person2('yiyi',2,'幼儿园');
+    console.log(p2);
+    //p2.say();
+</script>
+</body>
+</html>

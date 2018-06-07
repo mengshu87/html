@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="t">
+<input type="button" id="t2" value="按钮">
+<!--<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>-->
+
+<script>
+    /*
+    Object
+
+         Object.assign({},{}) 浅拷贝
+
+         Object.is() 2个值是否相等,可以判断2个NaN相等 Object.is(NaN,NaN)  //true    Object.is(-0,+0)  false
+
+         Object.getPrototypeOf(对象)
+             通过实例化对象去查看构造函数的原型。
+             如果参数不是对象，会被自动转为对象。
+             如果参数是undefined或null，它们无法转为对象，所以会报错。
+
+         Object.setPrototypeOf
+             用来设置一个对象的prototype对象，返回参数对象本身
+
+         Object.create
+            创建一个对象，这个对象可以克隆于另一个对象
+
+         getOwnPropertyNames(obj)
+            获取对象的可枚举（遍历）的key值名字返回一个数组
+
+         Object.getOwnPropertyDescriptors(obj)
+            返回指定对象所有自身属性（非继承属性）的描述对象
+
+         Object.keys()
+         把对象的key值放到一个数组中
+         Object.values()
+         把对象的value值放到一个数组中
+         Object.entries()
+         把对象的key,value值放到一个数组中
+
+         Object.defineproperty() 数据劫持
+             方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
+             enumerable:是否可枚举 布尔值
+             configurable:是否可删除
+             writable:是否可写
+             value:值
+             get:读的时候会进这个函数
+             set:设置的时候会进这个函数
+             注意:
+             写了value就不能用set和get了
+
+     */
+
+   /* class Person{
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+        }
+        say(){
+            console.log(123);
+        }
+    }
+    let p=new Person('momo',19);
+    console.log(p.say);
+    //console.log(Object.getPrototypeOf(p)===Person.prototype);       //true
+    Object.setPrototypeOf(p,{
+        add(){
+            console.log('add');
+        }
+    });
+   //console.log(p);
+    let PersonYX = Object.getPrototypeOf(p);
+    PersonYX.add = function(){
+        alert(321);
+    }
+    Object.setPrototypeOf(p,PersonYX);
+    console.log(PersonYX);
+    p.say();
+    p.add();
+*/
+
+    /*let obj = {
+         name:'123'
+     }
+     let me = Object.create(obj);  //create:创建一个对象，这个对象可以克隆于另一个对象
+     me.age = 12;
+     console.log(me.name);      //123*/
+
+   /* class Person{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        say(){
+            console.log(123);
+        }
+    }
+
+    let p = new Person('xx',12);
+
+    let p2 = Object.create(p);
+
+     p2.say = function(){
+         console.log(321);
+     }
+
+     console.log(p2.constructor);
+
+     Object.setPrototypeOf(p2,{name:'xcv'})
+
+     console.log(p2.name);  //xcv*/
+
+        /*
+        * getOwnPropertyNames(obj)
+         获取对象的可枚举（遍历）的key值名字返回一个数组*/
+    /*let obj = {
+         key:'123',
+         value:'321',
+         hh:'3214342',
+         say:function(){
+             console.log(234);
+         }
+     }
+    console.log(Object.getOwnPropertyNames(obj));        //["key", "value", "hh", "say"]*/
+
+   /* let lis = document.getElementsByTagName('li');
+
+    console.log(Object.getOwnPropertyDescriptors(lis));*/
+
+    let obj = {
+         name:'红娟',
+         age:8
+    }
+
+    let a = '123';
+    Object.defineProperty(obj,'job',{
+        get:function(){
+        return a;
+    },
+    set:function(newVal){
+        // a = newVal;
+        a = newVal;//newVal.replace(/\d+/g,'');
+        },
+        enumerable:true,
+        configurable:true,
+    });
+
+    obj.job = '宇宙超级高级无敌前端开发12312';
+
+    t.oninput = function(){
+        obj.job = this.value;
+
+        t2.value = a;
+        console.log(a);
+    }
+
+    let num = 0;
+    t2.onclick = function(){
+        a = ++num;
+        t2.value = t.value = obj.job;
+    }
+    console.log(obj.job);
+
+</script>
+</body>
+</html>
