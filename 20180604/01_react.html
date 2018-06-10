@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    react: 是一个 JavaScript 库
+    react 是数据驱动视图的    MVC（Model 数据   View 页面  Controller 控制器）
+            VUE 和angular 是MVVM (Model 数据   View 页面  View 页面 Model 数据 )
+
+    react是V层框架 -> 专门用于界面
+
+    react 是组件化开发   （以类为单件）
+     操作DOM是性能杀手,所以react就提出了一个虚拟DOM（Virtual DOM）
+
+  1.react 安装
+         npm install -g create-react-app
+
+         create-react-app my-app(文件名)
+
+         cd my-app
+
+         npm start
+ 2.学React技巧：
+
+     1.掌握JSX语法（练，排错的练，报错会不习惯）
+
+     2.学会使用生命周期
+
+     3.学会状态管理
+
+ 3. JSX： javascript XML
+
+ 4.应用：
+     1.选引入react
+         import React,{Component} from 'react';
+         import ReactDOM from 'react-dom';
+
+
+     2.ReactDOM.render(组件或者标签，挂载点，当挂载完成之后的回调函数)
+        ***项层元素只能有一个标签
+        ***所有的class都要写成className
+        ***{可以执行js 代码}
+        ***单标签要有结束符   <input />  <img />
+        ***React DOM 使用驼峰(camelCase)属性命名约定 例如：onClick onMouseOut
+       例如：
+       1.{[1,2,3]}---->1,2,3 会展开数组
+       2.不能直接放对象，可以放对象的属性，如果要显示对象，就使用JSON.stringify(obj)转一下
+
+5.使用class 继承的方法来写组件
+    class App extends Component{}      前提是 import React,{Component} from 'react';
+    也可以使用 class App extends React.Component{}   他的前提是import React from 'react';
+
+    在声明类的时候，****首字母必须大写****  例如： App
+
+     使用结构赋值来处理数据
+
+     传递数据通过属性来传递，通过this.props去接收
+
+     注意：
+         在循环中必须加key, 为了优化  而且在react 中不支持for 循环，如果且for,只能使用htmlFor
+
+ 6.当render 内的 input 添加value值之后就变成了受控组件
+     受控组件： 输入框中的内容就锁定了，修改不了
+     只有改变了数据，才能修改输入框中的内容
+     要加 onChange={} 事件，不然会报错
+
+7.this.setState();修改状态->改变视图
+
+
+8. state是React中组件的一个对象.
+   props是一种父级向子级传递数据的方式.
+
+
+9 父子组件传递为单向流动的
+  父传子，通过给子组件添加属性传递的。
+  子组件要接收父组件的数据，通过this.props去接收
+
+    父级传递的数据只能父级修改，子级修改不了
+    子传父，通过回调函数传递。
+
+    父级定义一个修改数据的方法，传给子级，让子级去调用
+    父级的这个方法，这样就达到触发子级，修改父级的数据，渲染最新的数据
+
+    父级传递数据给子级，子级把父级的数据变成了自己的
+    然后操作自身的状态是不会影响父级的,如果父级的数据跟
+    子级走，那么还是需要回调函数。
+
+    因为constructor只会执行一次，可以把父类的数据继承给子类
+    （子类就有了父类的数据），改变子类的数据只会作用子类是不会
+    影响父类的
+    如果在修改子类数据的同时关联父类，那么还是要用回调。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     */
+
+
+
+
+</script>
+</body>
+</html>
