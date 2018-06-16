@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+        router:
+            路由:URL
+       1.安装
+            npm i react-router-dom -S
+
+       2.页面中引入
+            import { BrowserRouter as Router} from 'react-router-dom'
+            这里的 as 是将BrowserRouter 改一个名字
+
+       3.同时在根节点下使用<Router></Router>  来包住要执行的组件
+           ReactDOM.render(
+             <Router>
+                <App />   在根节点下使用
+             </Router>
+             ,
+             document.getElementById('root')
+           )
+
+       4.使用
+             <Route path="/" component={Index}/>
+             <Route path="/about" component={About}/>
+
+
+      5.exact 准确匹配
+            例如：
+                 <Route exact path="/" component={Index}></Route>
+                 <Route path="/about" component={About}></Route>
+
+            如果没有给第一个Rout 添加 exact,那么访问页面的时候，
+                只访问 / 那么就只弹出首页的内容
+                访问 /about 页面，会把首页和about 页面的东西全部显示出来
+
+            如果给第一个Rout 添加了exact ,那么 根目标就进入了准确匹配模式
+             访问  /  根目标，就只弹出首页的内容
+             访问 /about 页面，也只会弹出about页面的内容
+
+         path	location.pathname	exact	matches?
+
+         /one	/one/two	true	no
+         /one	/one/two	false	yes
+
+     6. strict 严格匹配
+
+        例如：
+             <Route path="/" component={Index}></Route>
+             <Route strict path="/about/" component={About}></Route>
+         如果给第二个Rout 添加了strict ,那么 about 就进入了严格匹配模式
+            当访问 / 时，能访问到首页的内容
+            如果访问 /about   也只能是访问到首页的内容
+            当访问/about/ 时，才能访问到about 页面的内容 同时也能访问到首页的内容
+
+         path	location.pathname	matches?
+         /one/	/one	        no
+         /one/	/one/	        yes
+         /one/	/one/two	    yes
+
+  7.
+     在Route中如果写了component={组件}，那么如果要获取URL信息
+     可以去组件中的render函数中的this.props中查找
+
+     只要匹配才会执行这个组件
+     render={(URL信息)=>{
+     return 组件
+     }}
+
+     不管匹不匹配某个路径都会执行这个组件(甚至可以不用写path)
+     children = {(URL信息)=>{
+     return 组件
+     }}
+
+     如果不匹配，url是没有match（值为null）
+
+     URL:
+     match
+     loaction
+     history
+
+     */
+</script>
+</body>
+</html>
