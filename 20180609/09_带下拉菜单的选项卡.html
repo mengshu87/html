@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Title</title>
+    <style>
+        .tab-content{
+            border: 1px solid #ddd;
+            border-top:none;
+            padding:50px;
+            border-radius:0 0 5px 5px
+        }
+    </style>
+</head>
+<body style="height:3000px">
+<div class="container">
+    <br/><br/><br/>
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#a" data-toggle="tab">One</a></li>
+            <li><a href="#b" data-toggle="tab">Two</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Three <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#c" data-toggle="tab"> child1</a></li>
+                    <li><a href="#d" data-toggle="tab"> child1</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="tab-content">
+            <li id="a" class="tab-pane active">aaaaaaaaaaaaaaaaaaa</li>
+            <li id="b" class="tab-pane">bbbbbb</li>
+            <li id="c" class="tab-pane">ccccccccccc</li>
+            <li id="d" class="tab-pane">dddddd</li>
+        </ul>
+    </div>
+
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+</html>

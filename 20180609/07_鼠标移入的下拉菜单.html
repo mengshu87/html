@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Title</title>
+    <style>
+        .my-btnStyle button{
+            width:85px;
+            height:50px;
+            border:none;
+            backgroud:#f6f8f7;
+        }
+        .my-btnStyle .dropdown-menu img{
+            margin:5px;
+        }
+        .my-btnStyle .dropdown-menu{
+            animation:.4s linear fadeIn;
+        }
+        @keyframes fadeIn{
+            0%{opactity:0; transform:translateY(-20px);}
+            100%{opacity:1;transform:translateY(0px);}
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="dropdown my-btnStyle">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Plugins
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="dropdown my-btnStyle ">
+                <button class="btn btn-default dropdown-toggle">
+                    Plugins
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="dropdown my-btnStyle">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-target=".dropdown">
+                    Plugins   <!--data-target=".dropdown" 同时显示隐藏-->
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a herf="/categories/32/wordpress-pulgins">
+                            <img width="16" height="16" src="https:www.codester.com/static/uploads/categories/32/icon-alt.png" />
+                            <span>Wordpress</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script>
+    if(window.navigator.userAgent.toLowerCase().indexOf('mobile')==-1){
+        /*$('.dropdown-toggle').on('mouseover',function(){
+            alert(1);
+         })*/
+        /*$('.drowdown-toggle').on('mouseover',function(){
+            $('.dropdown').addClass('open');
+        }).on('mouseout',function(){
+            $('.dropdown').removeClass('open');
+        });*/
+
+    //$('.dropdown-toggle').dropdown('toggle');
+   /* $('dropdown').on('show.bs.dropdown',function(){     //下拉菜单显示前显示
+        alert(1);
+    })
+    $('dropdown').on('shown.bs.dropdown',function(){        //下拉菜单显示后显示
+        alert(1);
+    })*/
+    $('dropdown').on('hide.bs.dropdown',function(){     //下拉菜单隐藏前触发
+        alert(1);
+    })
+    $('dropdown').on('hidden.bs.dropdown',function(){        //下拉菜单隐藏后触发
+        alert(1);
+    })
+    }
+</script>
+</html>
