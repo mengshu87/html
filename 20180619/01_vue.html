@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div class="root">
+    <div>{{val}}</div>
+    <div v-if="offset">显示</div>
+    <div v-else>显示2</div>
+
+    <!--
+    v-if="数据" 当这个数据为true时，则显示，为false 就不显示
+    v-else-if="数据"  当这个数据为true时，则显示，为false 就不显示
+    v-else 上面的条件都不满足时，执行这句
+
+    数据在放在data 内
+
+    -->
+    <div v-if="color=='red'">div1</div>
+    <div v-else-if="color=='green'">div2</div>
+    <div v-else>div3</div>
+
+    <!--
+    v-for 循环可以得到对就的数据
+    -->
+    <ul>
+        <li v-for="(val,key) in arr">{{key}}:{{val}}</li>
+    </ul>
+
+    <ul>
+        <li v-for="(val,key) in obj">{{key}}:{{val}}</li>
+    </ul>
+
+    <!--
+        v-text="数据"  就是数据内是什么就显示什么
+            等同于innerText
+
+        v-html="数据"   就是数据内如果有标签元素，就会被解析
+            等同于innerHTML
+    -->
+    <div v-text="val2"></div>
+    <div v-html="val2"></div>
+
+
+
+</div>
+<script src="vue.js"></script>
+<script>
+    /*
+     {{ }} 用于输出对象属性和函数返回值。
+
+     */
+    let v=new Vue({
+        el:'.root',         //el：参数 ，用来存入DOM的元素节点
+        data:{              //data 用于定义属性
+            val:'123',
+            offset:false,
+            color:'green',
+            arr:[],
+            obj:{
+                n1:'葱',
+                n2:'姜',
+                n3:'蒜'
+            },
+            val2:'<h1>我是标题</h1>'
+        }
+    });
+    setTimeout(function(){
+        v.arr=[1,2,3,4];
+    },2000)
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .red{
+        background:red;
+    }
+    .green{
+        background:green;
+    }
+    .blue{
+        background:blue;
+    }
+    .box{
+        width:100px;
+        height:100px;
+    }
+</style>
+<body>
+<div class="main">
+    <button @click="bg='red'">变红</button>
+    <button @click="bg='green'">变绿</button>
+    <button @click="bg='blue'">变蓝</button>
+    <!--<div class="box"
+        v-bind:class="bg"
+    ></div>-->
+    <div class="box" :class="bg"></div>
+    <div class="box" :style="{background:'yellow'}"></div>
+</div>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el:'.main',
+        data:{
+            bg:'red'
+        }
+    })
+</script>
+</body>
+</html>

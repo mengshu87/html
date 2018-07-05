@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main">
+    <!--<button v-on:click="chaneNum">按钮</button>-->
+    <!--<button @click="chaneNum">按钮</button>-->
+    <button @mouseover="chaneNum">按钮</button>
+    <ul>
+        <li v-for="(val,key) in arr">{{val}}</li>
+    </ul>
+
+    <input type="text" @keyup.13="keyup"/>
+    <ul>
+        <li v-for="(val,key) in arr2">{{val}}</li>
+    </ul>
+
+    <!--
+    下面两个div ,如果点击div2就会冒泡到div1上，所以要阻止冒泡
+     所以要使用修饰符来完成
+      @mousedown.prevent        //这是阻止默认行为
+    -->
+    <div @click="fn1">
+        div1
+        <div
+            @click.stop="fn2"
+            @mousedown.prevent
+        >div2</div>
+    </div>
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el:'.main',
+        data:{
+            arr:[],
+            num:0,
+            arr2:[]
+        },
+        methods:{
+            chaneNum(){
+                //let {num}=this;     //一定要结构一下num
+                num=this.num;
+                this.num++;
+                this.arr.push(num);
+            },
+            keyup(ev){
+                //console.log(ev.target.value);
+                this.arr2.push(ev.target.value);
+                ev.target.value='';
+            },
+            fn1(){
+                alert('div1');
+            },
+            fn2(){
+                alert('div2');
+            }
+        }
+    })
+</script>
+</body>
+</html>

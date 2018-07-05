@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input
+                    class="new-todo"
+                    placeholder="请输入内容"
+                    value=""
+                    @keyup.13="keyup"
+                >
+            </header>
+            <section class="main">
+                <input
+                    class="toggle-all"
+                    type="checkbox"
+                    :checked="arr.length?arr.every(e=>e.checked):false"
+                    @click="all"
+                >
+                <ul class="todo-list">
+                    <li :class="val.checked?'completed':''"
+                        v-for="(val,key) in arr"
+                    >
+                        <div class="view">
+                            <input
+                                class="toggle"
+                                type="checkbox"
+                                checked=""
+                                v-model="val.checked"
+                            >
+                            <label v-on:dblclick="dbclick">{{val.text}}</label>
+                            <button
+                                class="destroy"
+                                @click="del(val.id)"
+                            ></button>
+                        </div>
+                         <input class="edit" value="多多对对对">
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer" >
+	            <span class="todo-count">
+	            	<strong>{{noCheckedNum()}}</strong>
+	            	<span>条未选中</span>
+	            </span>
+            </footer>
+        </div>
+    </section>
+<script src="vue.js" charset="utf-8"></script>
+<script>
+    function getItem(){     //装历史记录存入浏览器
+        return JSON.parse(localStorage.getItem('data'))||[{text:'哈哈',id:1,checked:false},{text:'呵呵',id:2,checked:false}]
+    }
+
+    new Vue({
+        el:'.todoapp',
+        data:{
+            arr:getItem(),
+            val:''
+        },
+        methods:{
+            keyup(ev){
+                this.arr.push({
+                    text:ev.target.value,
+                    id:+new Date,
+                    checked:false
+                });
+                ev.target.value='';
+            },
+            all(ev){
+                this.arr.forEach(e=>{
+                    e.checked = ev.target.checked;
+                });
+            },
+            del(id){
+                this.arr=this.arr.filter(e=>e.id!==id);
+            },
+            noCheckedNum(){
+                let len=this.arr.length;
+                this.arr.forEach(e=>{
+                    if(e.checked){
+                        len--;
+                    }
+                })
+                return len;
+            },
+            dbclick(){
+
+            }
+        },
+        watch:{
+            arr:{
+                handler(val,oldVal){
+                    localStorage.setItem('data',JSON.stringify(this.arr));
+                },
+                deep:true
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div class="main">
+    <!--<input type="text" v-model="val"/>{{val}}-->
+    <br/><br/>
+    <input type="checkbox" v-model="checked" />{{checked}}
+    <br/><br/>
+<!--
+v-model 要用循环，v-model的值要使用arr[key] 不能直接用val
+-->
+    <input
+        type="checkbox"
+        v-for="(val,key) in arr"
+        v-model="arr[key]"
+    >{{arr}}
+    <br/><br/>
+    <input
+        type="checkbox"
+        v-for="(val,key) in arr2"
+        v-model="val.checked"
+    />{{arr2}}
+    <br/><br/>
+    <!--<input type="radio" value="0" v-model="val2">
+    <input type="radio" value="1" v-model="val2">-->
+    <br/><br/>
+    <input type="radio" value="0" v-model="val2">
+    <input type="radio" value="1" v-model="val2">{{arr3[val2]}}
+    <br/><br/>
+
+    <select v-model="select">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>{{select}}
+    <br/><br/>
+    <select v-model="selected" multiple>        <!--按住shift可以多选-->
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>{{selected}}
+    <br/><br/>
+
+    <!--<input type="text" v-model.lazy="val">{{val}}-->
+    <br/><br/>
+    <input type="text" v-model.lazy.number="val" type="number">{{val}}
+
+
+
+</div>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el:'.main',
+        data:{
+            val:'12',
+            checked:false,
+            arr:[true,true,false,false],
+            arr2:[{name:'hehe',checked:false},{name:'haha',checked:false}],
+            val2:'0',
+            arr3:['男','女'],
+            select:'',
+            selected:[]
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main">
+    <button
+        v-for="(val,key) in arr"
+        @click="num=key"
+    >{{val}}</button>
+    <div
+        v-for="(val,key) in arr2"
+        v-if="num==key"
+    >{{val}}</div>
+</div>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el:'.main',
+        data:{
+            num:0,
+            arr:['按钮1','按钮2','按钮3'],
+            arr2:[111,222,333]
+        }
+    })
+</script>
+</body>
+</html>

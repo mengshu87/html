@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main">
+    <div v-show="onOff">div1</div>
+</div>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el:'.main',
+        data: {
+            onOff:false
+        }
+    })
+</script>
+</body>
+</html>
